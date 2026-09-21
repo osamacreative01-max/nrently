@@ -26,14 +26,14 @@ export default function ContactCta() {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full btn-gradient px-8 py-4 font-display text-sm font-semibold text-white shadow-lg shadow-accent/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-accent/60"
+              className="inline-flex items-center justify-center gap-2 rounded-full btn-gradient px-6 py-3.5 font-display text-sm font-semibold text-white shadow-lg shadow-accent/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-accent/60 sm:px-8 sm:py-4"
             >
               <MessageCircle className="h-4 w-4" />
               Book on WhatsApp
             </a>
             <a
               href={`tel:${PHONE_DISPLAY.replace(/-/g, "")}`}
-              className="inline-flex items-center gap-3 rounded-full border border-white/30 px-8 py-4 font-display text-lg font-bold text-white transition-all duration-300 hover:border-accent hover:text-accent"
+              className="inline-flex items-center justify-center gap-3 rounded-full border border-white/30 px-6 py-3.5 font-display text-base font-bold text-white transition-all duration-300 hover:border-accent hover:text-accent sm:px-8 sm:py-4 sm:text-lg"
               style={{ fontVariantNumeric: "tabular-nums" }}
             >
               <Phone className="h-5 w-5" />

@@ -21,13 +21,13 @@ export default function DestinationsGrid() {
               href={city.href}
               className="group relative block overflow-hidden rounded-2xl shadow-sm transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-brand/20"
             >
-              <div className="relative aspect-[4/3] overflow-hidden bg-night">
+              <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-b from-[#1a1a1a] to-night">
                 <Image
                   src={city.image}
                   alt={city.name}
                   fill
                   sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="object-contain p-4 transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-brand/95 via-brand/25 to-transparent" />
                 <ArrowUpRight className="absolute right-5 top-5 h-6 w-6 translate-y-1 text-white opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100" />

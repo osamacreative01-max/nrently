@@ -45,7 +45,7 @@ export default function Hero() {
       <div className="pointer-events-none absolute -right-24 bottom-1/4 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
       <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-cream to-transparent" />
 
-      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-12 px-4 pb-40 pt-32 sm:px-6 lg:grid-cols-[1.15fr_1fr] lg:px-8">
+      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-8 px-4 pb-20 pt-28 sm:gap-12 sm:pb-28 sm:pt-32 lg:grid-cols-[1.15fr_1fr] lg:px-8">
         <div>
           <motion.p
             initial={prefersReduced ? false : { opacity: 0, y: 16 }}
@@ -57,7 +57,7 @@ export default function Hero() {
             Car Rental Services in Karachi
           </motion.p>
 
-          <h1 className="font-display text-4xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl">
+          <h1 className="font-display text-3xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-4xl lg:text-5xl xl:text-6xl">
             {HERO.heading.split(" ").map((word, i) => (
               <span key={word + i} className="inline-block whitespace-nowrap pr-3 last:pr-0">
                 <span className="inline-block overflow-hidden pb-1 align-bottom">
@@ -91,20 +91,20 @@ export default function Hero() {
             initial={prefersReduced ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-9 flex flex-wrap items-center gap-4"
+            className="mt-8 flex flex-col gap-3 sm:flex-row sm:mt-9 sm:flex-wrap sm:items-center sm:gap-4"
           >
             <a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full btn-gradient px-8 py-4 font-display text-sm font-semibold text-white shadow-2xl shadow-accent/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-accent/60"
+              className="inline-flex items-center justify-center gap-2 rounded-full btn-gradient px-6 py-3.5 font-display text-sm font-semibold text-white shadow-2xl shadow-accent/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-accent/60 sm:px-8 sm:py-4"
             >
               <MessageCircle className="h-4 w-4" />
               {HERO.cta}
             </a>
             <a
               href={`tel:${PHONE_DISPLAY.replace(/-/g, "")}`}
-              className="inline-flex items-center gap-2 rounded-full border border-white/30 px-8 py-4 font-display text-sm font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:border-white hover:bg-white/10"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 px-6 py-3.5 font-display text-sm font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:border-white hover:bg-white/10 sm:px-8 sm:py-4"
               style={{ fontVariantNumeric: "tabular-nums" }}
             >
               <Phone className="h-4 w-4" />
@@ -118,10 +118,10 @@ export default function Hero() {
           initial={prefersReduced ? false : { opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.9, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="relative hidden lg:block"
+          className="relative mt-8 lg:mt-0"
         >
-          <div className="pointer-events-none absolute inset-0 -z-0 rounded-full bg-accent/20 blur-[100px]" />
-          <div className="relative aspect-[4/3]">
+          <div className="pointer-events-none absolute inset-0 -z-0 rounded-full bg-accent/20 blur-[60px] sm:blur-[100px]" />
+          <div className="relative aspect-[4/3] sm:aspect-[3/2] lg:aspect-[4/3]">
             {/* Preload all images */}
             {CAROUSEL_IMAGES.map((img) => (
               <link key={img.src} rel="preload" as="image" href={img.src} />

@@ -43,7 +43,9 @@ export default function Footer() {
       <div className="relative mx-auto max-w-7xl px-4 pb-10 pt-16 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-4">
-            <Logo />
+            <div className="h-10 w-28 sm:h-14 sm:w-36">
+              <Logo />
+            </div>
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-slate-400">
               {FOOTER.tagline}
             </p>

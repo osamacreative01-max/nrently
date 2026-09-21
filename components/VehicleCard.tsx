@@ -34,7 +34,7 @@ export default function VehicleCard({ vehicle, categoryLabel }: VehicleCardProps
       {/* Card content */}
       <div className="flex flex-1 flex-col px-5 pt-4 pb-5">
         {/* Two-column layout: info + price */}
-        <div className="flex items-start justify-between gap-4">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
           {/* Left column — vehicle info */}
           <div className="flex flex-col gap-2.5">
             <h3 className="font-display text-lg font-bold leading-tight text-white">
@@ -67,11 +67,11 @@ export default function VehicleCard({ vehicle, categoryLabel }: VehicleCardProps
           </div>
 
           {/* Right column — price + CTA */}
-          <div className="flex flex-col items-end gap-2">
+          <div className="flex flex-col items-start gap-2 sm:items-end">
             <span className="text-[10px] font-medium uppercase tracking-wide text-accent">
               Best Price Rate Selected
             </span>
-            <p className="text-right">
+            <p className="sm:text-right">
               <span className="font-display text-xl font-bold text-white">
                 PKR {vehicle.pricePerDay.toLocaleString()}
               </span>

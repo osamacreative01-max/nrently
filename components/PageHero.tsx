@@ -21,7 +21,7 @@ export default function PageHero({ title, subtitle, eyebrow, image, imageAlt }: 
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className={`grid items-center gap-8 ${image ? "lg:grid-cols-[1fr_1fr]" : ""}`}>
+        <div className={`grid items-center gap-6 sm:gap-8 ${image ? "lg:grid-cols-[1fr_1fr]" : ""}`}>
           <motion.div
             initial={prefersReduced ? false : { opacity: 0, y: 26 }}
             animate={{ opacity: 1, y: 0 }}
@@ -34,7 +34,7 @@ export default function PageHero({ title, subtitle, eyebrow, image, imageAlt }: 
                 {eyebrow}
               </p>
             )}
-            <h1 className="text-4xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl">
+            <h1 className="text-3xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-4xl lg:text-5xl xl:text-6xl">
               {title}
             </h1>
             {subtitle && (
@@ -49,7 +49,7 @@ export default function PageHero({ title, subtitle, eyebrow, image, imageAlt }: 
               initial={prefersReduced ? false : { opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="relative hidden lg:block"
+              className="relative mt-4 lg:mt-0"
             >
               <div className="pointer-events-none absolute inset-0 -z-0 rounded-full bg-accent/10 blur-[80px]" />
               <div className="relative aspect-[16/9]">

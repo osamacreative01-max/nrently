@@ -20,10 +20,10 @@ export default function CategoryGrid() {
           <StaggerItem key={cat.id}>
             <Link
               href={cat.href}
-              className="group relative flex min-h-[380px] flex-col overflow-hidden rounded-3xl border border-white/[0.06] bg-[#0e0e0e] transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 hover:shadow-2xl hover:shadow-accent/10"
+              className="group relative flex min-h-[300px] flex-col overflow-hidden rounded-3xl border border-white/[0.06] bg-[#0e0e0e] transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 hover:shadow-2xl hover:shadow-accent/10 sm:min-h-[380px]"
             >
               {/* Image — large */}
-              <div className="relative h-64 overflow-hidden bg-gradient-to-b from-[#1a1a1a] to-[#0e0e0e]">
+              <div className="relative h-48 overflow-hidden bg-gradient-to-b from-[#1a1a1a] to-[#0e0e0e] sm:h-64">
                 <Image
                   src={cat.image}
                   alt={cat.label}

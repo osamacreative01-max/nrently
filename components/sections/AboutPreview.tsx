@@ -17,7 +17,7 @@ export default function AboutPreview() {
       <div className="pointer-events-none absolute -right-24 top-0 h-80 w-80 rounded-full bg-accent/10 blur-3xl" />
       <div className="pointer-events-none absolute -left-24 bottom-0 h-60 w-60 rounded-full bg-accent/[0.06] blur-3xl" />
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8">
+      <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-4 sm:px-6 sm:gap-12 lg:grid-cols-2 lg:gap-16 lg:px-8">
         {/* Left — Floating car images */}
         <Reveal className="relative">
           <div className="relative aspect-[4/3] sm:aspect-[3/2] lg:aspect-[4/3]">
