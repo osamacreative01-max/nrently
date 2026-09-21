@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Nrently.pk — Next.js Redesign
 
-## Getting Started
+Frontend-only redesign of nrently.pk (car rental services) built per the project
+specification in `nrently-nextjs-redesign-spec.md`.
 
-First, run the development server:
+## Stack
+
+- **Next.js 15** (App Router)
+- **Tailwind CSS** (v4, token-based design system)
+- **Framer Motion** + **GSAP (ScrollTrigger)** — scroll animations
+- **Lenis** — smooth cinematic scrolling
+- **Lucide** icons · **Google Fonts** (Poppins / Inter)
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000
+npm run lint       # ESLint
+npm run build      # production build
+npm run start      # serve production build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Routes
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Route | Page |
+|---|---|
+| `/` | Home |
+| `/about-us` | About Us |
+| `/vehicles` · `/budget` · `/standard` · `/luxury` · `/suv` · `/vans-and-coasters` | Fleet |
+| `/location` · `/karachi` · `/lahore` · `/islamabad` | Locations |
+| `/contact-us` | Contact |
+| `/blogs` | Blog |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+All **Book Now** CTAs route to WhatsApp (`https://wa.link/0ilzkn`) exactly as the
+current site. There is no backend — the booking form is UI only.
 
-## Learn More
+## Deployment (recommended: Vercel)
 
-To learn more about Next.js, take a look at the following resources:
+1. Push this folder to a Git repository.
+2. Import the repo at [vercel.com/new](https://vercel.com/new) — zero config.
+3. Point the `nrently.pk` domain's DNS at the new host (free SSL, global CDN).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Alt: `npm run build` then serve `out`/`.next` on the client's existing hosting.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Customising
 
-## Deploy on Vercel
+- Brand colors/typography: `app/globals.css` (`@theme` tokens).
+- Fleet, cities, FAQs, blog posts: `lib/site.ts`.
+- Imagery: component `Image` `src`s (aimed at `images.unsplash.com`).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Open items (from spec §9 — awaiting client)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [ ] High-res logo (PNG/SVG) → extract exact brand hex codes
+- [ ] Confirmation on vehicle/city photos (reuse vs replace)
+- [ ] Final sign-off on placeholder palette

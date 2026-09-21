@@ -1,26 +1,170 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-brand: #000000;
+  --color-accent: #E31E24;
+  --color-crimson: #FF8A3D;
+  --color-cream: #000000;
+  --color-night: #121212;
+  --color-ink: #FFFFFF;
+  --color-slate: #A1A1AA;
+  --color-mint: #22c55e;
+  --color-line: #2A2A2A;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+
+  --color-brand: #000000;
+  --color-accent: #E31E24;
+  --color-crimson: #FF8A3D;
+  --color-cream: #000000;
+  --color-night: #121212;
+  --color-ink: #FFFFFF;
+  --color-slate: #A1A1AA;
+  --color-mint: #22c55e;
+  --color-line: #2A2A2A;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+}
+
+::selection {
+  background-color: var(--color-accent);
+  color: #ffffff;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+::-webkit-scrollbar-thumb {
+  background: #2A2A2A;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3A3A3A;
+}
+
+/* Lenis recommended classes */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* Underline-draw utility for links */
+.draw-link {
+  position: relative;
+}
+.draw-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 2px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.draw-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Gradient button utility (orange → red) */
+.btn-gradient {
+  background: linear-gradient(135deg, #FF8A3D 0%, #E31E24 100%);
+  color: #ffffff;
+}
+.btn-gradient:hover {
+  background: linear-gradient(135deg, #FF8A3D 0%, #c41a1f 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .draw-link::after {
+    transition: none;
+  }
+  .marquee-track {
+    animation: none !important;
+  }
+}
+
+/* Marquee auto-scroll animation */
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee-scroll 30s linear infinite;
+}
+
+/* Pause on hover handled via group-hover in JSX */
+
+/* Floating car animations */
+@keyframes float-1 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(12px, -16px) rotate(1deg); }
+  50% { transform: translate(-8px, -24px) rotate(-1deg); }
+  75% { transform: translate(16px, -10px) rotate(0.5deg); }
+}
+
+@keyframes float-2 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(-14px, -12px) rotate(-1.5deg); }
+  50% { transform: translate(10px, -20px) rotate(1deg); }
+  75% { transform: translate(-6px, -8px) rotate(-0.5deg); }
+}
+
+@keyframes float-3 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(8px, -20px) rotate(1deg); }
+  50% { transform: translate(-12px, -14px) rotate(-1.5deg); }
+  75% { transform: translate(6px, -22px) rotate(0.5deg); }
+}
+
+.animate-float-1 { animation: float-1 6s ease-in-out infinite; }
+.animate-float-2 { animation: float-2 7s ease-in-out infinite 0.5s; }
+.animate-float-3 { animation: float-3 8s ease-in-out infinite 1s; }
