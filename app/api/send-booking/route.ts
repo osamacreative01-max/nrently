@@ -116,7 +116,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Booking email error:", error);
-    const message = error instanceof Error ? error.message : "Unknown error";
-    return NextResponse.json({ error: `Failed to send booking: ${message}` }, { status: 500 });
+    return NextResponse.json(
+      {
+        error:
+          "Sorry, we couldn't send your booking right now. Please try again or complete your booking on WhatsApp.",
+      },
+      { status: 500 }
+    );
   }
 }

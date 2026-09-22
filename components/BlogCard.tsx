@@ -6,7 +6,7 @@ import type { BlogPost } from "@/lib/site";
 export default function BlogCard({ post }: { post: BlogPost }) {
   return (
     <Link
-      href="/blogs"
+      href={`/blogs/${post.slug}`}
       className="group block h-full overflow-hidden rounded-2xl border border-line bg-[#121212] shadow-sm transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-brand/10"
     >
       <div className="relative aspect-[16/10] overflow-hidden bg-night">

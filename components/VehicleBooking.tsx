@@ -5,7 +5,9 @@ import Link from "next/link";
 import {
   AlertCircle,
   CalendarDays,
+  CheckCircle2,
   Clock,
+  Loader2,
   Mail,
   MapPin,
   MessageCircle,
@@ -41,6 +43,10 @@ export default function VehicleBooking({ vehicle, search }: VehicleBookingProps)
     email?: string;
     phone?: string;
   }>({});
+  const [emailStatus, setEmailStatus] = useState<
+    "idle" | "sending" | "success" | "error"
+  >("idle");
+  const [emailError, setEmailError] = useState("");
 
   const waHref = buildWhatsAppUrl({ vehicleName: vehicle.name, search, name, phone });
   const clientMessage = buildWhatsAppMessage({
@@ -48,6 +54,20 @@ export default function VehicleBooking({ vehicle, search }: VehicleBookingProps)
     search,
     name,
     phone,
+  });
+
+  const buildPayload = () => ({
+    name: name.trim(),
+    email: email.trim(),
+    phone: phone.trim(),
+    carType: vehicle.name,
+    pickupLocation: search?.pickupLocation ?? "",
+    dropoffLocation: search?.dropoffLocation ?? "",
+    pickupDate: search?.pickupDate ?? "",
+    pickupTime: search?.pickupTime ?? "",
+    dropoffDate: search?.dropoffDate ?? "",
+    dropoffTime: "",
+    clientMessage,
   });
 
   const validate = (): boolean => {
@@ -69,25 +89,34 @@ export default function VehicleBooking({ vehicle, search }: VehicleBookingProps)
       return;
     }
 
-    // Preserve the existing booking-email flow alongside WhatsApp, and send the
-    // same message back to the customer's email.
+    // Preserve the existing booking-email flow alongside WhatsApp, so the same
+    // message also reaches the customer and owner email without extra clicks.
     void fetch("/api/send-booking", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        name: name.trim(),
-        email: email.trim(),
-        phone: phone.trim(),
-        carType: vehicle.name,
-        pickupLocation: search?.pickupLocation ?? "",
-        dropoffLocation: search?.dropoffLocation ?? "",
-        pickupDate: search?.pickupDate ?? "",
-        pickupTime: search?.pickupTime ?? "",
-        dropoffDate: search?.dropoffDate ?? "",
-        dropoffTime: "",
-        clientMessage,
-      }),
+      body: JSON.stringify(buildPayload()),
     }).catch(() => {});
+  };
+
+  const handleEmailBooking = async (e: React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (!validate()) return;
+
+    setEmailStatus("sending");
+    setEmailError("");
+    try {
+      const res = await fetch("/api/send-booking", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(buildPayload()),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Something went wrong.");
+      setEmailStatus("success");
+    } catch (err) {
+      setEmailStatus("error");
+      setEmailError(err instanceof Error ? err.message : "Failed to send.");
+    }
   };
 
   const rentalRows = search
@@ -248,7 +277,46 @@ export default function VehicleBooking({ vehicle, search }: VehicleBookingProps)
         Book on WhatsApp
       </a>
 
-      <p className="mt-3 text-center text-xs text-slate">
+      <div className="mt-3 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-wider text-slate">
+        <span className="h-px flex-1 bg-white/10" />
+        or
+        <span className="h-px flex-1 bg-white/10" />
+      </div>
+
+      {/* Email confirmation */}
+      <button
+        type="button"
+        onClick={handleEmailBooking}
+        disabled={emailStatus === "sending"}
+        className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl border border-accent/40 bg-accent/10 px-6 py-4 font-display text-sm font-bold text-accent transition-all duration-300 hover:bg-accent hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
+      >
+        {emailStatus === "sending" ? (
+          <>
+            <Loader2 className="h-4 w-4 animate-spin" />
+            Sending...
+          </>
+        ) : (
+          <>
+            <Mail className="h-4 w-4" />
+            Book via Email
+          </>
+        )}
+      </button>
+
+      {emailStatus === "success" && (
+        <p className="mt-3 flex items-center justify-center gap-2 rounded-xl bg-mint/10 px-4 py-3 text-sm font-medium text-mint">
+          <CheckCircle2 className="h-4 w-4 shrink-0" />
+          Booking request sent! A confirmation copy has been emailed to you.
+        </p>
+      )}
+      {emailStatus === "error" && (
+        <p className="mt-3 flex items-center justify-center gap-2 rounded-xl bg-accent/10 px-4 py-3 text-sm font-medium text-accent">
+          <AlertCircle className="h-4 w-4 shrink-0" />
+          {emailError}
+        </p>
+      )}
+
+      <p className="mt-4 text-center text-xs text-slate">
         No advance payment required. Pay when you receive the car.
       </p>
     </div>

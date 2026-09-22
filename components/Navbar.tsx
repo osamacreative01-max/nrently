@@ -72,6 +72,15 @@ export default function Navbar() {
     };
   }, [mobileOpen]);
 
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [mobileOpen]);
+
   const solid = scrolled || mobileOpen;
   const textClass = "text-white";
   const subText = solid ? "text-slate" : "text-slate-100";
@@ -114,6 +123,7 @@ export default function Navbar() {
                     isActive(item.href ?? "/") ? "text-accent" : textClass
                   }`}
                   aria-expanded={openGroup === item.label}
+                  aria-haspopup="menu"
                 >
                   {item.label}
                   <ChevronDown
@@ -186,6 +196,8 @@ export default function Navbar() {
           className={`p-2 lg:hidden ${textClass}`}
           onClick={() => setMobileOpen(true)}
           aria-label="Open menu"
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-nav"
         >
           <Menu className="h-6 w-6" />
         </button>
@@ -205,6 +217,10 @@ export default function Navbar() {
             />
             <motion.aside
               key="drawer"
+              id="mobile-nav"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Mobile navigation"
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
@@ -242,6 +258,7 @@ export default function Navbar() {
                           }
                           className="flex w-full items-center justify-between rounded-xl px-4 py-3 font-display text-lg font-semibold text-white"
                           aria-expanded={mobileGroup === item.label}
+                          aria-haspopup="menu"
                         >
                           {item.label}
                           <ChevronDown

@@ -3,6 +3,7 @@ export function categoryLabel(id: CategoryId): string {
 }
 
 export const WHATSAPP_URL = "https://wa.link/0ilzkn";
+export const SITE_URL = "https://nrently.vercel.app";
 export const PHONE_DISPLAY = "0306-6556934";
 export const PHONE_INTL = "+923066556934";
 export const SECOND_PHONE_DISPLAY = "+92 316 1068353";
@@ -71,7 +72,7 @@ export const CATEGORIES: Category[] = [
     href: "/budget",
     example: "Daihatsu Mira or Similar",
     blurb: "Clean, reliable and easy on the budget — perfect for daily city runs.",
-    from: 4500,
+    from: 4200,
     image: "/images/SUZUKI Cultus-Photoroom.png",
     features: ["Economical fuel", "City driving", "Great mileage"],
   },
@@ -101,7 +102,7 @@ export const CATEGORIES: Category[] = [
     href: "/suv",
     example: "Land Cruiser or Similar",
     blurb: "Powerful 4x4s and family SUVs for highways, hills and rough terrain.",
-    from: 12000,
+    from: 10000,
     image: "/images/TOYOTA LC 300-Photoroom.png",
     features: ["4x4 capability", "High ground clearance", "7-seater ready"],
   },
@@ -111,7 +112,7 @@ export const CATEGORIES: Category[] = [
     href: "/vans-and-coasters",
     example: "Toyota Coaster or Similar",
     blurb: "Hiace vans and coasters for groups, outings and events.",
-    from: 9000,
+    from: 8500,
     image: "/images/changan karvaan-Photoroom.png",
     features: ["Up to 28 seats", "Group travel", "Cargo space"],
   },
@@ -514,7 +515,7 @@ export const CITIES: CityInfo[] = [
     blurb:
       "The city that never sleeps. From Clifton beaches to the airport runways, get around easefully.",
     image: "/images/TOYOTA Corolla Altis-Photoroom.png",
-    from: 4500,
+    from: 4200,
     areas: [
       "Gulshan-e-Iqbal",
       "Gulistan-e-Johar",

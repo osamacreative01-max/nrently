@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Clock, Fuel, Settings, Users } from "lucide-react";
-import { VEHICLES, categoryLabel } from "@/lib/site";
+import { BRAND_NAME, SITE_URL, VEHICLES, categoryLabel } from "@/lib/site";
 import { parseRentalSearch, serializeRentalSearch } from "@/lib/search";
 import VehicleBooking from "@/components/VehicleBooking";
 import ContactCta from "@/components/sections/ContactCta";
@@ -27,9 +27,26 @@ export async function generateMetadata({
     return { title: "Vehicle Not Found" };
   }
 
+  const price = `PKR ${vehicle.pricePerDay.toLocaleString()}/day`;
+  const description = `${vehicle.description} Rent the ${vehicle.name} for ${price} (with driver) — trustworthy ${BRAND_NAME} service, delivered clean and on time.`;
+  const imageUrl = `${SITE_URL}${encodeURI(vehicle.image)}`;
+
   return {
     title: `${vehicle.name} on Rent`,
-    description: vehicle.description,
+    description,
+    alternates: { canonical: `/vehicles/${vehicle.id}` },
+    openGraph: {
+      title: `${vehicle.name} on Rent | ${BRAND_NAME}.pk`,
+      description,
+      type: "website",
+      images: [{ url: imageUrl, width: 800, height: 800, alt: `${vehicle.name} rental — ${BRAND_NAME}` }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${vehicle.name} on Rent | ${BRAND_NAME}.pk`,
+      description,
+      images: [imageUrl],
+    },
   };
 }
 
@@ -45,6 +62,25 @@ export default async function VehicleDetailPage({
   const search = parseRentalSearch(await searchParams);
   const backHref = `/vehicles${search ? serializeRentalSearch(search) : ""}`;
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "AutoRental",
+    name: vehicle.name,
+    image: `${SITE_URL}${encodeURI(vehicle.image)}`,
+    description: vehicle.description,
+    url: `${SITE_URL}/vehicles/${vehicle.id}`,
+    priceRange: `PKR ${vehicle.pricePerDay.toLocaleString()}/day`,
+    payer: "Renter",
+    category: categoryLabel(vehicle.category),
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Karachi",
+      addressCountry: "PK",
+    },
+    areaServed: "PK",
+    slogan: "Trustworthy Pakistani car rental, delivered clean and on time.",
+  };
+
   const specs = [
     { icon: Users, label: `${vehicle.seats} Seats` },
     { icon: Settings, label: vehicle.transmission },
@@ -57,6 +93,10 @@ export default async function VehicleDetailPage({
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <section className="mx-auto max-w-7xl px-4 pb-20 pt-10 sm:px-6 lg:px-8">
         <Link
           href={backHref}

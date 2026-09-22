@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/ui/Reveal";
-import Parallax from "@/components/ui/Parallax";
 import ValuesGrid from "@/components/sections/ValuesGrid";
 import StatsBand from "@/components/sections/StatsBand";
 import FaqSection from "@/components/sections/FaqSection";

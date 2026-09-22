@@ -6,7 +6,7 @@ import RouteTransition from "@/components/RouteTransition";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
-import { BRAND_NAME, BRAND_TAGLINE } from "@/lib/site";
+import { BRAND_NAME, BRAND_TAGLINE, SITE_URL } from "@/lib/site";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -21,7 +21,15 @@ const poppins = Poppins({
   display: "swap",
 });
 
+const ogImage = {
+  url: `${SITE_URL}/images/MERCEDES%20S%20Class%20-%20S400.png`,
+  width: 800,
+  height: 800,
+  alt: `${BRAND_NAME} — luxurious rental fleet`,
+};
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: `${BRAND_NAME}.pk — ${BRAND_TAGLINE}`,
     template: `%s | ${BRAND_NAME}.pk`,
@@ -36,11 +44,27 @@ export const metadata: Metadata = {
     "wedding car hire",
     "Nrently",
   ],
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
+    siteName: `${BRAND_NAME}.pk`,
     title: `${BRAND_NAME}.pk — ${BRAND_TAGLINE}`,
     description: `${BRAND_TAGLINE}. Book premium rental cars across Pakistan on WhatsApp.`,
+    url: SITE_URL,
     type: "website",
     locale: "en_PK",
+    images: [ogImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${BRAND_NAME}.pk — ${BRAND_TAGLINE}`,
+    description: `${BRAND_TAGLINE}. Book premium rental cars across Pakistan on WhatsApp.`,
+    images: [ogImage.url],
   },
 };
 
