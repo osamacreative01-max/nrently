@@ -6,6 +6,7 @@ import {
   AlertCircle,
   CalendarDays,
   Clock,
+  Mail,
   MapPin,
   MessageCircle,
   Phone,
@@ -13,6 +14,7 @@ import {
 } from "lucide-react";
 import { type Vehicle } from "@/lib/site";
 import {
+  buildWhatsAppMessage,
   buildWhatsAppUrl,
   formatRentalDate,
   formatRentalTime,
@@ -32,14 +34,30 @@ const labelClasses =
 
 export default function VehicleBooking({ vehicle, search }: VehicleBookingProps) {
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [errors, setErrors] = useState<{ name?: string; phone?: string }>({});
+  const [errors, setErrors] = useState<{
+    name?: string;
+    email?: string;
+    phone?: string;
+  }>({});
 
   const waHref = buildWhatsAppUrl({ vehicleName: vehicle.name, search, name, phone });
+  const clientMessage = buildWhatsAppMessage({
+    vehicleName: vehicle.name,
+    search,
+    name,
+    phone,
+  });
 
   const validate = (): boolean => {
-    const next: { name?: string; phone?: string } = {};
+    const next: { name?: string; email?: string; phone?: string } = {};
     if (!name.trim()) next.name = "Please enter your name.";
+    if (!email.trim()) {
+      next.email = "Please enter your email address.";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      next.email = "Please enter a valid email address.";
+    }
     if (!phone.trim()) next.phone = "Please enter your phone number.";
     setErrors(next);
     return Object.keys(next).length === 0;
@@ -51,25 +69,25 @@ export default function VehicleBooking({ vehicle, search }: VehicleBookingProps)
       return;
     }
 
-    // Preserve the existing booking-email flow alongside WhatsApp.
-    if (search) {
-      void fetch("/api/send-booking", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: name.trim(),
-          email: "",
-          phone: phone.trim(),
-          carType: vehicle.name,
-          pickupLocation: search.pickupLocation,
-          dropoffLocation: search.dropoffLocation,
-          pickupDate: search.pickupDate,
-          pickupTime: search.pickupTime,
-          dropoffDate: search.dropoffDate,
-          dropoffTime: "",
-        }),
-      }).catch(() => {});
-    }
+    // Preserve the existing booking-email flow alongside WhatsApp, and send the
+    // same message back to the customer's email.
+    void fetch("/api/send-booking", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: name.trim(),
+        email: email.trim(),
+        phone: phone.trim(),
+        carType: vehicle.name,
+        pickupLocation: search?.pickupLocation ?? "",
+        dropoffLocation: search?.dropoffLocation ?? "",
+        pickupDate: search?.pickupDate ?? "",
+        pickupTime: search?.pickupTime ?? "",
+        dropoffDate: search?.dropoffDate ?? "",
+        dropoffTime: "",
+        clientMessage,
+      }),
+    }).catch(() => {});
   };
 
   const rentalRows = search
@@ -159,6 +177,34 @@ export default function VehicleBooking({ vehicle, search }: VehicleBookingProps)
             <p className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-accent">
               <AlertCircle className="h-3.5 w-3.5 shrink-0" />
               {errors.name}
+            </p>
+          )}
+        </div>
+
+        <div className="sm:col-span-2">
+          <label htmlFor="customer-email" className={labelClasses}>
+            <Mail className="h-3 w-3 text-accent/70" />
+            Email Address
+          </label>
+          <input
+            id="customer-email"
+            type="email"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              if (errors.email)
+                setErrors((prev) => ({ ...prev, email: undefined }));
+            }}
+            placeholder="you@example.com"
+            autoComplete="email"
+            className={`${fieldClasses} ${
+              errors.email ? "border-accent/60" : ""
+            }`}
+          />
+          {errors.email && (
+            <p className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-accent">
+              <AlertCircle className="h-3.5 w-3.5 shrink-0" />
+              {errors.email}
             </p>
           )}
         </div>

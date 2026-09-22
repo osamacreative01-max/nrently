@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { EMAIL, BRAND_NAME } from "@/lib/site";
 
 interface BookingData {
   name: string;
@@ -12,19 +13,20 @@ interface BookingData {
   pickupTime: string;
   dropoffDate: string;
   dropoffTime: string;
+  clientMessage?: string;
 }
 
 export async function POST(req: NextRequest) {
   try {
     const body: BookingData = await req.json();
 
-    const { name, email, phone, carType, pickupLocation, dropoffLocation, pickupDate, pickupTime, dropoffDate, dropoffTime } = body;
+    const { name, email, phone, carType, pickupLocation, dropoffLocation, pickupDate, pickupTime, dropoffDate, dropoffTime, clientMessage } = body;
 
-    if (!name || !phone || !carType || !pickupLocation || !pickupDate) {
+    if (!name || !phone || !carType || !pickupLocation || !pickupDate || !email) {
       return NextResponse.json({ error: "All required fields must be filled." }, { status: 400 });
     }
 
-    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return NextResponse.json({ error: "Invalid email address." }, { status: 400 });
     }
 
@@ -39,6 +41,10 @@ export async function POST(req: NextRequest) {
     });
 
     const recipientEmail = process.env.BOOKING_EMAIL || process.env.SMTP_USER;
+    // Always notify the site owner at nrently@gmail.com too.
+    const recipients = Array.from(
+      new Set([recipientEmail, EMAIL].filter(Boolean) as string[])
+    );
 
     const htmlContent = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden;">
@@ -72,12 +78,40 @@ export async function POST(req: NextRequest) {
     `;
 
     await transporter.sendMail({
-      from: `"Nrently Bookings" <${process.env.SMTP_USER}>`,
-      to: recipientEmail,
+      from: `"${BRAND_NAME} Bookings" <${process.env.SMTP_USER}>`,
+      to: recipients,
       replyTo: email,
       subject: `New Booking: ${name} — ${carType} (${pickupLocation})`,
       html: htmlContent,
     });
+
+    if (clientMessage) {
+      try {
+        await transporter.sendMail({
+          from: `"${BRAND_NAME} Car Rentals" <${process.env.SMTP_USER}>`,
+          to: email,
+          replyTo: recipientEmail,
+          subject: `Your Booking Request Confirmation — ${carType}`,
+          text: clientMessage,
+        });
+      } catch (clientError) {
+        console.error("Client confirmation email error:", clientError);
+      }
+    }
+
+    if (clientMessage) {
+      try {
+        await transporter.sendMail({
+          from: `"${BRAND_NAME} Car Rentals" <${process.env.SMTP_USER}>`,
+          to: EMAIL,
+          replyTo: email,
+          subject: `Booking Message — ${name} (${carType})`,
+          text: clientMessage,
+        });
+      } catch (ownerError) {
+        console.error("Owner message email error:", ownerError);
+      }
+    }
 
     return NextResponse.json({ success: true });
   } catch (error) {
