@@ -18,7 +18,7 @@ export default function VansPage() {
       <PageHero
         eyebrow="Vans & Coasters"
         title="Moving bigger groups, beautifully"
-        subtitle="Spacious passenger vans and full-size coasters for weddings, outings and corporate travel — from PKR 9,000/day."
+        subtitle="Spacious passenger vans and full-size coasters for weddings, outings and corporate travel — from PKR 8,500/day."
         image="/images/changan karvaan-Photoroom.png"
         imageAlt="Changan Karvaan van rental"
       />
