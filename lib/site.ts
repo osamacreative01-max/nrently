@@ -113,7 +113,7 @@ export const CATEGORIES: Category[] = [
     example: "Toyota Coaster or Similar",
     blurb: "Hiace vans and coasters for groups, outings and events.",
     from: 8500,
-    image: "/images/changan karvaan-Photoroom.png",
+    image: "/images/Hiace-card.png",
     features: ["Up to 28 seats", "Group travel", "Cargo space"],
   },
 ];
@@ -408,7 +408,7 @@ export const VEHICLES: Vehicle[] = [
     fuel: "Diesel",
     ac: true,
     tag: "Group Pick",
-    image: "/images/Hiace.webp",
+    image: "/images/Hiace-card.png",
     description:
       "A spacious 15-seat passenger van for outings, pickups and group travel — comfortable and dependable.",
     driverHours: 12,
@@ -424,7 +424,7 @@ export const VEHICLES: Vehicle[] = [
     transmission: "Manual",
     fuel: "Diesel",
     ac: true,
-    image: "/images/Saloon 4C (2).webp",
+    image: "/images/Saloon 4C.png",
     description:
       "A full-size 28-seat coast for weddings, corporate retreats and large family gatherings.",
     driverHours: 12,

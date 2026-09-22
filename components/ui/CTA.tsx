@@ -20,7 +20,7 @@ export default function CTA({
   type = "link",
 }: CTAProps) {
   const base = [
-    "inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 font-display text-sm font-semibold tracking-wide transition-all duration-300",
+    "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 font-display text-xs font-semibold tracking-wide transition-all duration-300 sm:px-7 sm:text-sm",
     "hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent",
     className,
   ].join(" ");

@@ -38,10 +38,10 @@ export default function VehicleListing({
 
   return (
     <section>
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
         <SectionHeading eyebrow={eyebrow} title={title} subtitle={subtitle} />
         <Stagger
-          className={`mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 ${
+          className={`mt-8 grid gap-5 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 ${
             vehiclesClassName ?? ""
           }`}
         >

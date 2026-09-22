@@ -21,7 +21,7 @@ export default function BlogCard({ post }: { post: BlogPost }) {
           {post.category}
         </span>
       </div>
-      <div className="p-6">
+      <div className="p-4 sm:p-6">
         <div className="flex items-center gap-4 text-xs text-slate">
           <span className="flex items-center gap-1.5">
             <CalendarDays className="h-3.5 w-3.5 text-accent" />

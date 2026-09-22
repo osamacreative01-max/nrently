@@ -39,8 +39,8 @@ export default function RentalSearchSummary({ search }: RentalSearchSummaryProps
   ];
 
   return (
-    <section className="mx-auto max-w-7xl px-4 pt-10 sm:px-6 lg:px-8">
-      <div className="rounded-2xl border border-line bg-[#121212] p-5 sm:p-6">
+    <section className="mx-auto max-w-7xl px-4 pt-8 sm:px-6 sm:pt-10 lg:px-8">
+      <div className="rounded-2xl border border-line bg-[#121212] p-4 sm:p-6">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <h2 className="font-display text-sm font-bold uppercase tracking-wider text-white">
             Your rental search
@@ -54,25 +54,25 @@ export default function RentalSearchSummary({ search }: RentalSearchSummaryProps
           </Link>
         </div>
 
-        <dl className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <dl className="mt-4 grid grid-cols-1 gap-3 sm:mt-5 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
           {items.map((item) => (
             <div
               key={item.label}
-              className="rounded-xl border border-white/[0.06] bg-white/[0.03] px-4 py-3"
+              className="rounded-xl border border-white/[0.06] bg-white/[0.03] px-3 py-2.5 sm:px-4 sm:py-3"
             >
               <dt className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-slate">
                 <item.icon className="h-3 w-3 text-accent" />
                 {item.label}
               </dt>
-              <dd className="mt-1.5 text-sm font-medium text-white">
+              <dd className="mt-1.5 break-words text-sm font-medium text-white">
                 {item.value}
               </dd>
             </div>
           ))}
         </dl>
 
-        <p className="mt-4 flex items-center gap-1.5 text-xs text-slate">
-          <Clock className="h-3.5 w-3.5 text-accent" />
+        <p className="mt-4 flex items-start gap-1.5 text-xs leading-relaxed text-slate">
+          <Clock className="mt-0.5 h-3.5 w-3.5 shrink-0 text-accent" />
           Select a vehicle below to continue to booking — we&apos;ll confirm
           availability and price on WhatsApp.
         </p>

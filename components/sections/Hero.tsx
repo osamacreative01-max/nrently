@@ -45,13 +45,13 @@ export default function Hero() {
       <div className="pointer-events-none absolute -right-24 bottom-1/4 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
       <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-cream to-transparent" />
 
-      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-8 px-4 pb-20 pt-28 sm:gap-12 sm:pb-28 sm:pt-32 lg:grid-cols-[1.15fr_1fr] lg:px-8">
+      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-8 px-4 pb-14 pt-24 sm:gap-12 sm:pb-28 sm:pt-32 lg:grid-cols-[1.15fr_1fr] lg:px-8">
         <div>
           <motion.p
             initial={prefersReduced ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="mb-4 flex items-center gap-2 font-display text-sm font-semibold uppercase tracking-[0.3em] text-accent"
+            className="mb-4 flex items-center gap-2 font-display text-xs font-semibold uppercase tracking-[0.18em] text-accent sm:text-sm sm:tracking-[0.3em]"
           >
             <span className="h-px w-8 bg-accent" />
             Car Rental Services in Karachi
@@ -118,10 +118,10 @@ export default function Hero() {
           initial={prefersReduced ? false : { opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.9, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="relative mt-8 lg:mt-0"
+          className="relative lg:mt-0"
         >
           <div className="pointer-events-none absolute inset-0 -z-0 rounded-full bg-accent/20 blur-[60px] sm:blur-[100px]" />
-          <div className="relative aspect-[4/3] sm:aspect-[3/2] lg:aspect-[4/3]">
+          <div className="relative mt-6 aspect-[4/3] sm:aspect-[3/2] lg:aspect-[4/3] sm:mt-8">
             {/* Preload all images */}
             {CAROUSEL_IMAGES.map((img) => (
               <link key={img.src} rel="preload" as="image" href={img.src} />

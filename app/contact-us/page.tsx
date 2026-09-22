@@ -63,7 +63,7 @@ export default function ContactPage() {
         imageAlt="Contact Nrently car rental"
       />
 
-      <section className="mx-auto max-w-7xl px-4 pb-20 pt-14 sm:px-6 lg:px-8">
+      <section className="mx-auto max-w-7xl px-4 pb-14 pt-10 sm:px-6 sm:pb-20 sm:pt-14 lg:px-8">
         <Stagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {INFO_CARDS.map((card) => {
             const Icon = card.icon;
@@ -95,12 +95,12 @@ export default function ContactPage() {
                         ? "noopener noreferrer"
                         : undefined
                     }
-                    className="block h-full rounded-2xl border border-line bg-[#121212] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-xl"
+                    className="block h-full rounded-2xl border border-line bg-[#121212] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-xl sm:p-6"
                   >
                     {content}
                   </a>
                 ) : (
-                  <div className="h-full rounded-2xl border border-line bg-[#121212] p-6">
+                  <div className="h-full rounded-2xl border border-line bg-[#121212] p-5 sm:p-6">
                     {content}
                   </div>
                 )}
@@ -110,8 +110,8 @@ export default function ContactPage() {
         </Stagger>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-2">
+      <section className="mx-auto max-w-7xl px-4 pb-14 sm:px-6 sm:pb-20 lg:px-8">
+        <div className="grid gap-8 sm:gap-10 lg:grid-cols-2">
           <ContactForm />
           <div>
             <SectionHeading
@@ -124,7 +124,7 @@ export default function ContactPage() {
               <iframe
                 title="Nrently location map — Shahrah-e-Faisal, Karachi"
                 src={CONTACT.mapEmbeds.karachi}
-                className="h-[26rem] w-full grayscale-[20%]"
+                className="h-64 w-full grayscale-[20%] sm:h-[26rem]"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 allowFullScreen

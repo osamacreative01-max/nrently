@@ -1,9 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
-import { MapPin, MessageCircle, Phone } from "lucide-react";
+import { ArrowRight, MapPin, MessageCircle, Navigation, Phone } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/ui/Reveal";
-import Parallax from "@/components/ui/Parallax";
+import SectionHeading from "@/components/ui/SectionHeading";
 import VehicleListing from "@/components/sections/VehicleListing";
 import ContactCta from "@/components/sections/ContactCta";
 import {
@@ -13,11 +12,20 @@ import {
   WHATSAPP_URL,
   type CityInfo,
 } from "@/lib/site";
+import { buildRouteWhatsAppUrl } from "@/lib/search";
 
 interface CityLandingProps {
   city: CityInfo;
   tagline: string;
   routes: string[];
+}
+
+function splitRoute(route: string): { from: string; to: string } {
+  const parts = route.split(/↔|<->|->/);
+  if (parts.length >= 2) {
+    return { from: parts[0].trim(), to: parts.slice(1).join(" ").trim() };
+  }
+  return { from: route, to: "City" };
 }
 
 export default function CityLanding({ city, tagline, routes }: CityLandingProps) {
@@ -35,75 +43,113 @@ export default function CityLanding({ city, tagline, routes }: CityLandingProps)
         imageAlt={`Car rental in ${city.name}`}
       />
 
-      <section className="mx-auto max-w-7xl px-4 pb-20 pt-14 sm:px-6 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
-          <Reveal>
-            <p className="mb-3 font-display text-sm font-semibold uppercase tracking-[0.25em] text-accent">
-              Popular Routes
-            </p>
-            <h2 className="text-3xl font-bold text-white sm:text-4xl">
-              Where {city.name} rides with us
-            </h2>
-            <p className="mt-4 text-base leading-relaxed text-slate">
-              {city.blurb} Enjoy flexible, door-to-door service in and around
-              the city with professional drivers on request.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-2.5">
-              {routes.map((route) => (
-                <span
-                  key={route}
-                  className="flex items-center gap-1.5 rounded-full bg-[#121212] px-4 py-2 text-sm text-ink ring-1 ring-line"
-                >
-                  <MapPin className="h-4 w-4 text-accent" />
-                  {route}
-                </span>
-              ))}
-            </div>
-          </Reveal>
+      {/* Popular Routes */}
+      <section className="relative overflow-hidden border-b border-line/60 bg-[#0a0a0a] py-12 sm:py-20">
+        <div className="pointer-events-none absolute -right-32 top-1/3 h-72 w-72 rounded-full bg-accent/10 blur-3xl" />
+        <div className="pointer-events-none absolute -left-20 bottom-0 h-56 w-56 rounded-full bg-white/5 blur-3xl" />
 
-          <Reveal delay={0.1}>
-            <div className="relative grid grid-cols-1 gap-3 sm:grid-cols-2">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-gradient-to-b from-[#1a1a1a] to-[#121212]">
-                <Parallax className="absolute -inset-y-[12%] inset-x-0" speed={0.1}>
-                  <Image
-                    src={city.image}
-                    alt={city.name}
-                    fill
-                    sizes="(min-width: 640px) 50vw, 100vw"
-                    className="object-contain p-6"
-                  />
-                </Parallax>
-              </div>
-              <div className="flex flex-col justify-center gap-3">
-                <div className="rounded-2xl bg-brand p-5 text-white">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-accent">
-                    Rates from
-                  </p>
-                  <p
-                    className="mt-1 font-display text-3xl font-extrabold"
-                    style={{ fontVariantNumeric: "tabular-nums" }}
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            eyebrow="Popular Routes"
+            title={`Where ${city.name} rides with us`}
+            subtitle={`${city.blurb} Door-to-door service in and around the city with professional drivers on request.`}
+          />
+
+          {/* Route cards */}
+          <div className="mt-12 grid gap-4 sm:grid-cols-2">
+            {routes.map((route, i) => {
+              const { from, to } = splitRoute(route);
+              const waHref = buildRouteWhatsAppUrl(from, to, city.name);
+              return (
+                <Reveal key={route} delay={i * 0.08}>
+                  <a
+                    href={waHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Book route ${from} to ${to} in ${city.name} on WhatsApp`}
+                    className="group relative flex items-center gap-3 overflow-hidden rounded-2xl border border-line bg-[#121212] p-4 transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-xl hover:shadow-accent/10 sm:gap-4 sm:p-6"
                   >
-                    PKR {city.from.toLocaleString()}
-                    <span className="text-sm font-medium text-slate-300"> /day</span>
-                  </p>
-                </div>
-                <div className="rounded-2xl border border-line bg-[#121212] p-5">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-slate">
-                    Customer centre
-                  </p>
-                  <p className="mt-1 text-sm font-medium text-white">{city.address}</p>
-                </div>
-                <div className="rounded-2xl border border-line bg-[#121212] p-5">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-slate">
-                    Areas served
-                  </p>
-                  <p className="mt-1 text-sm font-medium text-white">
-                    {city.areas.slice(0, 4).join(" · ")}
-                  </p>
+                    <span className="absolute right-4 top-4 font-display text-4xl font-extrabold text-white/[0.04] transition-colors duration-300 group-hover:text-accent/10">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent ring-1 ring-accent/20 transition-colors duration-300 group-hover:bg-accent group-hover:text-white group-hover:ring-accent">
+                      <Navigation className="h-5 w-5" />
+                    </div>
+
+                    <div className="relative min-w-0 flex-1">
+                      <div className="flex items-center gap-2">
+                        <MapPin className="h-3.5 w-3.5 shrink-0 text-accent" />
+                        <p className="truncate text-sm font-semibold text-white">
+                          {from}
+                        </p>
+                      </div>
+                      <div className="my-1.5 ml-1.5 h-3 w-px border-l border-dashed border-white/20" />
+                      <div className="flex items-center gap-2">
+                        <MapPin className="h-3.5 w-3.5 shrink-0 text-slate" />
+                        <p className="truncate text-sm font-medium text-slate transition-colors duration-300 group-hover:text-white">
+                          {to}
+                        </p>
+                      </div>
+                    </div>
+
+                    <span className="hidden items-center gap-1.5 rounded-full border border-accent/30 bg-accent/10 px-3 py-1.5 text-[11px] font-semibold text-accent transition-all duration-300 group-hover:bg-accent group-hover:text-white sm:inline-flex">
+                      <MessageCircle className="h-3.5 w-3.5" />
+                      Book
+                    </span>
+                    <ArrowRight className="h-5 w-5 shrink-0 text-slate/40 transition-all duration-300 group-hover:translate-x-1 group-hover:text-accent" />
+                  </a>
+                </Reveal>
+              );
+            })}
+          </div>
+
+          {/* City info strip */}
+          <div className="mt-8 grid gap-4 sm:mt-12 sm:grid-cols-3">
+            <Reveal delay={0.1}>
+              <div className="h-full rounded-2xl border border-line bg-gradient-to-br from-accent/15 to-[#121212] p-4 sm:p-6">
+                <p className="text-xs font-semibold uppercase tracking-wide text-accent">
+                  Rates from
+                </p>
+                <p
+                  className="mt-2 font-display text-2xl font-extrabold text-white sm:text-3xl"
+                  style={{ fontVariantNumeric: "tabular-nums" }}
+                >
+                  PKR {city.from.toLocaleString()}
+                  <span className="text-sm font-medium text-slate"> /day</span>
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.15}>
+              <div className="h-full rounded-2xl border border-line bg-[#121212] p-4 sm:p-6">
+                <p className="text-xs font-semibold uppercase tracking-wide text-slate">
+                  Customer centre
+                </p>
+                <p className="mt-2 text-sm font-medium leading-relaxed text-white">
+                  {city.address}
+                </p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.2}>
+              <div className="h-full rounded-2xl border border-line bg-[#121212] p-4 sm:p-6">
+                <p className="text-xs font-semibold uppercase tracking-wide text-slate">
+                  Areas served
+                </p>
+                <div className="mt-3 flex flex-wrap gap-1.5">
+                  {city.areas.slice(0, 6).map((area) => (
+                    <span
+                      key={area}
+                      className="rounded-full bg-white/[0.05] px-2.5 py-1 text-[11px] text-slate"
+                    >
+                      {area}
+                    </span>
+                  ))}
                 </div>
               </div>
-            </div>
-          </Reveal>
+            </Reveal>
+          </div>
         </div>
       </section>
 
@@ -118,10 +164,10 @@ export default function CityLanding({ city, tagline, routes }: CityLandingProps)
         <section className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
           <div className="grid gap-8 lg:grid-cols-[1fr_1.4fr] lg:items-center">
             <Reveal>
-              <p className="mb-3 font-display text-sm font-semibold uppercase tracking-[0.25em] text-accent">
+              <p className="mb-3 font-display text-xs font-semibold uppercase tracking-[0.18em] text-accent sm:text-sm sm:tracking-[0.25em]">
                 Find Us
               </p>
-              <h2 className="text-3xl font-bold text-white sm:text-4xl">
+              <h2 className="text-2xl font-bold text-white sm:text-4xl">
                 Customer centre in {city.name}
               </h2>
               <p className="mt-4 text-base leading-relaxed text-slate">
@@ -137,7 +183,7 @@ export default function CityLanding({ city, tagline, routes }: CityLandingProps)
                 <iframe
                   title={`Nrently location map — ${city.name}`}
                   src={mapEmbed}
-                  className="h-80 w-full grayscale-[20%]"
+                    className="h-72 w-full grayscale-[20%] sm:h-80"
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                   allowFullScreen
@@ -149,12 +195,12 @@ export default function CityLanding({ city, tagline, routes }: CityLandingProps)
       )}
 
       <section className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center justify-between gap-6 rounded-3xl bg-gradient-to-r from-brand to-brand/90 px-8 py-10 text-center sm:flex-row sm:text-left">
+        <div className="flex flex-col items-center justify-between gap-6 rounded-3xl bg-gradient-to-r from-brand to-brand/90 px-5 py-8 text-center sm:flex-row sm:px-8 sm:py-10 sm:text-left">
           <div>
-            <h2 className="font-display text-2xl font-bold text-white sm:text-3xl">
+            <h2 className="font-display text-xl font-bold text-white sm:text-3xl">
               Ready to drive in {city.name}?
             </h2>
-            <div className="mt-3 flex flex-col gap-2 sm:flex-row sm:gap-6">
+            <div className="mt-3 flex flex-col gap-2 text-sm sm:flex-row sm:gap-6">
               <a
                 href={`tel:${PHONE_DISPLAY.replace(/-/g, "")}`}
                 className="text-sm text-slate-300 hover:text-accent"
@@ -164,7 +210,7 @@ export default function CityLanding({ city, tagline, routes }: CityLandingProps)
                 {PHONE_DISPLAY}
               </a>
               <span className="hidden text-slate-500 sm:inline">|</span>
-              <span className="text-sm text-slate-400">Budget to luxury fleet in stock</span>
+              <span className="text-xs text-slate-400 sm:text-sm">Budget to luxury fleet in stock</span>
             </div>
           </div>
           <div className="flex flex-wrap justify-center gap-3">
@@ -172,14 +218,14 @@ export default function CityLanding({ city, tagline, routes }: CityLandingProps)
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 font-display text-sm font-semibold text-white shadow-lg shadow-accent/30 transition-all duration-300 hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 rounded-full bg-accent px-5 py-3 font-display text-xs font-semibold text-white shadow-lg shadow-accent/30 transition-all duration-300 hover:-translate-y-0.5 sm:px-7 sm:py-3.5 sm:text-sm"
             >
               <MessageCircle className="h-4 w-4" />
               Book in {city.name}
             </a>
             <Link
               href="/vehicles"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 px-7 py-3.5 font-display text-sm font-semibold text-white transition-all duration-300 hover:border-white hover:bg-[#121212]/10"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 px-5 py-3 font-display text-xs font-semibold text-white transition-all duration-300 hover:border-white hover:bg-[#121212]/10 sm:px-7 sm:py-3.5 sm:text-sm"
             >
               Browse Fleet
             </Link>

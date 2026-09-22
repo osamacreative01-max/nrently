@@ -74,18 +74,18 @@ export default function VehicleCategories() {
   const items = CATEGORIES.map((cat, i) => ({ ...cat, Icon: ICONS[i] }));
 
   return (
-    <section className="relative overflow-hidden bg-[#0a0a0a] py-20 sm:py-28">
+    <section className="relative overflow-hidden bg-[#0a0a0a] py-14 sm:py-28">
       {/* Section Header */}
-      <div className="relative mx-auto mb-14 max-w-7xl px-4 text-center sm:px-6 lg:px-8">
+      <div className="relative mb-10 mx-auto max-w-7xl px-4 text-center sm:mb-14 sm:px-6 lg:px-8">
         <p className="font-display text-xs font-semibold uppercase tracking-[0.3em] text-accent">
           Our Fleet
         </p>
 
         {/* Glitch heading */}
-        <div className="relative mt-3 inline-block">
+        <div className="relative mt-3 max-w-full inline-block">
           {/* Cyan offset layer */}
           <h2
-            className="pointer-events-none absolute inset-0 select-none font-display text-3xl font-bold text-cyan-500/30 sm:text-4xl"
+              className="pointer-events-none absolute inset-0 select-none font-display text-2xl font-bold text-cyan-500/30 sm:text-4xl"
             style={{ transform: "translate(-2px, -1px)" }}
             aria-hidden="true"
           >
@@ -93,14 +93,14 @@ export default function VehicleCategories() {
           </h2>
           {/* Red offset layer */}
           <h2
-            className="pointer-events-none absolute inset-0 select-none font-display text-3xl font-bold text-accent/30 sm:text-4xl"
+              className="pointer-events-none absolute inset-0 select-none font-display text-2xl font-bold text-accent/30 sm:text-4xl"
             style={{ transform: "translate(2px, 1px)" }}
             aria-hidden="true"
           >
             Explore Our Vehicle Categories
           </h2>
           {/* Main white text */}
-          <h2 className="relative font-display text-3xl font-bold text-white sm:text-4xl">
+          <h2 className="relative font-display text-2xl font-bold text-white sm:text-4xl">
             Explore Our Vehicle Categories
           </h2>
         </div>
@@ -112,7 +112,7 @@ export default function VehicleCategories() {
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-32 bg-gradient-to-r from-[#0a0a0a] to-transparent" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-32 bg-gradient-to-l from-[#0a0a0a] to-transparent" />
 
-        <div className="marquee-track flex w-max gap-6 px-6 group-hover/marquee:[animation-play-state:paused]">
+        <div className="marquee-track flex w-max gap-4 px-4 group-hover/marquee:[animation-play-state:paused] sm:gap-6 sm:px-6">
           {/* First set */}
           {items.map((cat) => (
             <Link
@@ -153,12 +153,12 @@ export default function VehicleCategories() {
       </div>
 
       {/* CTA Button */}
-      <div className="mt-14 text-center">
+      <div className="mt-10 text-center sm:mt-14">
         <Link
           href={WHATSAPP_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-full bg-accent px-10 py-4 font-display text-sm font-bold text-white shadow-lg shadow-accent/25 transition-all duration-300 hover:scale-105 hover:bg-accent/90 hover:shadow-xl hover:shadow-accent/40"
+          className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3.5 font-display text-xs font-bold text-white shadow-lg shadow-accent/25 transition-all duration-300 hover:scale-105 hover:bg-accent/90 hover:shadow-xl hover:shadow-accent/40 sm:px-10 sm:py-4 sm:text-sm"
         >
           Find Your Perfect Ride
         </Link>

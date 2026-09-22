@@ -97,11 +97,11 @@ export default function ContactForm() {
         align="left"
         eyebrow="Send a Message"
         title="Tell us what you need"
-        subtitle="Fill the form and we'll follow up — or skip straight to WhatsApp for instant answers."
+        subtitle="Fill the form — or skip straight to WhatsApp for instant answers."
       />
 
       <form
-        className="mt-8 rounded-3xl border border-line bg-[#121212] p-6 shadow-xl shadow-brand/5 sm:p-8"
+        className="mt-8 rounded-3xl border border-line bg-[#121212] p-4 shadow-xl shadow-brand/5 sm:p-8"
         onSubmit={handleSubmit}
       >
         {status === "success" ? (
@@ -139,7 +139,7 @@ export default function ContactForm() {
                   onChange={update("name")}
                   placeholder="Your name"
                   autoComplete="name"
-                  className={`${FIELD} ${
+                  className={`${FIELD} min-h-[44px] ${
                     errors.name ? "border-accent/60" : ""
                   }`}
                 />
@@ -162,7 +162,7 @@ export default function ContactForm() {
                   onChange={update("phone")}
                   placeholder="03xx-xxxxxxx"
                   autoComplete="tel"
-                  className={`${FIELD} ${
+                  className={`${FIELD} min-h-[44px] ${
                     errors.phone ? "border-accent/60" : ""
                   }`}
                 />
@@ -185,7 +185,7 @@ export default function ContactForm() {
                   onChange={update("email")}
                   placeholder="you@example.com"
                   autoComplete="email"
-                  className={`${FIELD} ${
+                  className={`${FIELD} min-h-[44px] ${
                     errors.email ? "border-accent/60" : ""
                   }`}
                 />
@@ -207,7 +207,7 @@ export default function ContactForm() {
                   value={form.message}
                   onChange={update("message")}
                   placeholder="e.g. Need a Corolla for 3 days in Karachi with driver"
-                  className={`${FIELD} resize-none ${
+                  className={`${FIELD} min-h-[44px] resize-none ${
                     errors.message ? "border-accent/60" : ""
                   }`}
                 />
@@ -222,7 +222,7 @@ export default function ContactForm() {
               <button
                 type="submit"
                 disabled={status === "sending"}
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand px-7 py-4 font-display text-sm font-semibold text-white shadow-lg shadow-brand/30 transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand/90 disabled:cursor-not-allowed disabled:opacity-60 sm:col-span-2"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand px-7 py-4 font-display text-sm font-semibold text-white shadow-lg shadow-brand/30 transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand/90 disabled:cursor-not-allowed disabled:opacity-60 min-h-[48px] sm:col-span-2"
               >
                 {status === "sending" ? (
                   <>

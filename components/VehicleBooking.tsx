@@ -29,7 +29,7 @@ interface VehicleBookingProps {
 }
 
 const fieldClasses =
-  "w-full rounded-xl border border-white/[0.08] bg-white/[0.04] px-4 py-3 text-sm text-white outline-none transition-all duration-200 placeholder:text-slate-500 focus:border-accent/40 focus:bg-white/[0.06] focus:ring-1 focus:ring-accent/20";
+  "w-full min-w-0 rounded-xl border border-white/[0.08] bg-white/[0.04] px-4 py-3 text-sm text-white outline-none transition-all duration-200 placeholder:text-slate-500 focus:border-accent/40 focus:bg-white/[0.06] focus:ring-1 focus:ring-accent/20 min-h-[44px]";
 
 const labelClasses =
   "mb-1.5 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-slate";
@@ -150,28 +150,28 @@ export default function VehicleBooking({ vehicle, search }: VehicleBookingProps)
     : [];
 
   return (
-    <div className="mt-8 rounded-2xl border border-line bg-[#121212] p-5 sm:p-6">
-      <h2 className="font-display text-base font-bold text-white">
+    <div className="mt-6 rounded-2xl border border-line bg-[#121212] p-4 sm:mt-8 sm:p-6">
+      <h2 className="font-display text-sm font-bold text-white sm:text-base">
         Booking details
       </h2>
 
       {search ? (
-        <dl className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <dl className="mt-3 grid grid-cols-1 gap-2.5 sm:mt-4 sm:grid-cols-2 sm:gap-3">
           {rentalRows.map((row) => (
             <div
               key={row.label}
-              className="rounded-xl border border-white/[0.06] bg-white/[0.03] px-4 py-3"
+              className="rounded-xl border border-white/[0.06] bg-white/[0.03] px-3 py-2.5 sm:px-4 sm:py-3"
             >
               <dt className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-slate">
                 <row.icon className="h-3 w-3 text-accent" />
                 {row.label}
               </dt>
-              <dd className="mt-1 text-sm font-medium text-white">{row.value}</dd>
+              <dd className="mt-1 break-words text-sm font-medium text-white">{row.value}</dd>
             </div>
           ))}
         </dl>
       ) : (
-        <div className="mt-4 rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-3 text-sm text-slate">
+        <div className="mt-4 rounded-xl border border-white/[0.08] bg-white/[0.03] px-3 py-2.5 text-xs text-slate sm:mt-4 sm:px-4 sm:py-3 sm:text-sm">
           No rental dates selected yet.{" "}
           <Link
             href="/#booking"
@@ -184,7 +184,7 @@ export default function VehicleBooking({ vehicle, search }: VehicleBookingProps)
       )}
 
       {/* Customer details */}
-      <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div className="mt-4 grid grid-cols-1 gap-3 sm:mt-5 sm:grid-cols-2 sm:gap-4">
         <div>
           <label htmlFor="customer-name" className={labelClasses}>
             <User className="h-3 w-3 text-accent/70" />
@@ -271,13 +271,13 @@ export default function VehicleBooking({ vehicle, search }: VehicleBookingProps)
         target="_blank"
         rel="noopener noreferrer"
         onClick={handleClick}
-        className="mt-5 flex w-full items-center justify-center gap-2 rounded-xl bg-mint px-6 py-4 font-display text-sm font-bold text-white shadow-lg shadow-mint/20 transition-all duration-300 hover:shadow-xl hover:shadow-mint/30"
+        className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-mint px-6 py-4 font-display text-sm font-bold text-white shadow-lg shadow-mint/20 transition-all duration-300 hover:shadow-xl hover:shadow-mint/30 sm:mt-5"
       >
         <MessageCircle className="h-4 w-4" />
         Book on WhatsApp
       </a>
 
-      <div className="mt-3 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-wider text-slate">
+      <div className="mt-2.5 flex items-center gap-3 text-[11px] font-semibold uppercase tracking-wider text-slate sm:mt-3">
         <span className="h-px flex-1 bg-white/10" />
         or
         <span className="h-px flex-1 bg-white/10" />
@@ -288,7 +288,7 @@ export default function VehicleBooking({ vehicle, search }: VehicleBookingProps)
         type="button"
         onClick={handleEmailBooking}
         disabled={emailStatus === "sending"}
-        className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl border border-accent/40 bg-accent/10 px-6 py-4 font-display text-sm font-bold text-accent transition-all duration-300 hover:bg-accent hover:text-white disabled:cursor-not-allowed disabled:opacity-60"
+        className="mt-2.5 flex w-full items-center justify-center gap-2 rounded-xl border border-accent/40 bg-accent/10 px-6 py-4 font-display text-sm font-bold text-accent transition-all duration-300 hover:bg-accent hover:text-white disabled:cursor-not-allowed disabled:opacity-60 sm:mt-3"
       >
         {emailStatus === "sending" ? (
           <>
@@ -304,19 +304,19 @@ export default function VehicleBooking({ vehicle, search }: VehicleBookingProps)
       </button>
 
       {emailStatus === "success" && (
-        <p className="mt-3 flex items-center justify-center gap-2 rounded-xl bg-mint/10 px-4 py-3 text-sm font-medium text-mint">
+        <p className="mt-3 flex items-center justify-center gap-2 rounded-xl bg-mint/10 px-3 py-3 text-xs font-medium text-mint sm:px-4 sm:text-sm">
           <CheckCircle2 className="h-4 w-4 shrink-0" />
           Booking request sent! A confirmation copy has been emailed to you.
         </p>
       )}
       {emailStatus === "error" && (
-        <p className="mt-3 flex items-center justify-center gap-2 rounded-xl bg-accent/10 px-4 py-3 text-sm font-medium text-accent">
+        <p className="mt-3 flex items-center justify-center gap-2 rounded-xl bg-accent/10 px-3 py-3 text-xs font-medium text-accent sm:px-4 sm:text-sm">
           <AlertCircle className="h-4 w-4 shrink-0" />
           {emailError}
         </p>
       )}
 
-      <p className="mt-4 text-center text-xs text-slate">
+      <p className="mt-3 text-center text-xs text-slate sm:mt-4">
         No advance payment required. Pay when you receive the car.
       </p>
     </div>

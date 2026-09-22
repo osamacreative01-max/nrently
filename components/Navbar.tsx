@@ -66,9 +66,18 @@ export default function Navbar() {
   }, [pathname]);
 
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    const html = document.documentElement;
+    const body = document.body;
+    if (mobileOpen) {
+      html.classList.add("lenis-stopped");
+      body.style.overflow = "hidden";
+    } else {
+      html.classList.remove("lenis-stopped");
+      body.style.overflow = "";
+    }
     return () => {
-      document.body.style.overflow = "";
+      html.classList.remove("lenis-stopped");
+      body.style.overflow = "";
     };
   }, [mobileOpen]);
 
@@ -90,7 +99,9 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+      className={`fixed inset-x-0 top-0 transition-all duration-500 ${
+        mobileOpen ? "z-[70]" : "z-50"
+      } ${
         solid
           ? "bg-[#121212]/90 shadow-lg shadow-black/30 backdrop-blur-xl"
           : "bg-transparent"
@@ -193,7 +204,7 @@ export default function Navbar() {
 
         <button
           type="button"
-          className={`p-2 lg:hidden ${textClass}`}
+          className={`-m-1 flex h-11 w-11 items-center justify-center rounded-xl active:bg-white/10 lg:hidden ${textClass}`}
           onClick={() => setMobileOpen(true)}
           aria-label="Open menu"
           aria-expanded={mobileOpen}
@@ -225,13 +236,14 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="fixed inset-y-0 right-0 z-50 flex w-[86%] max-w-sm flex-col bg-brand px-6 py-6 lg:hidden"
+              className="fixed inset-y-0 right-0 z-50 flex w-[86%] max-w-sm flex-col bg-brand px-6 py-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] lg:hidden"
+              data-lenis-prevent
             >
               <div className="flex items-center justify-between">
                 <Logo />
                 <button
                   type="button"
-                  className="p-2 text-white"
+                  className="-m-1 flex h-11 w-11 items-center justify-center rounded-xl text-white active:bg-white/10"
                   onClick={() => setMobileOpen(false)}
                   aria-label="Close menu"
                 >
@@ -239,7 +251,7 @@ export default function Navbar() {
                 </button>
               </div>
 
-              <div className="mt-8 flex flex-1 flex-col gap-1.5 overflow-y-auto">
+              <div className="mt-8 flex flex-1 flex-col gap-1.5 overflow-y-auto overscroll-contain">
                 {MENU.map((item, i) => (
                   <motion.div
                     key={item.label}

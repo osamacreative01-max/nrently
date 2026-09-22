@@ -10,7 +10,7 @@ export default function FaqAccordion() {
   const prefersReduced = useReducedMotion();
 
   return (
-    <div className="mx-auto mt-14 max-w-3xl space-y-3">
+    <div className="mx-auto mt-10 max-w-3xl space-y-3 sm:mt-14">
       {FAQS.map((faq, i) => {
         const isOpen = openIndex === i;
         return (
@@ -25,20 +25,20 @@ export default function FaqAccordion() {
             <button
               type="button"
               onClick={() => setOpenIndex(isOpen ? null : i)}
-              className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+              className="flex w-full items-center justify-between gap-3 px-4 py-4 text-left sm:gap-4 sm:px-6 sm:py-5"
               aria-expanded={isOpen}
             >
-              <span className={`font-display text-base font-semibold sm:text-lg transition-colors duration-300 ${isOpen ? "text-white" : "text-white/80"}`}>
+              <span className={`min-w-0 font-display text-base font-semibold break-words sm:text-lg transition-colors duration-300 ${isOpen ? "text-white" : "text-white/80"}`}>
                 {faq.q}
               </span>
               <motion.span
                 animate={{ rotate: isOpen ? 180 : 0 }}
                 transition={{ duration: 0.3 }}
-                className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
+                className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full transition-all duration-300 sm:h-8 sm:w-8 ${
                   isOpen ? "bg-accent text-white" : "bg-white/[0.06] text-slate"
                 }`}
               >
-                <ChevronDown className="h-4 w-4" />
+                <ChevronDown className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
               </motion.span>
             </button>
             <AnimatePresence initial={false}>
@@ -53,7 +53,7 @@ export default function FaqAccordion() {
                   transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <div className="border-t border-white/[0.06]">
-                    <p className="px-6 py-5 text-sm leading-relaxed text-slate">
+                    <p className="px-4 py-4 text-sm leading-relaxed text-slate sm:px-6 sm:py-5">
                       {faq.a}
                     </p>
                   </div>

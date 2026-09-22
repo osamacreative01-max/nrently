@@ -7,6 +7,8 @@ export interface RentalSearch {
   pickupDate: string;
   pickupTime: string;
   dropoffDate: string;
+  pickupCoords?: string;
+  dropoffCoords?: string;
 }
 
 export interface RentalSearchFormValues {
@@ -102,6 +104,8 @@ export function serializeRentalSearch(search: RentalSearch): string {
     pickupTime: search.pickupTime,
     dropoffDate: search.dropoffDate,
   });
+  if (search.pickupCoords) params.set("pickupCoords", search.pickupCoords);
+  if (search.dropoffCoords) params.set("dropoffCoords", search.dropoffCoords);
   return `?${params.toString()}`;
 }
 
@@ -124,6 +128,10 @@ export function parseRentalSearch(
   if (dropoffDate < pickupDate) return null;
   if (!sameDropoffLocation && !dropoffLocation) return null;
 
+  const pickupCoords = first(params.pickupCoords).trim();
+  let dropoffCoords = first(params.dropoffCoords).trim();
+  if (sameDropoffLocation) dropoffCoords = pickupCoords;
+
   return {
     pickupLocation,
     dropoffLocation,
@@ -131,6 +139,8 @@ export function parseRentalSearch(
     pickupDate,
     pickupTime,
     dropoffDate,
+    ...(pickupCoords ? { pickupCoords } : {}),
+    ...(dropoffCoords ? { dropoffCoords } : {}),
   };
 }
 
@@ -188,6 +198,16 @@ export function buildWhatsAppMessage(options: {
       `Pickup Time: ${formatRentalTime(search.pickupTime)}`,
       `Drop-off Date: ${formatRentalDate(search.dropoffDate)}`
     );
+    if (search.pickupCoords) {
+      lines.push(
+        `Pickup Map: https://www.google.com/maps?q=${search.pickupCoords}`
+      );
+    }
+    if (search.dropoffCoords && search.dropoffCoords !== search.pickupCoords) {
+      lines.push(
+        `Drop-off Map: https://www.google.com/maps?q=${search.dropoffCoords}`
+      );
+    }
   }
 
   const customerName = name?.trim();
@@ -213,4 +233,76 @@ export function buildWhatsAppUrl(options: {
   const digits = PHONE_INTL.replace(/[^0-9]/g, "");
   const message = buildWhatsAppMessage(options);
   return `https://wa.me/${digits}?text=${encodeURIComponent(message)}`;
+}
+
+export function buildRouteWhatsAppUrl(
+  from: string,
+  to: string,
+  cityName: string
+): string {
+  const digits = PHONE_INTL.replace(/[^0-9]/g, "");
+  const message = [
+    "Hello Nrently,",
+    "",
+    "I want to book a ride on this popular route:",
+    "",
+    `Route: ${from} ↔ ${to}`,
+    `City: ${cityName}`,
+    "",
+    "Please confirm availability, vehicle options and price.",
+  ].join("\n");
+  return `https://wa.me/${digits}?text=${encodeURIComponent(message)}`;
+}
+
+export interface DetectedLocation {
+  address: string;
+  coords: string;
+}
+
+export async function detectCurrentLocation(): Promise<DetectedLocation> {
+  if (!("geolocation" in navigator)) {
+    throw new Error("Geolocation is not supported in this browser.");
+  }
+
+  const position = await new Promise<GeolocationPosition>((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(resolve, reject, {
+      enableHighAccuracy: true,
+      timeout: 12000,
+      maximumAge: 60000,
+    });
+  });
+
+  const { latitude, longitude } = position.coords;
+  const coords = `${latitude.toFixed(6)},${longitude.toFixed(6)}`;
+  let address = `Current Location (${coords})`;
+
+  try {
+    const res = await fetch(
+      `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}&zoom=18&addressdetails=1`,
+      {
+        headers: {
+          Accept: "application/json",
+          "User-Agent": "NrentlyBooking/1.0",
+        },
+      }
+    );
+    if (res.ok) {
+      const data = (await res.json()) as {
+        display_name?: string;
+        address?: Record<string, string>;
+      };
+      const a = data.address ?? {};
+      const short = [
+        a.road || a.neighbourhood || a.suburb || a.hamlet || a.village,
+        a.city || a.town || a.county || a.state,
+      ]
+        .filter(Boolean)
+        .join(", ");
+      address = short || data.display_name || address;
+    }
+  } catch {
+    // Keep coords fallback if reverse geocode fails
+  }
+
+  return { address, coords };
 }

@@ -97,7 +97,7 @@ export default async function VehicleDetailPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <section className="mx-auto max-w-7xl px-4 pb-20 pt-10 sm:px-6 lg:px-8">
+      <section className="mx-auto max-w-7xl px-4 pb-20 pt-24 sm:px-6 sm:pt-32 lg:px-8">
         <Link
           href={backHref}
           className="inline-flex items-center gap-2 text-sm text-slate transition-colors duration-200 hover:text-white"
@@ -106,35 +106,35 @@ export default async function VehicleDetailPage({
           {search ? "Back to search results" : "Back to vehicles"}
         </Link>
 
-        <div className="mt-8 grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-14">
+        <div className="mt-6 grid grid-cols-1 gap-8 sm:mt-8 sm:gap-10 lg:grid-cols-2 lg:gap-14">
           {/* Vehicle image + specs */}
-          <div className="rounded-2xl border border-line bg-[#121212] p-6 sm:p-8">
-            <div className="relative aspect-[16/10]">
+          <div className="rounded-3xl border border-line bg-[#101010] p-4 sm:p-8">
+            <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-gradient-to-b from-[#1a1a1a] to-[#101010]">
               <Image
                 src={vehicle.image}
                 alt={vehicle.name}
                 fill
                 sizes="(min-width: 1024px) 50vw, 100vw"
-                className="object-contain drop-shadow-[0_16px_32px_rgba(0,0,0,0.6)]"
+              className="object-contain p-3 sm:p-8"
               />
               {vehicle.tag && (
-                <span className="absolute left-0 top-0 rounded-full bg-accent px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-white shadow-lg">
+                <span className="absolute left-4 top-4 rounded-full bg-accent px-3 py-1 text-[10px] font-bold uppercase tracking-wide text-white shadow-lg">
                   {vehicle.tag}
                 </span>
               )}
             </div>
 
-            <dl className="mt-8 grid grid-cols-2 gap-3">
+            <dl className="mt-6 grid grid-cols-2 gap-2.5 sm:mt-8 sm:gap-3">
               {specs.map((spec) => (
                 <div
                   key={spec.label}
-                  className="flex items-center gap-2 rounded-xl border border-white/[0.06] bg-white/[0.03] px-4 py-3 text-sm text-slate"
+                  className="flex min-w-0 flex-wrap items-center gap-2 rounded-xl border border-white/[0.06] bg-white/[0.03] px-3 py-2.5 text-xs text-slate sm:px-4 sm:py-3 sm:text-sm"
                 >
                   <spec.icon className="h-4 w-4 shrink-0 text-accent" />
                   {spec.label}
                 </div>
               ))}
-              <div className="flex items-center gap-2 rounded-xl border border-white/[0.06] bg-white/[0.03] px-4 py-3 text-sm text-slate col-span-2">
+              <div className="col-span-2 flex min-w-0 flex-wrap items-center gap-2 rounded-xl border border-white/[0.06] bg-white/[0.03] px-3 py-2.5 text-xs text-slate sm:px-4 sm:py-3 sm:text-sm">
                 <Clock className="h-4 w-4 shrink-0 text-accent" />
                 Overtime PKR {vehicle.overtimeRate}/hr after{" "}
                 {vehicle.driverHours} hrs
@@ -150,15 +150,15 @@ export default async function VehicleDetailPage({
               </span>
             </div>
 
-            <h1 className="mt-4 font-display text-3xl font-bold text-white sm:text-4xl">
+            <h1 className="mt-3 font-display text-2xl font-bold leading-tight text-white break-words sm:mt-4 sm:text-4xl">
               {vehicle.name}
             </h1>
 
-            <p className="mt-4 text-sm leading-relaxed text-slate">
+            <p className="mt-3 text-sm leading-relaxed text-slate sm:mt-4">
               {vehicle.description}
             </p>
 
-            <p className="mt-5">
+            <p className="mt-4 sm:mt-5">
               <span className="font-display text-2xl font-bold text-white">
                 PKR {vehicle.pricePerDay.toLocaleString()}
               </span>

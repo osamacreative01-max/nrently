@@ -12,18 +12,18 @@ const ICONS: Record<string, LucideIcon> = {
 
 export default function ValuesGrid() {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+    <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
       <SectionHeading
         eyebrow="Why Nrently"
         title="The Nrently difference"
         subtitle="More than cars — a promise kept on every booking."
       />
-      <Stagger className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <Stagger className="mt-8 grid gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
         {VALUES.map((value) => {
           const Icon = ICONS[value.icon] ?? Sparkles;
           return (
             <StaggerItem key={value.title}>
-              <div className="group h-full rounded-2xl border border-line bg-[#121212] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-xl hover:shadow-brand/10">
+              <div className="group h-full rounded-2xl border border-line bg-[#121212] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-xl hover:shadow-brand/10 sm:p-6">
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand text-accent transition-transform duration-300 group-hover:scale-110">
                   <Icon className="h-5 w-5" />
                 </div>

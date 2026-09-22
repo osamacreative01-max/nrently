@@ -6,25 +6,25 @@ import { CITIES, customerCenters } from "@/lib/site";
 
 export default function CustomerCenters() {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+    <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20 lg:px-8 lg:py-28">
       <SectionHeading
         eyebrow="Customer Centres"
         title="Pickup points across the country"
         subtitle="Collect your car from any of our centres, or have it delivered to your home or hotel."
       />
 
-      <Stagger className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <Stagger className="mt-8 grid gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
         {customerCenters.map((center) => {
           const city = CITIES.find((c) => c.name === center.city);
           return (
             <StaggerItem key={center.city}>
-              <div className="group h-full rounded-2xl border border-line bg-[#121212] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-xl hover:shadow-brand/10">
+              <div className="group h-full rounded-2xl border border-line bg-[#121212] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-xl hover:shadow-brand/10 sm:p-6">
                 <div className="flex items-center gap-3">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand font-display text-sm font-bold text-accent">
+                  <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand font-display text-sm font-bold text-accent sm:h-10 sm:w-10">
                     {center.city.charAt(0)}
                   </span>
                   <div>
-                    <h3 className="font-display text-lg font-bold text-white">
+                    <h3 className="font-display text-base font-bold text-white sm:text-lg">
                       {center.city}
                     </h3>
                     <p className="text-xs text-slate">
@@ -33,11 +33,11 @@ export default function CustomerCenters() {
                   </div>
                 </div>
 
-                <ul className="mt-5 space-y-2.5 border-t border-line pt-5 text-sm text-ink">
-                  <li className="flex items-center gap-2.5">
-                    <MapPin className="h-4 w-4 shrink-0 text-accent" />
-                    <span className="text-slate">{city?.address}</span>
-                  </li>
+                <ul className="mt-4 space-y-2.5 border-t border-line pt-4 text-sm text-ink sm:mt-5 sm:pt-5">
+                <li className="flex items-start gap-2.5">
+                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                  <span className="min-w-0 break-words text-slate">{city?.address}</span>
+                </li>
                   <li className="flex items-center gap-2.5">
                     <Phone className="h-4 w-4 shrink-0 text-accent" />
                     <span style={{ fontVariantNumeric: "tabular-nums" }}>
@@ -54,7 +54,7 @@ export default function CustomerCenters() {
                   )}
                   <li className="flex items-center gap-2.5">
                     <Mail className="h-4 w-4 shrink-0 text-accent" />
-                    {center.email}
+                    <span className="min-w-0 break-all">{center.email}</span>
                   </li>
                 </ul>
 
@@ -70,7 +70,7 @@ export default function CustomerCenters() {
         })}
 
         <StaggerItem className="sm:col-span-2 lg:col-span-3">
-          <div className="flex flex-col items-center justify-between gap-4 rounded-2xl bg-gradient-to-r from-brand to-brand/90 px-8 py-8 sm:flex-row">
+          <div className="flex flex-col items-center justify-between gap-4 rounded-2xl bg-gradient-to-r from-brand to-brand/90 px-5 py-7 sm:flex-row sm:px-8 sm:py-8">
             <div>
               <h3 className="font-display text-xl font-bold text-white">
                 Prefer doorstep delivery?

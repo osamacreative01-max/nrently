@@ -26,12 +26,12 @@ export default function LocationPage() {
       <DestinationsGrid />
       <CityHighlights cityName="Pakistan" />
 
-      <section className="bg-[#121212] py-16 lg:py-20">
+      <section className="bg-[#121212] py-12 sm:py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h2 className="text-center font-display text-2xl font-bold text-white sm:text-3xl">
             Areas served in detail
           </h2>
-          <Stagger className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+          <Stagger className="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-2 sm:gap-5 lg:grid-cols-5">
             {CITIES.map((city) => (
               <StaggerItem key={city.id}>
                 <div className="h-full rounded-2xl border border-line bg-[#121212] p-5">

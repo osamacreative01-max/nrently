@@ -64,20 +64,20 @@ export default function VehicleFilter({ search = null }: VehicleFilterProps) {
     "border border-white/10 bg-[#121212] text-slate hover:border-accent/40 hover:text-white";
 
   return (
-    <section className="mx-auto max-w-7xl px-4 pb-20 pt-10 sm:px-6 lg:px-8">
+    <section className="mx-auto max-w-7xl px-4 pb-20 pt-8 sm:px-6 lg:px-8">
       {/* Search bar */}
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="mx-auto flex max-w-xl items-center gap-2 rounded-2xl border border-white/10 bg-[#121212] px-4 py-1 pl-4 transition-colors focus-within:border-accent/40"
+        className="mx-auto flex max-w-xl items-center gap-2 rounded-2xl border border-white/10 bg-[#121212] px-3 py-1 transition-colors focus-within:border-accent/40 sm:px-4"
       >
         <Search className="h-4 w-4 shrink-0 text-accent" />
         <input
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search by model, e.g. Corolla, Civic, Land Cruiser…"
+          placeholder="Search by model, e.g. Corolla, Civic…"
           aria-label="Search vehicles by model"
-          className="w-full bg-transparent py-3 text-sm text-white outline-none placeholder:text-slate-500"
+          className="w-full min-w-0 bg-transparent py-2.5 text-xs text-white outline-none placeholder:text-slate-500 sm:py-3 sm:text-sm"
         />
       </form>
 
@@ -98,14 +98,14 @@ export default function VehicleFilter({ search = null }: VehicleFilterProps) {
       </div>
 
       {/* Transmission + seats */}
-      <div className="mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
-        <div className="flex flex-wrap items-center justify-center gap-2">
+        <div className="mt-4 flex flex-wrap items-center justify-center gap-2 sm:gap-x-4 sm:gap-y-2">
+        <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2">
           {TRANSMISSION_FILTERS.map((f) => (
             <button
               key={f.id}
               type="button"
               onClick={() => setTransmission(f.id)}
-              className={`rounded-full px-4 py-2 text-xs font-semibold transition-all duration-300 ${
+              className={`rounded-full px-3 py-2 text-[11px] font-semibold transition-all duration-300 sm:px-4 sm:text-xs ${
                 transmission === f.id ? chipActive : chipIdle
               }`}
             >
@@ -114,7 +114,7 @@ export default function VehicleFilter({ search = null }: VehicleFilterProps) {
           ))}
         </div>
 
-        <label className="flex items-center gap-2 rounded-full border border-white/10 bg-[#121212] px-4 py-2 text-xs font-semibold text-slate">
+        <label className="flex items-center gap-2 rounded-full border border-white/10 bg-[#121212] px-3 py-2 text-[11px] font-semibold text-slate sm:px-4 sm:text-xs">
           <Users className="h-3.5 w-3.5 text-accent" />
           Seats
           <select
@@ -136,7 +136,7 @@ export default function VehicleFilter({ search = null }: VehicleFilterProps) {
       </div>
 
       {/* Result count + clear */}
-      <div className="mt-6 flex flex-wrap items-center justify-center gap-4">
+      <div className="mt-5 flex flex-wrap items-center justify-center gap-3 sm:mt-6 sm:gap-4">
         <p className="text-xs font-medium uppercase tracking-widest text-slate">
           {vehicles.length} {vehicles.length === 1 ? "vehicle" : "vehicles"}
         </p>
@@ -154,7 +154,7 @@ export default function VehicleFilter({ search = null }: VehicleFilterProps) {
 
       {/* Grid / empty state */}
       {vehicles.length === 0 ? (
-        <div className="mt-10 flex flex-col items-center rounded-2xl border border-line bg-[#121212] px-6 py-16 text-center">
+        <div           className="mt-8 flex flex-col items-center rounded-2xl border border-line bg-[#121212] px-5 py-12 text-center sm:mt-10 sm:px-6 sm:py-16">
           <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/5 text-slate">
             <CarFront className="h-8 w-8" />
           </div>
@@ -177,7 +177,7 @@ export default function VehicleFilter({ search = null }: VehicleFilterProps) {
       ) : (
         <motion.div
           layout={!prefersReduced}
-          className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2"
+          className="mt-8 grid grid-cols-1 gap-5 sm:mt-10 sm:grid-cols-2 sm:gap-6"
         >
           <AnimatePresence mode="popLayout">
             {vehicles.map((vehicle) => (

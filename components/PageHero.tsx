@@ -15,7 +15,7 @@ export default function PageHero({ title, subtitle, eyebrow, image, imageAlt }: 
   const prefersReduced = useReducedMotion();
 
   return (
-    <section className="relative overflow-hidden bg-brand pb-10 pt-24 sm:pb-14 sm:pt-32">
+    <section className="relative overflow-hidden bg-brand pb-8 pt-20 sm:pb-14 sm:pt-32">
       <div className="pointer-events-none absolute -right-28 -top-24 h-96 w-96 rounded-full bg-accent/15 blur-3xl" />
       <div className="pointer-events-none absolute -left-20 bottom-0 h-64 w-64 rounded-full bg-white/5 blur-3xl" />
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent" />
@@ -29,7 +29,7 @@ export default function PageHero({ title, subtitle, eyebrow, image, imageAlt }: 
             className="max-w-2xl"
           >
             {eyebrow && (
-              <p className="mb-3 flex items-center gap-2 font-display text-sm font-semibold uppercase tracking-[0.3em] text-accent">
+              <p className="mb-3 flex items-center gap-2 font-display text-xs font-semibold uppercase tracking-[0.18em] text-accent sm:text-sm sm:tracking-[0.3em]">
                 <span className="h-px w-8 bg-accent" />
                 {eyebrow}
               </p>
@@ -38,7 +38,7 @@ export default function PageHero({ title, subtitle, eyebrow, image, imageAlt }: 
               {title}
             </h1>
             {subtitle && (
-              <p className="mt-5 max-w-xl text-base leading-relaxed text-slate-300 sm:text-lg">
+              <p className="mt-4 max-w-xl text-sm leading-relaxed text-slate-300 sm:mt-5 sm:text-lg">
                 {subtitle}
               </p>
             )}
@@ -49,17 +49,17 @@ export default function PageHero({ title, subtitle, eyebrow, image, imageAlt }: 
               initial={prefersReduced ? false : { opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="relative mt-4 lg:mt-0"
+              className="relative mt-3 lg:mt-0"
             >
               <div className="pointer-events-none absolute inset-0 -z-0 rounded-full bg-accent/10 blur-[80px]" />
-              <div className="relative aspect-[16/9]">
+              <div className="relative aspect-[16/10]">
                 <Image
                   src={image}
                   alt={imageAlt || "Car rental"}
                   fill
                   priority
-                  sizes="40vw"
-                  className="object-contain drop-shadow-[0_25px_50px_rgba(0,0,0,0.5)]"
+                  sizes="(min-width: 1024px) 48vw, 100vw"
+                  className="object-contain p-2 drop-shadow-[0_25px_50px_rgba(0,0,0,0.55)] sm:p-4"
                 />
               </div>
             </motion.div>

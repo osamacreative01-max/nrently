@@ -12,7 +12,7 @@ export default function CityHighlights({ cityName = "Pakistan" }: CityHighlights
   const items = [...CITY_HIGHLIGHTS, ...CITY_HIGHLIGHTS];
 
   return (
-    <section className="relative overflow-hidden bg-night py-20 lg:py-28">
+    <section className="relative overflow-hidden bg-night py-14 sm:py-20 lg:py-28">
       <div className="pointer-events-none absolute -right-24 top-0 h-80 w-80 rounded-full bg-accent/10 blur-3xl" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -23,12 +23,12 @@ export default function CityHighlights({ cityName = "Pakistan" }: CityHighlights
         />
       </div>
 
-      <div className="mt-14 group/marquee">
-        <div className="marquee-track group-hover/marquee:[animation-play-state:paused] flex w-max gap-5 px-4">
+      <div className="mt-10 group/marquee sm:mt-14">
+        <div className="marquee-track group-hover/marquee:[animation-play-state:paused] flex w-max gap-4 px-4 sm:gap-5">
           {items.map((item, i) => (
             <div
               key={`${item.name}-${i}`}
-              className="group relative w-[280px] shrink-0 overflow-hidden rounded-2xl border border-white/[0.06] sm:w-[340px] lg:w-[400px]"
+              className="group relative w-[260px] shrink-0 overflow-hidden rounded-2xl border border-white/[0.06] sm:w-[340px] lg:w-[400px]"
             >
               <div className="relative aspect-[16/10] overflow-hidden">
                 <Image
@@ -40,14 +40,14 @@ export default function CityHighlights({ cityName = "Pakistan" }: CityHighlights
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-                <div className="absolute inset-0 flex flex-col justify-end p-5">
-                  <h3 className="font-display text-lg font-bold text-white sm:text-xl">
+                <div className="absolute inset-0 flex flex-col justify-end p-4 sm:p-5">
+                  <h3 className="font-display text-base font-bold text-white sm:text-xl">
                     {item.name}
                   </h3>
-                  <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-white/70">
+                  <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-white/70 sm:mt-2 sm:text-sm">
                     {item.text}
                   </p>
-                  <div className="mt-3 h-0.5 w-10 bg-accent transition-all duration-300 group-hover:w-16" />
+                  <div className="mt-2 h-0.5 w-10 bg-accent transition-all duration-300 group-hover:w-16 sm:mt-3" />
                 </div>
               </div>
             </div>
