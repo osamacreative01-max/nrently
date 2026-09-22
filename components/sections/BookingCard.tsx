@@ -136,6 +136,9 @@ export default function BookingCard() {
         <div className="pointer-events-none absolute -left-28 -top-28 h-72 w-72 rounded-full bg-accent/15 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-28 -right-28 h-72 w-72 rounded-full bg-accent/5 blur-3xl" />
         <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-[3px] overflow-hidden">
+          <div className="animate-sheen h-full w-1/3 rounded-full bg-gradient-to-r from-transparent via-accent to-transparent" />
+        </div>
 
         <div className="relative p-6 sm:p-10 lg:p-12">
           {/* Header */}
@@ -291,7 +294,7 @@ export default function BookingCard() {
 
               <button
                 type="submit"
-                className="btn-gradient flex h-[52px] w-full items-center justify-center gap-2.5 rounded-xl px-9 font-display text-sm font-bold text-white shadow-lg shadow-accent/25 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-accent/40 lg:w-auto"
+                className="btn-gradient-animated flex h-[52px] w-full items-center justify-center gap-2.5 rounded-xl px-9 font-display text-sm font-bold text-white shadow-lg shadow-accent/25 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-accent/50 lg:w-auto"
               >
                 <Search className="h-[18px] w-[18px]" />
                 Search Cars

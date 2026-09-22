@@ -118,6 +118,42 @@ html.lenis body {
   background: linear-gradient(135deg, #FF8A3D 0%, #c41a1f 100%);
 }
 
+/* Animated gradient button — draws focus */
+.btn-gradient-animated {
+  background: linear-gradient(120deg, #ff8a3d 0%, #e31e24 40%, #e31e24 60%, #ff8a3d 100%);
+  background-size: 220% 220%;
+  color: #ffffff;
+  animation: gradient-shift 4s ease-in-out infinite;
+}
+.btn-gradient-animated:hover {
+  background: linear-gradient(120deg, #ff8a3d 0%, #d61c21 40%, #d61c21 60%, #ff8a3d 100%);
+  background-size: 220% 220%;
+}
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Moving light sheen across the top edge of the search panel */
+@keyframes sheen-sweep {
+  0% {
+    transform: translateX(-130%);
+  }
+  100% {
+    transform: translateX(430%);
+  }
+}
+.animate-sheen {
+  animation: sheen-sweep 3.5s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -127,6 +163,12 @@ html.lenis body {
   }
   .marquee-track {
     animation: none !important;
+  }
+  .btn-gradient-animated {
+    animation: none;
+  }
+  .animate-sheen {
+    animation: none;
   }
 }
 
