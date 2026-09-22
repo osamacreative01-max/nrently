@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import nodemailer from "nodemailer";
 import { BRAND_NAME, EMAIL } from "@/lib/site";
+import { createMailer, SMTP_USER, BOOKING_EMAIL } from "@/lib/smtp";
 
 function escapeHtml(value: string): string {
   return value.replace(
@@ -52,19 +52,10 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT) || 587,
-      secure: process.env.SMTP_SECURE === "true",
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
+    const transporter = createMailer();
 
-    const recipient = process.env.BOOKING_EMAIL || process.env.SMTP_USER;
     const recipients = Array.from(
-      new Set([recipient, EMAIL].filter(Boolean) as string[])
+      new Set([BOOKING_EMAIL, EMAIL].filter(Boolean) as string[])
     );
 
     const html = `
@@ -92,7 +83,7 @@ export async function POST(req: NextRequest) {
     `;
 
     await transporter.sendMail({
-      from: `"${BRAND_NAME} Contact" <${process.env.SMTP_USER}>`,
+      from: `"${BRAND_NAME} Contact" <${SMTP_USER}>`,
       to: recipients,
       replyTo: email || undefined,
       subject: `New Contact Message: ${name} — ${phone}`,

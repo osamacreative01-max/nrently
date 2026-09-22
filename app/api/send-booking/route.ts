@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import nodemailer from "nodemailer";
 import { EMAIL, BRAND_NAME } from "@/lib/site";
+import { createMailer, SMTP_USER, BOOKING_EMAIL } from "@/lib/smtp";
 
 interface BookingData {
   name: string;
@@ -30,20 +30,10 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Invalid email address." }, { status: 400 });
     }
 
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT) || 587,
-      secure: process.env.SMTP_SECURE === "true",
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
+    const transporter = createMailer();
 
-    const recipientEmail = process.env.BOOKING_EMAIL || process.env.SMTP_USER;
-    // Always notify the site owner at nrently@gmail.com too.
     const recipients = Array.from(
-      new Set([recipientEmail, EMAIL].filter(Boolean) as string[])
+      new Set([BOOKING_EMAIL, EMAIL].filter(Boolean) as string[])
     );
 
     const htmlContent = `
@@ -78,7 +68,7 @@ export async function POST(req: NextRequest) {
     `;
 
     await transporter.sendMail({
-      from: `"${BRAND_NAME} Bookings" <${process.env.SMTP_USER}>`,
+      from: `"${BRAND_NAME} Bookings" <${SMTP_USER}>`,
       to: recipients,
       replyTo: email,
       subject: `New Booking: ${name} — ${carType} (${pickupLocation})`,
@@ -88,9 +78,9 @@ export async function POST(req: NextRequest) {
     if (clientMessage) {
       try {
         await transporter.sendMail({
-          from: `"${BRAND_NAME} Car Rentals" <${process.env.SMTP_USER}>`,
+          from: `"${BRAND_NAME} Car Rentals" <${SMTP_USER}>`,
           to: email,
-          replyTo: recipientEmail,
+          replyTo: BOOKING_EMAIL,
           subject: `Your Booking Request Confirmation — ${carType}`,
           text: clientMessage,
         });
@@ -102,7 +92,7 @@ export async function POST(req: NextRequest) {
     if (clientMessage) {
       try {
         await transporter.sendMail({
-          from: `"${BRAND_NAME} Car Rentals" <${process.env.SMTP_USER}>`,
+          from: `"${BRAND_NAME} Car Rentals" <${SMTP_USER}>`,
           to: EMAIL,
           replyTo: email,
           subject: `Booking Message — ${name} (${carType})`,
