@@ -40,14 +40,14 @@ export default function CategoryGrid() {
               </div>
 
               {/* Content */}
-              <div className="flex flex-1 flex-col p-6 pt-4">
-                <h3 className="font-display text-2xl font-bold text-white">
+              <div className="flex flex-1 flex-col p-6 pt-5">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
                   {cat.label}
-                </h3>
-                <p className="mt-1 text-sm font-medium text-accent">
-                  {cat.example}
                 </p>
-                <p className="mt-3 line-clamp-2 flex-1 text-sm leading-relaxed text-slate">
+                <h3 className="mt-2 font-display text-2xl font-bold text-white">
+                  {cat.example}
+                </h3>
+                <p className="mt-2 line-clamp-2 flex-1 text-sm leading-relaxed text-slate">
                   {cat.blurb}
                 </p>
 
@@ -63,7 +63,8 @@ export default function CategoryGrid() {
                   ))}
                 </div>
 
-                <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-white/70 transition-colors duration-300 group-hover:text-accent">
+                {/* CTA */}
+                <span className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] py-3 font-display text-sm font-semibold text-white transition-all duration-300 group-hover:border-accent group-hover:bg-accent group-hover:shadow-lg group-hover:shadow-accent/30">
                   View & Book
                   <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                 </span>
