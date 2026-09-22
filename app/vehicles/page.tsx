@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import VehicleFilter from "@/components/VehicleFilter";
+import RentalSearchSummary from "@/components/RentalSearchSummary";
 import ContactCta from "@/components/sections/ContactCta";
+import { parseRentalSearch } from "@/lib/search";
+
+type PageSearchParams = Record<string, string | string[] | undefined>;
 
 export const metadata: Metadata = {
   title: "Vehicles",
@@ -9,7 +13,13 @@ export const metadata: Metadata = {
     "Browse the complete Nrently fleet — budget, standard, luxury, SUV and vans & coasters with transparent daily rates.",
 };
 
-export default function VehiclesPage() {
+export default async function VehiclesPage({
+  searchParams,
+}: {
+  searchParams: Promise<PageSearchParams>;
+}) {
+  const search = parseRentalSearch(await searchParams);
+
   return (
     <>
       <PageHero
@@ -19,7 +29,8 @@ export default function VehiclesPage() {
         image="/images/TOYOTA Fortuner-Photoroom.png"
         imageAlt="Nrently vehicle fleet"
       />
-      <VehicleFilter />
+      <RentalSearchSummary search={search} />
+      <VehicleFilter search={search} />
       <ContactCta />
     </>
   );

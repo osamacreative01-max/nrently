@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import VehicleCard from "@/components/VehicleCard";
 import { CATEGORIES, VEHICLES, categoryLabel, type CategoryId } from "@/lib/site";
+import type { RentalSearch } from "@/lib/search";
 
 type Filter = "all" | CategoryId;
 
@@ -12,7 +13,11 @@ const FILTERS: { id: Filter; label: string }[] = [
   ...CATEGORIES.map((c) => ({ id: c.id as Filter, label: c.label })),
 ];
 
-export default function VehicleFilter() {
+interface VehicleFilterProps {
+  search?: RentalSearch | null;
+}
+
+export default function VehicleFilter({ search = null }: VehicleFilterProps) {
   const [filter, setFilter] = useState<Filter>("all");
   const prefersReduced = useReducedMotion();
 
@@ -55,7 +60,11 @@ export default function VehicleFilter() {
               exit={prefersReduced ? undefined : { opacity: 0, scale: 0.96 }}
               transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             >
-              <VehicleCard vehicle={vehicle} categoryLabel={categoryLabel(vehicle.category)} />
+              <VehicleCard
+                vehicle={vehicle}
+                categoryLabel={categoryLabel(vehicle.category)}
+                search={search}
+              />
             </motion.div>
           ))}
         </AnimatePresence>

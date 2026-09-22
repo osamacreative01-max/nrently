@@ -1,134 +1,120 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import {
-  CalendarDays,
-  Car,
-  CheckCircle2,
   AlertCircle,
+  CalendarDays,
+  Clock,
   MapPin,
   MessageCircle,
-  User,
-  ArrowRight,
-  Loader2,
-  Phone,
+  Search,
   Sparkles,
 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { BOOKING, WHATSAPP_URL } from "@/lib/site";
+import { WHATSAPP_URL } from "@/lib/site";
+import {
+  LOCATION_SUGGESTIONS,
+  PICKUP_TIME_OPTIONS,
+  serializeRentalSearch,
+  todayISO,
+  validateRentalSearch,
+  type RentalSearch,
+} from "@/lib/search";
 
-interface FormData {
-  name: string;
-  phone: string;
-  carType: string;
+interface SearchForm {
   pickupLocation: string;
+  sameDropoffLocation: boolean;
+  dropoffLocation: string;
   pickupDate: string;
+  pickupTime: string;
+  dropoffDate: string;
+}
+
+const fieldClasses =
+  "w-full rounded-xl border border-white/[0.08] bg-white/[0.04] px-4 py-3 text-sm text-white outline-none transition-all duration-200 placeholder:text-slate-500 focus:border-accent/40 focus:bg-white/[0.06] focus:ring-1 focus:ring-accent/20 [color-scheme:dark]";
+
+const labelClasses =
+  "mb-1.5 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-slate";
+
+function FieldError({ message }: { message?: string }) {
+  if (!message) return null;
+  return (
+    <p className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-accent">
+      <AlertCircle className="h-3.5 w-3.5 shrink-0" />
+      {message}
+    </p>
+  );
 }
 
 export default function BookingCard() {
-  const [form, setForm] = useState<FormData>({
-    name: "",
-    phone: "",
-    carType: BOOKING.carTypes[0],
-    pickupLocation: BOOKING.locations[0],
+  const router = useRouter();
+  const [form, setForm] = useState<SearchForm>({
+    pickupLocation: "",
+    sameDropoffLocation: true,
+    dropoffLocation: "",
     pickupDate: "",
+    pickupTime: "12:00",
+    dropoffDate: "",
   });
-  const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
-  const [errorMsg, setErrorMsg] = useState("");
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const update = (field: keyof FormData, value: string) =>
-    setForm((prev) => ({ ...prev, [field]: value }));
-
-  const validate = (): string | null => {
-    if (!form.name.trim()) return "Please enter your name.";
-    if (!form.phone.trim()) return "Please enter your phone number.";
-    if (!form.pickupDate) return "Please select a pick-up date.";
-    return null;
+  const update = <K extends keyof SearchForm>(field: K, value: SearchForm[K]) => {
+    setForm((prev) => {
+      const next = { ...prev, [field]: value } as SearchForm;
+      if (
+        field === "pickupDate" &&
+        typeof value === "string" &&
+        value &&
+        next.dropoffDate &&
+        next.dropoffDate < value
+      ) {
+        next.dropoffDate = "";
+      }
+      return next;
+    });
+    setErrors((prev) => {
+      const copy = { ...prev };
+      const key = field as string;
+      if (copy[key]) delete copy[key];
+      if (field === "sameDropoffLocation" && value === true && copy.dropoffLocation) {
+        delete copy.dropoffLocation;
+      }
+      if (field === "pickupDate" && copy.dropoffDate) {
+        delete copy.dropoffDate;
+      }
+      return copy;
+    });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setStatus("idle");
 
-    const error = validate();
-    if (error) {
-      setErrorMsg(error);
-      setStatus("error");
-      return;
-    }
+    const found = validateRentalSearch(form);
+    setErrors(found);
+    if (Object.keys(found).length > 0) return;
 
-    setLoading(true);
-    try {
-      const res = await fetch("/api/send-booking", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
+    const pickupLocation = form.pickupLocation.trim();
+    const search: RentalSearch = {
+      pickupLocation,
+      dropoffLocation: form.sameDropoffLocation
+        ? pickupLocation
+        : form.dropoffLocation.trim(),
+      sameDropoffLocation: form.sameDropoffLocation,
+      pickupDate: form.pickupDate,
+      pickupTime: form.pickupTime,
+      dropoffDate: form.dropoffDate,
+    };
 
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Something went wrong.");
-
-      setStatus("success");
-      setForm({
-        name: "",
-        phone: "",
-        carType: BOOKING.carTypes[0],
-        pickupLocation: BOOKING.locations[0],
-        pickupDate: "",
-      });
-    } catch (err) {
-      setStatus("error");
-      setErrorMsg(err instanceof Error ? err.message : "Failed to send.");
-    } finally {
-      setLoading(false);
-    }
+    router.push(`/vehicles${serializeRentalSearch(search)}`);
   };
 
-  const fields = [
-    {
-      icon: Car,
-      label: "Vehicle",
-      type: "select" as const,
-      value: form.carType,
-      field: "carType" as const,
-      options: BOOKING.carTypes,
-    },
-    {
-      icon: User,
-      label: "Your Name",
-      type: "text" as const,
-      value: form.name,
-      field: "name" as const,
-      placeholder: "Enter your name",
-    },
-    {
-      icon: Phone,
-      label: "Phone",
-      type: "tel" as const,
-      value: form.phone,
-      field: "phone" as const,
-      placeholder: "03XX-XXXXXXX",
-    },
-    {
-      icon: MapPin,
-      label: "Pickup City",
-      type: "select" as const,
-      value: form.pickupLocation,
-      field: "pickupLocation" as const,
-      options: BOOKING.locations,
-    },
-    {
-      icon: CalendarDays,
-      label: "Travel Date",
-      type: "date" as const,
-      value: form.pickupDate,
-      field: "pickupDate" as const,
-    },
-  ];
+  const minDate = todayISO();
 
   return (
-    <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+    <section
+      id="booking"
+      className="mx-auto max-w-7xl scroll-mt-28 px-4 py-20 sm:px-6 lg:px-8"
+    >
       <div className="relative overflow-hidden rounded-[2rem] border border-white/[0.06] bg-[#111]">
         {/* Ambient glow */}
         <div className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[600px] -translate-x-1/2 rounded-full bg-accent/[0.06] blur-[100px]" />
@@ -138,104 +124,172 @@ export default function BookingCard() {
           <div className="text-center">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-accent/20 bg-accent/10 px-4 py-1.5 text-xs font-semibold text-accent">
               <Sparkles className="h-3 w-3" />
-              Quick Booking
+              Rental Search
             </span>
             <h2 className="mt-5 font-display text-3xl font-bold text-white sm:text-4xl">
-              Book your ride in{" "}
-              <span className="text-accent">30 seconds</span>
+              Find your perfect <span className="text-accent">ride</span>
             </h2>
             <p className="mx-auto mt-3 max-w-md text-sm text-slate">
-              Fill in the details below and we&apos;ll confirm availability on WhatsApp instantly.
+              Tell us where and when — we&apos;ll match you with the right car
+              and confirm availability on WhatsApp.
             </p>
           </div>
 
-          {/* Form */}
-          <form
-            onSubmit={handleSubmit}
-            className="mx-auto mt-10 grid max-w-3xl grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-3 lg:gap-4"
-          >
-            {fields.map((f) => (
-              <div key={f.field} className="group relative">
-                <label className="mb-1.5 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-slate">
-                  <f.icon className="h-3 w-3 text-accent/70" />
-                  {f.label}
+          {/* Search form */}
+          <form onSubmit={handleSubmit} className="mx-auto mt-10 max-w-3xl">
+            <datalist id="rental-location-suggestions">
+              {LOCATION_SUGGESTIONS.map((location) => (
+                <option key={location} value={location} />
+              ))}
+            </datalist>
+
+            <div className="flex flex-col gap-4">
+              {/* 1. Pickup location */}
+              <div>
+                <label htmlFor="pickup-location" className={labelClasses}>
+                  <MapPin className="h-3 w-3 text-accent/70" />
+                  Where To Pick Up
                 </label>
-                {f.type === "select" ? (
+                <div className="relative">
+                  <MapPin className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate" />
+                  <input
+                    id="pickup-location"
+                    list="rental-location-suggestions"
+                    type="text"
+                    value={form.pickupLocation}
+                    onChange={(e) => update("pickupLocation", e.target.value)}
+                    placeholder="Enter your City, Airport Or Address *"
+                    autoComplete="off"
+                    className={`${fieldClasses} pl-10 ${
+                      errors.pickupLocation ? "border-accent/60" : ""
+                    }`}
+                  />
+                </div>
+                <FieldError message={errors.pickupLocation} />
+              </div>
+
+              {/* 2. Same drop-off location */}
+              <label
+                htmlFor="same-dropoff"
+                className="flex w-fit cursor-pointer items-center gap-2.5 text-sm font-medium text-slate transition-colors duration-200 hover:text-white"
+              >
+                <input
+                  id="same-dropoff"
+                  type="checkbox"
+                  checked={form.sameDropoffLocation}
+                  onChange={(e) => update("sameDropoffLocation", e.target.checked)}
+                  className="h-4 w-4 rounded border-white/20 bg-white/[0.04] accent-[#E31E24]"
+                />
+                Drop-off at same location
+              </label>
+
+              {/* Drop-off location (only when unchecked) */}
+              {!form.sameDropoffLocation && (
+                <div>
+                  <label htmlFor="dropoff-location" className={labelClasses}>
+                    <MapPin className="h-3 w-3 text-accent/70" />
+                    Drop-off Location
+                  </label>
+                  <div className="relative">
+                    <MapPin className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate" />
+                    <input
+                      id="dropoff-location"
+                      list="rental-location-suggestions"
+                      type="text"
+                      value={form.dropoffLocation}
+                      onChange={(e) => update("dropoffLocation", e.target.value)}
+                      placeholder="Enter your City, Airport Or Address"
+                      autoComplete="off"
+                      className={`${fieldClasses} pl-10 ${
+                        errors.dropoffLocation ? "border-accent/60" : ""
+                      }`}
+                    />
+                  </div>
+                  <FieldError message={errors.dropoffLocation} />
+                </div>
+              )}
+
+              {/* 3–5. Dates + time */}
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                <div>
+                  <label htmlFor="pickup-date" className={labelClasses}>
+                    <CalendarDays className="h-3 w-3 text-accent/70" />
+                    Pick-Up Date
+                  </label>
+                  <input
+                    id="pickup-date"
+                    type="date"
+                    value={form.pickupDate}
+                    min={minDate}
+                    onChange={(e) => update("pickupDate", e.target.value)}
+                    className={`${fieldClasses} ${
+                      errors.pickupDate ? "border-accent/60" : ""
+                    }`}
+                  />
+                  <FieldError message={errors.pickupDate} />
+                </div>
+
+                <div>
+                  <label htmlFor="pickup-time" className={labelClasses}>
+                    <Clock className="h-3 w-3 text-accent/70" />
+                    Pick-Up Time
+                  </label>
                   <select
-                    value={f.value}
-                    onChange={(e) => update(f.field, e.target.value)}
-                    className="w-full rounded-xl border border-white/[0.08] bg-white/[0.04] px-4 py-3 text-sm text-white outline-none transition-all duration-200 focus:border-accent/40 focus:bg-white/[0.06] focus:ring-1 focus:ring-accent/20"
+                    id="pickup-time"
+                    value={form.pickupTime}
+                    onChange={(e) => update("pickupTime", e.target.value)}
+                    className={`${fieldClasses} ${
+                      errors.pickupTime ? "border-accent/60" : ""
+                    }`}
                   >
-                    {f.options?.map((opt) => (
-                      <option key={opt} className="bg-[#121212]">
-                        {opt}
+                    {PICKUP_TIME_OPTIONS.map((option) => (
+                      <option
+                        key={option.value}
+                        value={option.value}
+                        className="bg-[#121212]"
+                      >
+                        {option.label}
                       </option>
                     ))}
                   </select>
-                ) : (
+                  <FieldError message={errors.pickupTime} />
+                </div>
+
+                <div>
+                  <label htmlFor="dropoff-date" className={labelClasses}>
+                    <CalendarDays className="h-3 w-3 text-accent/70" />
+                    Drop-off Date
+                  </label>
                   <input
-                    type={f.type}
-                    value={f.value}
-                    onChange={(e) => update(f.field, e.target.value)}
-                    placeholder={f.placeholder}
-                    className="w-full rounded-xl border border-white/[0.08] bg-white/[0.04] px-4 py-3 text-sm text-white outline-none transition-all duration-200 placeholder:text-slate-500 focus:border-accent/40 focus:bg-white/[0.06] focus:ring-1 focus:ring-accent/20"
+                    id="dropoff-date"
+                    type="date"
+                    value={form.dropoffDate}
+                    min={form.pickupDate || minDate}
+                    onChange={(e) => update("dropoffDate", e.target.value)}
+                    className={`${fieldClasses} ${
+                      errors.dropoffDate ? "border-accent/60" : ""
+                    }`}
                   />
-                )}
+                  <FieldError message={errors.dropoffDate} />
+                </div>
               </div>
-            ))}
+            </div>
 
-            {/* Status */}
-            <AnimatePresence mode="wait">
-              {status === "success" && (
-                <motion.div
-                  initial={{ opacity: 0, y: -8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  className="flex items-center gap-2 rounded-xl bg-emerald-500/10 px-4 py-3 text-sm text-emerald-400 sm:col-span-2"
-                >
-                  <CheckCircle2 className="h-4 w-4 shrink-0" />
-                  Booking request sent! We&apos;ll confirm on WhatsApp shortly.
-                </motion.div>
-              )}
-              {status === "error" && (
-                <motion.div
-                  initial={{ opacity: 0, y: -8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  className="flex items-center gap-2 rounded-xl bg-accent/10 px-4 py-3 text-sm text-accent sm:col-span-2"
-                >
-                  <AlertCircle className="h-4 w-4 shrink-0" />
-                  {errorMsg}
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* Submit */}
-            <div className="sm:col-span-2">
+            {/* 6. Search button */}
+            <div className="mt-6">
               <button
                 type="submit"
-                disabled={loading}
-                className="group/btn relative w-full overflow-hidden rounded-xl bg-accent px-6 py-4 font-display text-sm font-bold text-white shadow-lg shadow-accent/20 transition-all duration-300 hover:shadow-xl hover:shadow-accent/30 disabled:cursor-not-allowed disabled:opacity-50"
+                className="group/btn relative w-full overflow-hidden rounded-xl bg-accent px-6 py-4 font-display text-sm font-bold text-white shadow-lg shadow-accent/20 transition-all duration-300 hover:shadow-xl hover:shadow-accent/30"
               >
                 <span className="relative z-10 flex items-center justify-center gap-2">
-                  {loading ? (
-                    <>
-                      <Loader2 className="h-4 w-4 animate-spin" />
-                      Sending...
-                    </>
-                  ) : (
-                    <>
-                      <MessageCircle className="h-4 w-4" />
-                      Check Availability
-                      <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
-                    </>
-                  )}
+                  <Search className="h-4 w-4" />
+                  Search
                 </span>
               </button>
             </div>
 
             {/* Trust note */}
-            <p className="text-center text-xs text-slate sm:col-span-2">
+            <p className="mt-4 text-center text-xs text-slate">
               No advance payment required. Pay when you receive the car.
             </p>
           </form>
@@ -250,7 +304,9 @@ export default function BookingCard() {
             >
               <MessageCircle className="h-4 w-4" />
               Prefer to chat directly?{" "}
-              <span className="font-semibold text-accent">Message us on WhatsApp</span>
+              <span className="font-semibold text-accent">
+                Message us on WhatsApp
+              </span>
             </a>
           </div>
         </div>

@@ -1,17 +1,39 @@
 import Image from "next/image";
-import { MessageCircle, Users, Clock, Fuel, Settings } from "lucide-react";
+import Link from "next/link";
+import { MessageCircle, Users, Clock, Fuel, Settings, Search } from "lucide-react";
 import { WHATSAPP_URL, type Vehicle } from "@/lib/site";
+import {
+  buildWhatsAppUrl,
+  serializeRentalSearch,
+  type RentalSearch,
+} from "@/lib/search";
 
 interface VehicleCardProps {
   vehicle: Vehicle;
   categoryLabel?: string;
+  search?: RentalSearch | null;
 }
 
-export default function VehicleCard({ vehicle, categoryLabel }: VehicleCardProps) {
+export default function VehicleCard({
+  vehicle,
+  categoryLabel,
+  search = null,
+}: VehicleCardProps) {
+  const detailHref = `/vehicles/${vehicle.id}${
+    search ? serializeRentalSearch(search) : ""
+  }`;
+  const whatsappHref = search
+    ? buildWhatsAppUrl({ vehicleName: vehicle.name, search })
+    : WHATSAPP_URL;
+
   return (
     <article className="group relative flex flex-col rounded-2xl border border-line bg-[#121212] pt-12 transition-all duration-500 hover:-translate-y-1.5 hover:border-white/20 hover:shadow-2xl hover:shadow-brand/10">
       {/* Car image — overflowing top edge */}
-      <div className="relative -mt-16 mx-4 aspect-[16/10] overflow-visible">
+      <Link
+        href={detailHref}
+        className="relative -mt-16 mx-4 block aspect-[16/10] overflow-visible"
+        aria-label={`View ${vehicle.name}`}
+      >
         <Image
           src={vehicle.image}
           alt={vehicle.name}
@@ -29,7 +51,7 @@ export default function VehicleCard({ vehicle, categoryLabel }: VehicleCardProps
             {categoryLabel}
           </span>
         )}
-      </div>
+      </Link>
 
       {/* Card content */}
       <div className="flex flex-1 flex-col px-5 pt-4 pb-5">
@@ -38,7 +60,12 @@ export default function VehicleCard({ vehicle, categoryLabel }: VehicleCardProps
           {/* Left column — vehicle info */}
           <div className="flex flex-col gap-2.5">
             <h3 className="font-display text-lg font-bold leading-tight text-white">
-              {vehicle.name}
+              <Link
+                href={detailHref}
+                className="transition-colors duration-200 hover:text-accent"
+              >
+                {vehicle.name}
+              </Link>
             </h3>
 
             {/* Specs row */}
@@ -80,12 +107,20 @@ export default function VehicleCard({ vehicle, categoryLabel }: VehicleCardProps
           </div>
         </div>
 
-        {/* CTA Button */}
+        {/* CTA — continue to booking details */}
+        <Link
+          href={detailHref}
+          className="btn-gradient mt-4 flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 font-display text-sm font-semibold shadow-lg shadow-accent/20 transition-all duration-300 hover:shadow-xl hover:shadow-accent/30"
+        >
+          <Search className="h-4 w-4" /> Check Availability
+        </Link>
+
+        {/* Existing WhatsApp CTA — now includes rental details after a search */}
         <a
-          href={WHATSAPP_URL}
+          href={whatsappHref}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-accent px-4 py-3 font-display text-sm font-semibold text-white transition-all duration-300 hover:bg-accent/90 hover:shadow-lg hover:shadow-accent/30"
+          className="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-accent px-4 py-3 font-display text-sm font-semibold text-white transition-all duration-300 hover:bg-accent/90 hover:shadow-lg hover:shadow-accent/30"
         >
           <MessageCircle className="h-4 w-4" /> With Driver
         </a>
