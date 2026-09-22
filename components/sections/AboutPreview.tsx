@@ -5,84 +5,80 @@ import Reveal from "@/components/ui/Reveal";
 import CTA from "@/components/ui/CTA";
 import { ABOUT } from "@/lib/site";
 
-const FLOATING_CARS = [
-  { src: "/images/MERCEDES S Class - S400.png", alt: "Mercedes S400", className: "left-0 top-0 h-40 w-40 sm:h-52 sm:w-52 lg:h-64 lg:w-64", anim: "animate-float-1" },
-  { src: "/images/TOYOTA LC 300-Photoroom.png", alt: "Toyota Land Cruiser", className: "right-4 top-16 h-32 w-32 sm:h-44 sm:w-44 lg:h-52 lg:w-52", anim: "animate-float-2" },
-  { src: "/images/AUDI A5.png", alt: "Audi A5", className: "left-8 bottom-0 h-36 w-36 sm:h-44 sm:w-44 lg:h-56 lg:w-56", anim: "animate-float-3" },
+const HIGHLIGHTS = [
+  "10+ Years on the road",
+  ABOUT.subheading1,
+  ABOUT.subheading2,
 ];
 
 export default function AboutPreview() {
   return (
     <section className="relative overflow-hidden bg-night py-20 lg:py-28">
-      <div className="pointer-events-none absolute -right-24 top-0 h-80 w-80 rounded-full bg-accent/10 blur-3xl" />
-      <div className="pointer-events-none absolute -left-24 bottom-0 h-60 w-60 rounded-full bg-accent/[0.06] blur-3xl" />
+      <div className="pointer-events-none absolute -right-40 top-0 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
+      <div className="pointer-events-none absolute -left-40 bottom-0 h-80 w-80 rounded-full bg-accent/[0.06] blur-3xl" />
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-8 px-4 sm:px-6 sm:gap-12 lg:grid-cols-2 lg:gap-16 lg:px-8">
-        {/* Left — Floating car images */}
-        <Reveal className="relative">
-          <div className="relative aspect-[4/3] sm:aspect-[3/2] lg:aspect-[4/3]">
-            {/* Ambient glow */}
-            <div className="pointer-events-none absolute inset-0 rounded-3xl bg-accent/[0.04] blur-[60px]" />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <Reveal className="mx-auto max-w-3xl text-center">
+          <p className="mb-3 font-display text-sm font-semibold uppercase tracking-[0.25em] text-accent">
+            About Nrently
+          </p>
+          <h2 className="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-[2.6rem]">
+            {ABOUT.heading}
+          </h2>
+          <p className="mt-5 text-base leading-relaxed text-slate-300 sm:text-lg">
+            {ABOUT.paragraph}
+          </p>
+        </Reveal>
 
-            {FLOATING_CARS.map((car, i) => (
-              <div
-                key={car.src}
-                className={`absolute ${car.className} ${car.anim}`}
-                style={{ zIndex: 10 + i }}
-              >
-                <Image
-                  src={car.src}
-                  alt={car.alt}
-                  fill
-                  sizes="(min-width: 1024px) 25vw, 33vw"
-                  className="object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.5)]"
-                />
-              </div>
-            ))}
+        {/* Collage banner */}
+        <Reveal delay={0.1}>
+          <div className="group relative mt-10 overflow-hidden rounded-[2rem] border border-white/10 shadow-[0_45px_90px_-35px_rgba(0,0,0,0.8)] sm:mt-14">
+            <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+            <Image
+              src="/images/Car Collage.png"
+              alt="Nrently fleet — car collage"
+              fill
+              priority
+              sizes="(min-width: 1280px) 1280px, 100vw"
+              className="scale-105 object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-100"
+            />
 
-            {/* Decorative ring */}
-            <div className="absolute inset-8 rounded-full border border-white/[0.04]" />
-            <div className="absolute inset-16 rounded-full border border-white/[0.03]" />
-          </div>
+            {/* Top-left glass badge */}
+            <div className="absolute left-5 top-5 z-20 flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.07] px-5 py-3 backdrop-blur-md sm:left-8 sm:top-8">
+              <p className="font-display text-3xl font-extrabold text-white">
+                10+
+              </p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-white/85">
+                Years on
+                <br />
+                the road
+              </p>
+            </div>
 
-          {/* Stats badge */}
-          <div className="absolute -bottom-6 -right-4 rounded-2xl bg-accent px-6 py-4 shadow-2xl shadow-accent/30 sm:-right-6">
-            <p className="font-display text-3xl font-extrabold text-white">10+</p>
-            <p className="text-xs font-semibold uppercase tracking-wide text-white/80">
-              Years on the road
-            </p>
+            {/* Bottom-right chip */}
+            <div className="absolute bottom-5 right-5 z-20 sm:bottom-8 sm:right-8">
+              <span className="inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-black/35 px-5 py-2.5 text-sm font-semibold text-white backdrop-blur-md">
+                <span className="h-2 w-2 rounded-full bg-mint shadow-[0_0_12px_2px_rgba(255,255,255,0.35)]" />
+                23 cars in our fleet
+              </span>
+            </div>
           </div>
         </Reveal>
 
-        {/* Right — Content */}
-        <div>
-          <Reveal>
-            <p className="mb-3 font-display text-sm font-semibold uppercase tracking-[0.25em] text-accent">
-              About Nrently
-            </p>
-            <h2 className="text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-[2.6rem]">
-              {ABOUT.heading}
-            </h2>
-            <p className="mt-5 text-base leading-relaxed text-slate-300 sm:text-lg">
-              {ABOUT.paragraph}
-            </p>
-          </Reveal>
-
-          <Reveal delay={0.1}>
-            <ul className="mt-7 space-y-3">
-              {[ABOUT.subheading1, ABOUT.subheading2, ABOUT.subheading3].map(
-                (item) => (
-                  <li
-                    key={item}
-                    className="flex items-center gap-3 text-sm text-slate-200 sm:text-base"
-                  >
-                    <CheckCircle2 className="h-5 w-5 shrink-0 text-mint" />
-                    {item}
-                  </li>
-                )
-              )}
-            </ul>
-            <div className="mt-9 flex flex-wrap items-center gap-4">
+        {/* Highlights + CTA */}
+        <Reveal delay={0.2}>
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-x-10 gap-y-4 sm:mt-12">
+            {HIGHLIGHTS.map((item) => (
+              <div
+                key={item}
+                className="flex items-center gap-3 text-sm text-slate-200 sm:text-base"
+              >
+                <CheckCircle2 className="h-5 w-5 shrink-0 text-mint" />
+                {item}
+              </div>
+            ))}
+            <div className="flex flex-wrap items-center gap-4">
               <CTA href="/about-us" variant="primary">
                 More About Us
               </CTA>
@@ -93,8 +89,8 @@ export default function AboutPreview() {
                 Browse all vehicles
               </Link>
             </div>
-          </Reveal>
-        </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
