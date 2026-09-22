@@ -26,7 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return all.map((route) => ({
     url: `${SITE_URL}${route}`,
     lastModified: new Date(),
-    changeFrequency: route.includes("/vehicles/") ? "weekly" : "weekly",
+    changeFrequency: "weekly",
     priority:
       route === ""
         ? 1

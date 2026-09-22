@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Clock, Fuel, Settings, Users } from "lucide-react";
-import { BRAND_NAME, SITE_URL, VEHICLES, categoryLabel } from "@/lib/site";
+import { BRAND_NAME, RENTAL_POLICY, SITE_URL, VEHICLES, categoryLabel } from "@/lib/site";
 import { parseRentalSearch, serializeRentalSearch } from "@/lib/search";
 import VehicleBooking from "@/components/VehicleBooking";
 import ContactCta from "@/components/sections/ContactCta";
@@ -166,6 +166,25 @@ export default async function VehicleDetailPage({
             </p>
 
             <VehicleBooking vehicle={vehicle} search={search} />
+
+            <div className="mt-8 rounded-2xl border border-white/[0.06] bg-white/[0.02] p-4 sm:p-5">
+              <h2 className="font-display text-sm font-bold uppercase tracking-wide text-white">
+                Good to know
+              </h2>
+              <ul className="mt-3 space-y-2.5">
+                {RENTAL_POLICY.map((item) => (
+                  <li
+                    key={item.label}
+                    className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-0.5 text-xs leading-relaxed sm:text-sm"
+                  >
+                    <span className="font-semibold text-accent">
+                      {item.label}:
+                    </span>
+                    <span className="text-slate">{item.value}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>

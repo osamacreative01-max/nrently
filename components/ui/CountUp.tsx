@@ -21,7 +21,9 @@ export default function CountUp({
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
   const prefersReduced = useReducedMotion();
-  const [display, setDisplay] = useState(decimal ? value.toFixed(1) : "0");
+  const [display, setDisplay] = useState(
+    decimal ? value.toFixed(1) : value.toLocaleString()
+  );
 
   useEffect(() => {
     if (!inView || prefersReduced) {

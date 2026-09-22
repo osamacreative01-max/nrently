@@ -2,12 +2,16 @@ import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import VehicleListing from "@/components/sections/VehicleListing";
 import ContactCta from "@/components/sections/ContactCta";
-import { VEHICLES } from "@/lib/site";
+import { VEHICLES, categoryFrom, formatPKR } from "@/lib/site";
+
+const fromPrice = formatPKR(categoryFrom("suv"));
 
 export const metadata: Metadata = {
   title: "SUV Vehicles",
-  description:
-    "SUV and 4x4 hire in Pakistan — Toyota Land Cruiser, Prado and Fortuner from PKR 9,000/day.",
+  description: `SUV and 4x4 hire in Pakistan — Toyota Land Cruiser, Prado and Fortuner from ${fromPrice}/day.`,
+  alternates: {
+    canonical: "/suv",
+  },
 };
 
 const vehicles = VEHICLES.filter((v) => v.category === "suv");
@@ -18,7 +22,7 @@ export default function SuvPage() {
       <PageHero
         eyebrow="SUV Fleet"
         title="Go where the road goes"
-        subtitle="Commanding 4x4s and seven-seat SUVs built for motorways and northern hills — from PKR 9,000/day."
+        subtitle={`Commanding 4x4s and seven-seat SUVs built for motorways and northern hills — from ${fromPrice}/day.`}
         image="/images/TOYOTA LC 300-Photoroom.png"
         imageAlt="Toyota Land Cruiser SUV rental"
       />

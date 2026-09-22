@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   title: "Blogs & Travel Guides",
   description:
     "Road trip guides, rental tips and travel inspiration from the Nrently blog — for drivers across Pakistan.",
+  alternates: {
+    canonical: "/blogs",
+  },
 };
 
 export default function BlogsPage() {

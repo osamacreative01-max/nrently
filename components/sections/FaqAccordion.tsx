@@ -22,29 +22,36 @@ export default function FaqAccordion() {
                 : "border-white/[0.06] bg-transparent hover:border-white/10"
             }`}
           >
-            <button
-              type="button"
-              onClick={() => setOpenIndex(isOpen ? null : i)}
-              className="flex w-full items-center justify-between gap-3 px-4 py-4 text-left sm:gap-4 sm:px-6 sm:py-5"
-              aria-expanded={isOpen}
-            >
-              <span className={`min-w-0 font-display text-base font-semibold break-words sm:text-lg transition-colors duration-300 ${isOpen ? "text-white" : "text-white/80"}`}>
-                {faq.q}
-              </span>
-              <motion.span
-                animate={{ rotate: isOpen ? 180 : 0 }}
-                transition={{ duration: 0.3 }}
-                className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full transition-all duration-300 sm:h-8 sm:w-8 ${
-                  isOpen ? "bg-accent text-white" : "bg-white/[0.06] text-slate"
-                }`}
+            <h3>
+              <button
+                type="button"
+                onClick={() => setOpenIndex(isOpen ? null : i)}
+                className="flex w-full items-center justify-between gap-3 px-4 py-4 text-left sm:gap-4 sm:px-6 sm:py-5"
+                aria-expanded={isOpen}
+                aria-controls={`faq-panel-${i}`}
+                id={`faq-trigger-${i}`}
               >
-                <ChevronDown className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
-              </motion.span>
-            </button>
+                <span className={`min-w-0 font-display text-base font-semibold break-words sm:text-lg transition-colors duration-300 ${isOpen ? "text-white" : "text-white/80"}`}>
+                  {faq.q}
+                </span>
+                <motion.span
+                  animate={{ rotate: isOpen ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                  className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full transition-all duration-300 sm:h-8 sm:w-8 ${
+                    isOpen ? "bg-accent text-white" : "bg-white/[0.06] text-slate"
+                  }`}
+                >
+                  <ChevronDown className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                </motion.span>
+              </button>
+            </h3>
             <AnimatePresence initial={false}>
               {isOpen && (
                 <motion.div
                   key="content"
+                  role="region"
+                  aria-labelledby={`faq-trigger-${i}`}
+                  id={`faq-panel-${i}`}
                   initial={
                     prefersReduced ? false : { height: 0, opacity: 0 }
                   }

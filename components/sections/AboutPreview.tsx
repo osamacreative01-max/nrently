@@ -3,7 +3,7 @@ import { CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import Reveal from "@/components/ui/Reveal";
 import CTA from "@/components/ui/CTA";
-import { ABOUT } from "@/lib/site";
+import { ABOUT, VEHICLES } from "@/lib/site";
 
 const HIGHLIGHTS = [
   "10+ Years on the road",
@@ -60,7 +60,7 @@ export default function AboutPreview() {
             <div className="absolute bottom-4 right-4 z-20 sm:bottom-8 sm:right-8">
               <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/35 px-3.5 py-2 text-xs font-semibold text-white backdrop-blur-md sm:gap-2.5 sm:px-5 sm:py-2.5 sm:text-sm">
                 <span className="h-2 w-2 rounded-full bg-mint shadow-[0_0_12px_2px_rgba(255,255,255,0.35)]" />
-                23 cars in our fleet
+                {VEHICLES.length} cars in our fleet
               </span>
             </div>
           </div>

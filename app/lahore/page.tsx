@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Car Rental in Lahore",
   description:
     "Rent a car in Lahore — budget to luxury, with driver or self-drive. Doorstep delivery in Gulberg, DHA, Model Town and Johar Town.",
+  alternates: {
+    canonical: "/lahore",
+  },
 };
 
 const city = CITIES[1];

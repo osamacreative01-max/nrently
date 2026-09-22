@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   title: "Contact Us",
   description:
     "Contact Nrently — call or WhatsApp 24/7 for car rentals in Karachi. Visit our customer centres in Karachi, Lahore and Islamabad.",
+  alternates: {
+    canonical: "/contact-us",
+  },
 };
 
 const INFO_CARDS = [

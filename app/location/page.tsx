@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   title: "Location & Coverage",
   description:
     "Nrently car rental coverage across Pakistan — customer centres in Karachi, Lahore and Islamabad, plus Multan and Sukkur.",
+  alternates: {
+    canonical: "/location",
+  },
 };
 
 export default function LocationPage() {

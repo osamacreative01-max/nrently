@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { CalendarDays, Clock } from "lucide-react";
+import { ArrowRight, CalendarDays, Clock } from "lucide-react";
 import type { BlogPost } from "@/lib/site";
 
 export default function BlogCard({ post }: { post: BlogPost }) {
@@ -42,6 +42,10 @@ export default function BlogCard({ post }: { post: BlogPost }) {
         <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-slate">
           {post.excerpt}
         </p>
+        <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-accent">
+          Read article
+          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+        </span>
       </div>
     </Link>
   );

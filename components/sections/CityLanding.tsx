@@ -29,7 +29,13 @@ function splitRoute(route: string): { from: string; to: string } {
 }
 
 export default function CityLanding({ city, tagline, routes }: CityLandingProps) {
-  const vehicles = VEHICLES.filter((_, i) => i % 2 === 0).slice(0, 6);
+  const vehicles = [
+    ...VEHICLES.filter((v) => v.category === "budget"),
+    ...VEHICLES.filter((v) => v.category === "standard"),
+    ...VEHICLES.filter((v) => v.category === "luxury"),
+    ...VEHICLES.filter((v) => v.category === "suv"),
+    ...VEHICLES.filter((v) => v.category === "vans"),
+  ].slice(0, 6);
   const mapEmbed =
     CONTACT.mapEmbeds[city.id as keyof typeof CONTACT.mapEmbeds] ?? null;
 

@@ -2,12 +2,32 @@ export function categoryLabel(id: CategoryId): string {
   return CATEGORIES.find((c) => c.id === id)?.label ?? id;
 }
 
-export const WHATSAPP_URL = "https://wa.link/0ilzkn";
+export function categoryFrom(id: CategoryId): number {
+  return CATEGORIES.find((c) => c.id === id)?.from ?? 0;
+}
+
+export function formatPKR(value: number): string {
+  return `PKR ${value.toLocaleString("en-PK")}`;
+}
+
 export const SITE_URL = "https://nrently.vercel.app";
 export const PHONE_DISPLAY = "0306-6556934";
 export const PHONE_INTL = "+923066556934";
 export const SECOND_PHONE_DISPLAY = "+92 316 1068353";
 export const SECOND_PHONE_INTL = "+923161068353";
+
+const WHATSAPP_DEFAULT_MESSAGE = [
+  "Hello Nrently,",
+  "",
+  "I want to rent a car.",
+  "",
+  "Please share available options and prices.",
+].join("\n");
+
+export const WHATSAPP_URL = `https://wa.me/${PHONE_INTL.replace(
+  /[^0-9]/g,
+  ""
+)}?text=${encodeURIComponent(WHATSAPP_DEFAULT_MESSAGE)}`;
 export const EMAIL = "nrently@gmail.com";
 export const BRAND_NAME = "Nrently";
 export const BRAND_TAGLINE = "Best Car Rental Services in Karachi";
@@ -18,26 +38,6 @@ export const HERO = {
     "Looking for a reliable and affordable rental car? We offer a wide range of vehicles to suit your needs, whether for business, travel, or daily use. Enjoy hassle-free booking, competitive rates, and excellent customer service. Rent your perfect car today and drive with confidence!",
   cta: "Book Your Ride",
   image: "/images/download-removebg-preview.png",
-};
-
-export const BOOKING = {
-  carTypes: [
-    "Suzuki Cultus",
-    "Suzuki Wagon",
-    "Suzuki Alto",
-    "Toyota Corolla Grande",
-    "Toyota Corolla Altise",
-    "Toyota Yaris",
-    "Toyota GLI",
-    "Honda Civic",
-    "Audi A4",
-    "Audi A5",
-    "Mercedes CLA200",
-    "Mercedes S400",
-    "Hiace 15 Seater",
-    "Saloon 4C 28 Seater",
-  ],
-  locations: ["Karachi", "Lahore", "Islamabad", "Multan", "Sukkur", "Hyderabad"],
 };
 
 export const ABOUT = {
@@ -910,6 +910,60 @@ export const STATS = [
 ];
 
 export const MISSION = ABOUT.paragraph;
+
+export interface RentalPolicyItem {
+  label: string;
+  value: string;
+  known: boolean;
+}
+
+export const RENTAL_POLICY: RentalPolicyItem[] = [
+  {
+    label: "Driver",
+    value: "Included with every booking — 10 standard hours per day.",
+    known: true,
+  },
+  {
+    label: "Self-Drive",
+    value: "Coming soon — please confirm availability on WhatsApp.",
+    known: false,
+  },
+  {
+    label: "Driver Charges",
+    value: "Included in the daily rate. Overtime billed separately.",
+    known: true,
+  },
+  {
+    label: "Fuel",
+    value: "Depends on the chosen plan — confirm at the time of booking.",
+    known: false,
+  },
+  {
+    label: "Security Deposit",
+    value: "Refundable deposit required — amount confirmed on booking.",
+    known: false,
+  },
+  {
+    label: "Required Documents",
+    value: "CNIC (original) with a valid driving licence. Confirmed on WhatsApp.",
+    known: false,
+  },
+  {
+    label: "Minimum Duration",
+    value: "Basic plan starts from 1 day; monthly plans available.",
+    known: false,
+  },
+  {
+    label: "Traffic Fines",
+    value: "Any fines incurred during the rental are the renter's responsibility.",
+    known: false,
+  },
+  {
+    label: "Cancellation",
+    value: "Flexible cancellations — please message us at least 24 hours in advance.",
+    known: false,
+  },
+];
 
 export const VALUES = [
   {

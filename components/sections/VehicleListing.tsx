@@ -2,7 +2,7 @@ import { MessageCircle } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { Stagger, StaggerItem } from "@/components/ui/Stagger";
 import VehicleCard from "@/components/VehicleCard";
-import { WHATSAPP_URL, type Vehicle } from "@/lib/site";
+import { WHATSAPP_URL, categoryLabel, type Vehicle } from "@/lib/site";
 
 interface VehicleListingProps {
   eyebrow: string;
@@ -49,9 +49,7 @@ export default function VehicleListing({
             <StaggerItem key={vehicle.id}>
               <VehicleCard
                 vehicle={vehicle}
-                categoryLabel={
-                  vehicle.category === "vans" ? "Vans & Coasters" : vehicle.category
-                }
+                categoryLabel={categoryLabel(vehicle.category)}
               />
             </StaggerItem>
           ))}

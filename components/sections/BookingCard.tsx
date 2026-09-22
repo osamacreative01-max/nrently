@@ -33,6 +33,7 @@ interface SearchForm {
   pickupDate: string;
   pickupTime: string;
   dropoffDate: string;
+  dropoffTime: string;
   pickupCoords?: string;
   dropoffCoords?: string;
 }
@@ -103,6 +104,7 @@ export default function BookingCard() {
     pickupDate: "",
     pickupTime: "12:00",
     dropoffDate: "",
+    dropoffTime: "12:00",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [detecting, setDetecting] = useState<"pickup" | "dropoff" | null>(null);
@@ -200,6 +202,7 @@ export default function BookingCard() {
       pickupDate: form.pickupDate,
       pickupTime: form.pickupTime,
       dropoffDate: form.dropoffDate,
+      dropoffTime: form.dropoffTime,
       ...(form.pickupCoords ? { pickupCoords: form.pickupCoords } : {}),
       ...(form.sameDropoffLocation
         ? form.pickupCoords
@@ -255,7 +258,7 @@ export default function BookingCard() {
             </datalist>
 
             {/* Row 1 — core fields */}
-            <div className="mt-6 grid grid-cols-1 gap-3 sm:gap-4 lg:grid-cols-[1.7fr_1fr_1fr_1fr] lg:items-end">
+            <div className="mt-6 grid grid-cols-1 gap-3 sm:gap-4 lg:grid-cols-[1.4fr_1fr_1fr_1fr_1fr] lg:items-end">
               {/* Pickup location */}
               <div className="min-w-0">
                 <label htmlFor="pickup-location" className={labelClasses}>
@@ -350,6 +353,32 @@ export default function BookingCard() {
                   />
                 </div>
                 <FieldError message={errors.dropoffDate} />
+              </div>
+
+              {/* Drop-off Time */}
+              <div className="min-w-0">
+                <label htmlFor="dropoff-time" className={labelClasses}>
+                  Drop-off Time
+                </label>
+                <div className="group relative">
+                  <FieldIcon icon={Clock} />
+                  <select
+                    id="dropoff-time"
+                    value={form.dropoffTime}
+                    onChange={(e) => update("dropoffTime", e.target.value)}
+                    className={`${selectClasses} ${
+                      errors.dropoffTime ? "border-accent/60" : ""
+                    }`}
+                  >
+                    {PICKUP_TIME_OPTIONS.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                  <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500 transition-colors duration-200 group-focus-within:text-accent" />
+                </div>
+                <FieldError message={errors.dropoffTime} />
               </div>
             </div>
 

@@ -7,6 +7,7 @@ export interface RentalSearch {
   pickupDate: string;
   pickupTime: string;
   dropoffDate: string;
+  dropoffTime?: string;
   pickupCoords?: string;
   dropoffCoords?: string;
 }
@@ -18,6 +19,7 @@ export interface RentalSearchFormValues {
   pickupDate: string;
   pickupTime: string;
   dropoffDate: string;
+  dropoffTime: string;
 }
 
 type RawSearchParams = Record<string, string | string[] | undefined>;
@@ -91,6 +93,11 @@ export function validateRentalSearch(
   } else if (form.pickupDate && form.dropoffDate < form.pickupDate) {
     errors.dropoffDate = "Drop-off date cannot be before pickup date.";
   }
+  if (!form.dropoffTime) {
+    errors.dropoffTime = "Please select drop-off time.";
+  } else if (!isValidTime(form.dropoffTime)) {
+    errors.dropoffTime = "Please select a valid drop-off time.";
+  }
 
   return errors;
 }
@@ -103,6 +110,7 @@ export function serializeRentalSearch(search: RentalSearch): string {
     pickupDate: search.pickupDate,
     pickupTime: search.pickupTime,
     dropoffDate: search.dropoffDate,
+    dropoffTime: search.dropoffTime ?? "",
   });
   if (search.pickupCoords) params.set("pickupCoords", search.pickupCoords);
   if (search.dropoffCoords) params.set("dropoffCoords", search.dropoffCoords);
@@ -116,6 +124,7 @@ export function parseRentalSearch(
   const pickupDate = first(params.pickupDate);
   const pickupTime = first(params.pickupTime);
   const dropoffDate = first(params.dropoffDate);
+  const dropoffTime = first(params.dropoffTime);
   const sameDropoffLocation = first(params.sameDropoffLocation) !== "false";
 
   let dropoffLocation = first(params.dropoffLocation).trim();
@@ -139,6 +148,7 @@ export function parseRentalSearch(
     pickupDate,
     pickupTime,
     dropoffDate,
+    ...(isValidTime(dropoffTime) ? { dropoffTime } : {}),
     ...(pickupCoords ? { pickupCoords } : {}),
     ...(dropoffCoords ? { dropoffCoords } : {}),
   };
@@ -196,7 +206,10 @@ export function buildWhatsAppMessage(options: {
       `Drop-off Location: ${search.dropoffLocation || search.pickupLocation}`,
       `Pickup Date: ${formatRentalDate(search.pickupDate)}`,
       `Pickup Time: ${formatRentalTime(search.pickupTime)}`,
-      `Drop-off Date: ${formatRentalDate(search.dropoffDate)}`
+      `Drop-off Date: ${formatRentalDate(search.dropoffDate)}`,
+      ...(search.dropoffTime
+        ? [`Drop-off Time: ${formatRentalTime(search.dropoffTime)}`]
+        : [])
     );
     if (search.pickupCoords) {
       lines.push(

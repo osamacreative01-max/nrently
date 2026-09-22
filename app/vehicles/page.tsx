@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   title: "Vehicles",
   description:
     "Browse the complete Nrently fleet — budget, standard, luxury, SUV and vans & coasters with transparent daily rates.",
+  alternates: {
+    canonical: "/vehicles",
+  },
 };
 
 export default async function VehiclesPage({

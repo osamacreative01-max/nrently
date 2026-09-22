@@ -66,7 +66,7 @@ export default function VehicleBooking({ vehicle, search }: VehicleBookingProps)
     pickupDate: search?.pickupDate ?? "",
     pickupTime: search?.pickupTime ?? "",
     dropoffDate: search?.dropoffDate ?? "",
-    dropoffTime: "",
+    dropoffTime: search?.dropoffTime ?? "",
     clientMessage,
   });
 
@@ -78,7 +78,13 @@ export default function VehicleBooking({ vehicle, search }: VehicleBookingProps)
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
       next.email = "Please enter a valid email address.";
     }
-    if (!phone.trim()) next.phone = "Please enter your phone number.";
+    if (!phone.trim()) {
+      next.phone = "Please enter your phone number.";
+    } else if (
+      !/^(\+?92|0)3\d{2}[- ]?\d{7}$/.test(phone.trim())
+    ) {
+      next.phone = "Please enter a valid Pakistani phone number.";
+    }
     setErrors(next);
     return Object.keys(next).length === 0;
   };
@@ -88,6 +94,10 @@ export default function VehicleBooking({ vehicle, search }: VehicleBookingProps)
       e.preventDefault();
       return;
     }
+
+    // Only fire the booking-email flow when a full rental search is present;
+    // otherwise the WhatsApp message alone carries the booking request.
+    if (!search?.pickupLocation || !search?.pickupDate) return;
 
     // Preserve the existing booking-email flow alongside WhatsApp, so the same
     // message also reaches the customer and owner email without extra clicks.
@@ -146,6 +156,15 @@ export default function VehicleBooking({ vehicle, search }: VehicleBookingProps)
           label: "Drop-off Date",
           value: formatRentalDate(search.dropoffDate),
         },
+        ...(search.dropoffTime
+          ? [
+              {
+                icon: Clock,
+                label: "Drop-off Time",
+                value: formatRentalTime(search.dropoffTime),
+              },
+            ]
+          : []),
       ]
     : [];
 

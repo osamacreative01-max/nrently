@@ -9,6 +9,7 @@ import {
 import Logo from "./Logo";
 import { SOCIAL_LINKS } from "./SocialIcons";
 import {
+  CATEGORIES,
   CITIES,
   EMAIL,
   FOOTER,
@@ -26,13 +27,10 @@ const QUICK_LINKS = [
   { label: "Contact Us", href: "/contact-us" },
 ];
 
-const VEHICLE_LINKS = [
-  { label: "Budget Cars", href: "/budget" },
-  { label: "Standard Cars", href: "/standard" },
-  { label: "Luxury Cars", href: "/luxury" },
-  { label: "SUVs", href: "/suv" },
-  { label: "Vans & Coasters", href: "/vans-and-coasters" },
-];
+const VEHICLE_LINKS = CATEGORIES.map((c) => ({
+  label: c.label,
+  href: c.href,
+}));
 
 export default function Footer() {
   return (

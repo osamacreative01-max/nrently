@@ -7,12 +7,15 @@ import ValuesGrid from "@/components/sections/ValuesGrid";
 import StatsBand from "@/components/sections/StatsBand";
 import FaqSection from "@/components/sections/FaqSection";
 import ContactCta from "@/components/sections/ContactCta";
-import { ABOUT, STATS } from "@/lib/site";
+import { ABOUT } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "About Us",
   description:
     "Learn about Nrently — Pakistan's car rental service delivering budget to luxury vehicles with premium, transparent service.",
+  alternates: {
+    canonical: "/about-us",
+  },
 };
 
 export default function AboutPage() {
@@ -104,23 +107,6 @@ export default function AboutPage() {
                     Budget → Luxury
                   </span>
                 </div>
-              </div>
-
-              <div className="mt-4 grid grid-cols-3 gap-2 sm:mt-5 sm:gap-3">
-                {STATS.slice(0, 3).map((stat) => (
-                  <div
-                    key={stat.label}
-                    className="rounded-2xl border border-line bg-[#121212] px-2.5 py-3 text-center sm:px-3 sm:py-4"
-                  >
-                    <p className="font-display text-lg font-extrabold text-accent sm:text-2xl">
-                      {stat.value}
-                      {stat.suffix}
-                    </p>
-                    <p className="mt-1 text-[11px] font-medium uppercase tracking-wide text-slate-300 sm:text-xs">
-                      {stat.label}
-                    </p>
-                  </div>
-                ))}
               </div>
             </Reveal>
           </div>

@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Car Rental in Islamabad",
   description:
     "Rent a car in Islamabad — budget to luxury, with driver or self-drive. Delivery across F-6, F-7, Blue Area and DHA Phase 2.",
+  alternates: {
+    canonical: "/islamabad",
+  },
 };
 
 const city = CITIES[2];

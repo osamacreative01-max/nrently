@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "Car Rental in Karachi",
   description:
     "Rent a car in Karachi — budget to luxury, with driver or self-drive. Doorstep delivery in Clifton, DHA, Gulshan and at Jinnah Airport.",
+  alternates: {
+    canonical: "/karachi",
+  },
 };
 
 const city = CITIES[0];

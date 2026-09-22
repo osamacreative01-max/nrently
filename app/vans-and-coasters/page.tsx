@@ -2,12 +2,16 @@ import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import VehicleListing from "@/components/sections/VehicleListing";
 import ContactCta from "@/components/sections/ContactCta";
-import { VEHICLES } from "@/lib/site";
+import { VEHICLES, categoryFrom, formatPKR } from "@/lib/site";
+
+const fromPrice = formatPKR(categoryFrom("vans"));
 
 export const metadata: Metadata = {
   title: "Vans & Coasters",
-  description:
-    "Vans and coasters for group travel in Pakistan — Toyota Hiace 15-seater and Saloon 4C 28-seater hire.",
+  description: `Vans and coasters for group travel in Pakistan — Toyota Hiace 15-seater and Saloon 4C 28-seater hire from ${fromPrice}/day.`,
+  alternates: {
+    canonical: "/vans-and-coasters",
+  },
 };
 
 const vehicles = VEHICLES.filter((v) => v.category === "vans");
@@ -18,7 +22,7 @@ export default function VansPage() {
       <PageHero
         eyebrow="Vans & Coasters"
         title="Moving bigger groups, beautifully"
-        subtitle="Spacious passenger vans and full-size coasters for weddings, outings and corporate travel — from PKR 8,500/day."
+        subtitle={`Spacious passenger vans and full-size coasters for weddings, outings and corporate travel — from ${fromPrice}/day.`}
         image="/images/changan karvaan-Photoroom.png"
         imageAlt="Changan Karvaan van rental"
       />
