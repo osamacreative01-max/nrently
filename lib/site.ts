@@ -847,7 +847,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "From Clifton sunsets to Hawksbay, here's exactly how to plan the perfect drive around Pakistan's biggest city.",
     date: "2026-08-14",
     category: "Travel Tips",
-    image: "/images/Suzuki Alto-Photoroom.png",
+    image: "/images/blog-karachi-road-trip.webp",
     readTime: "6 min read",
   },
   {
@@ -857,7 +857,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "Budget hatch or beaming luxury sedan? A practical guide to matching the perfect vehicle to your trip.",
     date: "2026-07-28",
     category: "Guides",
-    image: "/images/SUZUKI Cultus-Photoroom.png",
+    image: "/images/blog-choosing-car.webp",
     readTime: "8 min read",
   },
   {
@@ -867,7 +867,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "Coasters, luxury sedans and baraat buses — how to coordinate a seamless, stunning wedding convoy.",
     date: "2026-06-30",
     category: "Events",
-    image: "/images/MERCEDES S Class - S400.png",
+    image: "/images/blog-wedding-fleet.webp",
     readTime: "5 min read",
   },
   {
@@ -877,7 +877,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "Why booking a reliable airport transfer beats waiting in a taxi line after a long international flight.",
     date: "2026-05-19",
     category: "Tips",
-    image: "/images/HONDA Civic-Photoroom.png",
+    image: "/images/blog-airport-transfer.webp",
     readTime: "4 min read",
   },
   {
@@ -887,7 +887,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "Staying in one city for a while? Discover how monthly contracts cut your per-day cost dramatically.",
     date: "2026-04-08",
     category: "Guides",
-    image: "/images/TOYOTA Corolla Altis-Photoroom.png",
+    image: "/images/blog-long-term-rental.webp",
     readTime: "7 min read",
   },
   {
@@ -897,7 +897,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "Salt Range vistas, Kallar Kahar stops and perfect rest breaks — your scenic M-2 road trip itinerary.",
     date: "2026-03-15",
     category: "Road Trips",
-    image: "/images/TOYOTA Fortuner-Photoroom.png",
+    image: "/images/blog-m2-motorway.webp",
     readTime: "6 min read",
   },
 ];
