@@ -98,7 +98,8 @@ export default function Navbar() {
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
-    <header
+    <>
+      <header
       className={`fixed inset-x-0 top-0 transition-all duration-500 ${
         mobileOpen ? "z-[70]" : "z-50"
       } ${
@@ -213,6 +214,7 @@ export default function Navbar() {
           <Menu className="h-6 w-6" />
         </button>
       </nav>
+      </header>
 
       <AnimatePresence>
         {mobileOpen && (
@@ -344,6 +346,6 @@ export default function Navbar() {
           </>
         )}
       </AnimatePresence>
-    </header>
+    </>
   );
 }

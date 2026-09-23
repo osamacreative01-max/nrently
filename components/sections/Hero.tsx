@@ -45,7 +45,7 @@ export default function Hero() {
       <div className="pointer-events-none absolute -right-24 bottom-1/4 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
       <div className="absolute inset-x-0 bottom-0 h-64 bg-gradient-to-t from-cream to-transparent" />
 
-      <div className="relative mx-auto grid w-full max-w-7xl items-center gap-8 px-4 pb-14 pt-24 sm:gap-12 sm:pb-28 sm:pt-32 lg:grid-cols-[1.15fr_1fr] lg:px-8">
+      <div className="relative mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-6 px-4 pb-10 pt-20 sm:gap-12 sm:pb-28 sm:pt-32 lg:grid-cols-[1.15fr_1fr] lg:px-8">
         <div>
           <motion.p
             initial={prefersReduced ? false : { opacity: 0, y: 16 }}
@@ -82,7 +82,7 @@ export default function Hero() {
             initial={prefersReduced ? false : { opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-6 max-w-xl text-base leading-relaxed text-slate-200 sm:text-lg"
+            className="mt-5 max-w-xl text-base leading-relaxed text-slate-200 sm:mt-6 sm:text-lg"
           >
             {HERO.paragraph}
           </motion.p>
@@ -91,7 +91,7 @@ export default function Hero() {
             initial={prefersReduced ? false : { opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-8 flex flex-col gap-3 sm:flex-row sm:mt-9 sm:flex-wrap sm:items-center sm:gap-4"
+            className="mt-6 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4"
           >
             <a
               href={WHATSAPP_URL}
@@ -118,10 +118,10 @@ export default function Hero() {
           initial={prefersReduced ? false : { opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.9, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="relative lg:mt-0"
+          className="relative pr-14 sm:pr-0 lg:mt-0"
         >
           <div className="pointer-events-none absolute inset-0 -z-0 rounded-full bg-accent/20 blur-[60px] sm:blur-[100px]" />
-          <div className="relative mt-6 aspect-[4/3] sm:aspect-[3/2] lg:aspect-[4/3] sm:mt-8">
+          <div className="relative mt-4 aspect-[16/10] sm:mt-8 sm:aspect-[3/2] lg:aspect-[4/3]">
             <AnimatePresence mode="wait">
               <motion.div
                 key={current}
@@ -144,7 +144,7 @@ export default function Hero() {
           </div>
 
           {/* Dot indicators */}
-          <div className="mt-6 flex items-center justify-center gap-1 sm:gap-2">
+          <div className="mt-4 flex items-center justify-center gap-1 sm:mt-6 sm:gap-2">
             {CAROUSEL_IMAGES.map((_, i) => (
               <button
                 key={i}
