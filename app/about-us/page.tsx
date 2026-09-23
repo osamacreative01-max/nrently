@@ -8,22 +8,21 @@ import StatsBand from "@/components/sections/StatsBand";
 import FaqSection from "@/components/sections/FaqSection";
 import ContactCta from "@/components/sections/ContactCta";
 import { ABOUT } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "About Us",
   description:
     "Learn about Nrently — Pakistan's car rental service delivering budget to luxury vehicles with premium, transparent service.",
-  alternates: {
-    canonical: "/about-us",
-  },
-};
+  path: "/about-us",
+});
 
 export default function AboutPage() {
   return (
     <>
       <PageHero
         eyebrow="About Us"
-        title={ABOUT.subheading1}
+        title="About Nrently — Car Rental in Pakistan"
         subtitle={ABOUT.subtext1}
         image="/images/MERCEDES CLA200.png"
         imageAlt="Nrently luxury car rental"
@@ -81,7 +80,7 @@ export default function AboutPage() {
 
                 <div className="relative aspect-[16/10] sm:aspect-[21/10]">
                   <Image
-                    src="/images/Car Collage.png"
+                    src="/images/car-collage.webp"
                     alt="Nrently fleet — luxury and budget cars collage"
                     fill
                     priority

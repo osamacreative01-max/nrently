@@ -55,7 +55,7 @@ export default function PageHero({ title, subtitle, eyebrow, image, imageAlt }: 
               <div className="relative aspect-[16/10]">
                 <Image
                   src={image}
-                  alt={imageAlt || "Car rental"}
+                  alt={imageAlt || "Nrently car rental fleet"}
                   fill
                   priority
                   sizes="(min-width: 1024px) 48vw, 100vw"

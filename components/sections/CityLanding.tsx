@@ -43,7 +43,7 @@ export default function CityLanding({ city, tagline, routes }: CityLandingProps)
     <>
       <PageHero
         eyebrow={`Car Rental in ${city.name}`}
-        title={`Explore ${city.name} with Nrently`}
+        title={`Car Rental in ${city.name} — Budget to Luxury`}
         subtitle={tagline}
         image={city.image}
         imageAlt={`Car rental in ${city.name}`}

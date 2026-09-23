@@ -35,8 +35,19 @@ export async function generateMetadata({
       title: post.title,
       description: post.excerpt,
       type: "article",
+      url: `${SITE_URL}/blogs/${post.slug}`,
+      siteName: "Nrently.pk",
+      locale: "en_PK",
       publishedTime: new Date(post.date).toISOString(),
+      modifiedTime: new Date(post.date).toISOString(),
+      authors: ["Nrently"],
       images: [{ url: `${SITE_URL}${post.image}`, width: 800, height: 800 }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      images: [`${SITE_URL}${post.image}`],
     },
   };
 }
@@ -56,6 +67,54 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   return (
     <article>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            mainEntityOfPage: {
+              "@type": "WebPage",
+              "@id": `${SITE_URL}/blogs/${post.slug}`,
+            },
+            headline: post.title,
+            description: post.excerpt,
+            image: `${SITE_URL}${post.image}`,
+            datePublished: new Date(post.date).toISOString(),
+            dateModified: new Date(post.date).toISOString(),
+            author: { "@type": "Organization", name: "Nrently" },
+            publisher: {
+              "@type": "Organization",
+              name: "Nrently.pk",
+              logo: { "@type": "ImageObject", url: `${SITE_URL}/logo.png` },
+            },
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Blogs",
+                item: `${SITE_URL}/blogs`,
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: post.title,
+                item: `${SITE_URL}/blogs/${post.slug}`,
+              },
+            ],
+          }),
+        }}
+      />
       <section className="mx-auto max-w-4xl px-4 pb-16 pt-28 sm:px-6 sm:pt-36">
         <Link
           href="/blogs"

@@ -3,16 +3,15 @@ import PageHero from "@/components/PageHero";
 import VehicleListing from "@/components/sections/VehicleListing";
 import ContactCta from "@/components/sections/ContactCta";
 import { VEHICLES, categoryFrom, formatPKR } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
 const fromPrice = formatPKR(categoryFrom("luxury"));
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Luxury Vehicles",
   description: `Luxury car rental in Pakistan — Mercedes-Benz CLA200 and S400, Audi A4 and A5 for weddings and VIP travel. Prices from ${fromPrice}/day.`,
-  alternates: {
-    canonical: "/luxury",
-  },
-};
+  path: "/luxury",
+});
 
 const vehicles = VEHICLES.filter((v) => v.category === "luxury");
 
@@ -21,7 +20,7 @@ export default function LuxuryPage() {
     <>
       <PageHero
         eyebrow="Luxury Fleet"
-        title="Arrive like it matters"
+        title="Luxury Cars for Rent in Pakistan"
         subtitle={`Mercedes-Benz and Audi executive sedans with chauffeur options — the first impression you can drive to — from ${fromPrice}/day.`}
         image="/images/MERCEDES S Class - S400.png"
         imageAlt="Mercedes S400 luxury rental car"

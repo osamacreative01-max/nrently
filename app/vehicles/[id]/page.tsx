@@ -97,6 +97,30 @@ export default async function VehicleDetailPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: "Vehicles",
+                item: `${SITE_URL}/vehicles`,
+              },
+              {
+                "@type": "ListItem",
+                position: 3,
+                name: vehicle.name,
+                item: `${SITE_URL}/vehicles/${vehicle.id}`,
+              },
+            ],
+          }),
+        }}
+      />
       <section className="mx-auto max-w-7xl px-4 pb-20 pt-24 sm:px-6 sm:pt-32 lg:px-8">
         <Link
           href={backHref}

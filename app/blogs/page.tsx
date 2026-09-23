@@ -4,22 +4,21 @@ import BlogCard from "@/components/BlogCard";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { Stagger, StaggerItem } from "@/components/ui/Stagger";
 import { BLOG_POSTS } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Blogs & Travel Guides",
   description:
     "Road trip guides, rental tips and travel inspiration from the Nrently blog — for drivers across Pakistan.",
-  alternates: {
-    canonical: "/blogs",
-  },
-};
+  path: "/blogs",
+});
 
 export default function BlogsPage() {
   return (
     <>
       <PageHero
         eyebrow="Nrently Blog"
-        title="Ideas for your next drive"
+        title="Car Rental Blog & Travel Guides"
         subtitle="Road trip itineraries, packing tips and everything you need to know about renting in Pakistan."
         image="/images/AUDI A5.png"
         imageAlt="Nrently car rental blog"

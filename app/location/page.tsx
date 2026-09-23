@@ -6,22 +6,21 @@ import ContactCta from "@/components/sections/ContactCta";
 import PageHero from "@/components/PageHero";
 import { Stagger, StaggerItem } from "@/components/ui/Stagger";
 import { CITIES } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Location & Coverage",
   description:
     "Nrently car rental coverage across Pakistan — customer centres in Karachi, Lahore and Islamabad, plus Multan and Sukkur.",
-  alternates: {
-    canonical: "/location",
-  },
-};
+  path: "/location",
+});
 
 export default function LocationPage() {
   return (
     <>
       <PageHero
         eyebrow="Coverage"
-        title="Wherever the road takes you"
+        title="Car Rental Locations in Pakistan"
         subtitle="Customer centres in the three major cities, with fleet delivery available for outstation hires across Pakistan."
         image="/images/TOYOTA Fortuner-Photoroom.png"
         imageAlt="Toyota Fortuner rental car"

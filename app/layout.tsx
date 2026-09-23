@@ -6,16 +6,7 @@ import RouteTransition from "@/components/RouteTransition";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
-import {
-  BRAND_NAME,
-  BRAND_TAGLINE,
-  CITIES,
-  EMAIL,
-  PHONE_INTL,
-  SITE_URL,
-  WHATSAPP_URL,
-  type CategoryId,
-} from "@/lib/site";
+import { BRAND_NAME, BRAND_TAGLINE, CITIES, EMAIL, PHONE_INTL, SITE_URL } from "@/lib/site";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -88,7 +79,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en-PK">
       <body
         suppressHydrationWarning
         className={`${inter.variable} ${poppins.variable} bg-cream text-ink antialiased`}
@@ -107,14 +98,23 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "CarRental",
-              name: BRAND_NAME,
+              name: `${BRAND_NAME}.pk`,
               url: SITE_URL,
               slogan: BRAND_TAGLINE,
               description:
                 "Car rental services across Pakistan — budget to luxury, with driver, delivered clean and on time.",
               email: EMAIL,
               telephone: PHONE_INTL,
-              priceRange: "PKR 4,200 – PKR 45,000 /day",
+              priceRange: "PKR 4,200 – PKR 22,000 /day",
+              image: `${SITE_URL}/images/MERCEDES%20S%20Class%20-%20S400.png`,
+              logo: `${SITE_URL}/logo.png`,
+              address: {
+                "@type": "PostalAddress",
+                streetAddress:
+                  "Shahrah e Faisal Near Airport Road, Faisal Cantonment",
+                addressLocality: "Karachi",
+                addressCountry: "PK",
+              },
               areaServed: CITIES.map((c) => c.name),
               contactPoint: {
                 "@type": "ContactPoint",
@@ -124,7 +124,7 @@ export default function RootLayout({
                 areaServed: "PK",
                 availableLanguage: "English",
               },
-              sameAs: [WHATSAPP_URL, `mailto:${EMAIL}`, `tel:${PHONE_INTL}`],
+              sameAs: ["https://www.facebook.com/share/1L5rE5ZQyJ/"],
             }),
           }}
         />

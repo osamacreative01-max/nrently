@@ -12,15 +12,14 @@ import {
   SECOND_PHONE_DISPLAY,
   WHATSAPP_URL,
 } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Contact Us",
   description:
     "Contact Nrently — call or WhatsApp 24/7 for car rentals in Karachi. Visit our customer centres in Karachi, Lahore and Islamabad.",
-  alternates: {
-    canonical: "/contact-us",
-  },
-};
+  path: "/contact-us",
+});
 
 const INFO_CARDS = [
   {

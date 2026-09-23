@@ -54,7 +54,7 @@ export default function Hero() {
             className="mb-4 flex items-center gap-2 font-display text-xs font-semibold uppercase tracking-[0.18em] text-accent sm:text-sm sm:tracking-[0.3em]"
           >
             <span className="h-px w-8 bg-accent" />
-            Car Rental Services in Karachi
+            Nrently — Car Rental Services in Karachi
           </motion.p>
 
           <h1 className="font-display text-3xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-4xl lg:text-5xl xl:text-6xl">
@@ -122,11 +122,6 @@ export default function Hero() {
         >
           <div className="pointer-events-none absolute inset-0 -z-0 rounded-full bg-accent/20 blur-[60px] sm:blur-[100px]" />
           <div className="relative mt-6 aspect-[4/3] sm:aspect-[3/2] lg:aspect-[4/3] sm:mt-8">
-            {/* Preload all images */}
-            {CAROUSEL_IMAGES.map((img) => (
-              <link key={img.src} rel="preload" as="image" href={img.src} />
-            ))}
-
             <AnimatePresence mode="wait">
               <motion.div
                 key={current}

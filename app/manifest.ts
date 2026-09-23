@@ -3,7 +3,6 @@ import { BRAND_NAME, BRAND_TAGLINE } from "@/lib/site";
 
 const accent = "#E31E24";
 const night = "#0a0a0a";
-const name = `${BRAND_NAME}.pk`;
 
 // PWA manifest — everything here is REAL brand data (no invented facts).
 // Icons reuse the existing uploaded logo asset so nothing is fabricated.

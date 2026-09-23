@@ -4,17 +4,16 @@ import VehicleFilter from "@/components/VehicleFilter";
 import RentalSearchSummary from "@/components/RentalSearchSummary";
 import ContactCta from "@/components/sections/ContactCta";
 import { parseRentalSearch } from "@/lib/search";
+import { pageMetadata } from "@/lib/seo";
 
 type PageSearchParams = Record<string, string | string[] | undefined>;
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Vehicles",
   description:
     "Browse the complete Nrently fleet — budget, standard, luxury, SUV and vans & coasters with transparent daily rates.",
-  alternates: {
-    canonical: "/vehicles",
-  },
-};
+  path: "/vehicles",
+});
 
 export default async function VehiclesPage({
   searchParams,
@@ -27,7 +26,7 @@ export default async function VehiclesPage({
     <>
       <PageHero
         eyebrow="Our Fleet"
-        title="Every ride, one rental company"
+        title="Car Rental Fleet in Pakistan"
         subtitle="Filter the full Nrently fleet by category. Serviced, insured and delivered clean to your door."
         image="/images/TOYOTA Fortuner-Photoroom.png"
         imageAlt="Nrently vehicle fleet"

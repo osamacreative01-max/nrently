@@ -1,11 +1,25 @@
 import { HelpCircle, MessageCircle } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import FaqAccordion from "./FaqAccordion";
-import { WHATSAPP_URL } from "@/lib/site";
+import { FAQS, WHATSAPP_URL } from "@/lib/site";
 
 export default function FaqSection() {
   return (
     <section className="bg-[#0a0a0a] py-14 sm:py-24 lg:py-32">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: FAQS.map((f) => ({
+              "@type": "Question",
+              name: f.q,
+              acceptedAnswer: { "@type": "Answer", text: f.a },
+            })),
+          }),
+        }}
+      />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow="FAQ"

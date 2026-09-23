@@ -10,7 +10,7 @@ export function formatPKR(value: number): string {
   return `PKR ${value.toLocaleString("en-PK")}`;
 }
 
-export const SITE_URL = "https://nrently.vercel.app";
+export const SITE_URL = "https://www.nrently.pk";
 export const PHONE_DISPLAY = "0306-6556934";
 export const PHONE_INTL = "+923066556934";
 export const SECOND_PHONE_DISPLAY = "+92 316 1068353";
@@ -41,15 +41,15 @@ export const HERO = {
 };
 
 export const ABOUT = {
-  heading: "Welcome To Car Rental Services in Karachi",
+  heading: "Welcome To Nrently Car Rental in Karachi",
   paragraph:
-    "Car Rental Services in Karachi, Pakistan, offers a hassle-free way to book a car for any occasion. Whether it's a wedding, business trip, corporate event, or picnic, our online platform makes car hire in Karachi simple. Select your car, choose pick-up and drop-off locations, and schedule your rental with ease. Enjoy flexible options, competitive prices, and a smooth car rental experience in Karachi.",
+    "Nrently makes it hassle-free to book a car for any occasion in Karachi, Pakistan. Whether it's a wedding, business trip, corporate event, or picnic, our online platform makes car hire in Karachi simple. Select your car, choose pick-up and drop-off locations, and schedule your rental with ease. Enjoy flexible options, competitive prices, and a smooth car rental experience in Karachi.",
   subheading1: "Find Your Best & Affordable Ride",
   subtext1: "Discover the best car rental services with driver in Pakistan.",
   subheading2: "Car Rental with Chauffeur",
   subheading3: "Luxury & Budget-Friendly Car Rental in Karachi",
   paragraph2:
-    "Enjoy a smooth and affordable travel experience with our top car rental services in Karachi, Pakistan. Whether you're exploring the city or need a trustworthy driver, we offer a variety of well-maintained vehicles to suit your needs. At Car Rental Services PK, we make sure every car is checked by our expert team for the best ride possible. Our easy online booking system lets you quickly choose your car, fill in your details, and get ready to hit the road—all at great prices.",
+    "Enjoy a smooth and affordable travel experience with our top car rental services in Karachi, Pakistan. Whether you're exploring the city or need a trustworthy driver, we offer a variety of well-maintained vehicles to suit your needs. At Nrently, we make sure every car is checked by our expert team for the best ride possible. Our easy online booking system lets you quickly choose your car, fill in your details, and get ready to hit the road—all at great prices.",
 };
 
 export type CategoryId = "budget" | "standard" | "luxury" | "suv" | "vans";
@@ -630,10 +630,10 @@ export const KARACHI_HIGHLIGHTS = {
   heading: "Rent A Car in Karachi",
   subheading: "Hire a Car in Karachi for a Memorable Trip",
   intro:
-    "We prioritize both quality and affordability, ensuring a safe ride for our valued visitors across Karachi. This makes Car Rental Services PK one of the top car rental companies in the city.",
+    "We prioritize both quality and affordability, ensuring a safe ride for our valued visitors across Karachi. This makes Nrently one of the top car rental companies in the city.",
   callToBook: {
-    heading: "CALL US & BOOK A CAR TODAY WITH CAR RENTAL SERVICE!",
-    text: "Explore Karachi's top attractions with the most trusted car rental service — Car Rental Services",
+    heading: "CALL US & BOOK A CAR TODAY WITH NRENTLY!",
+    text: "Explore Karachi's top attractions with the most trusted car rental service — Nrently",
     phone: "0306-6556934",
   },
 };
@@ -797,7 +797,7 @@ export interface FaqItem {
 export const FAQS: FaqItem[] = [
   {
     q: "How can I rent a car in Karachi, Pakistan?",
-    a: `It is very easy to book a car from our website. You need to follow basic simple steps. Please visit the rent-a-car area of Car Rental Services, choose the vehicle you want to hire, and then click the "book now" button. But ensure you have a current driver's Car Rental Karachi license and NIC if you live in Pakistan.`,
+    a: `It is very easy to book a car from our website. You need to follow basic simple steps. Please visit the rent-a-car area of Nrently, choose the vehicle you want to hire, and then click the "book now" button. But ensure you have a current driver's license and NIC if you live in Pakistan.`,
   },
   {
     q: "What is the maximum duration a car may be hired for?",
@@ -805,23 +805,23 @@ export const FAQS: FaqItem[] = [
   },
   {
     q: "Which rental vehicle company is most popular in Karachi?",
-    a: "Karachi's most popular rental car category is an economy car, such as a Toyota, Civic, Suzuki Alto VXL, Daihatsu Mira, Suzuki Cultus VXL, Suzuki Wagon R VXL, or comparable model. Car Rental Services have many different types of vehicles, from affordable models to expensive ones.",
+    a: "Karachi's most popular rental car category is an economy car, such as a Toyota, Civic, Suzuki Alto VXL, Daihatsu Mira, Suzuki Cultus VXL, Suzuki Wagon R VXL, or comparable model. Nrently offers many different types of vehicles, from affordable models to expensive ones.",
   },
   {
-    q: "Can I rent a car from Car Rental Services without a driver?",
+    q: "Can I rent a car from Nrently without a driver?",
     a: "Yes, you can easily rent a car you want for your event. We offer both cars with a driver and without a driver for both automatic and manual cars.",
   },
   {
     q: "Why do people rent cars in Karachi?",
-    a: "Going around Karachi without a vehicle is challenging because it is a large metropolis. You may travel conveniently and on schedule with Car Rental Services. To guarantee the best hire a vehicle in Karachi services, our crew is extremely helpful and fast.",
+    a: "Going around Karachi without a vehicle is challenging because it is a large metropolis. You may travel conveniently and on schedule with Nrently. To guarantee the best car hire in Karachi, our crew is extremely helpful and fast.",
   },
   {
     q: "Should I pay a fee in addition to my traffic fine?",
-    a: "If you're not using Car Rental Services' driver service, then you must pay the traffic fine.",
+    a: "If you're not using Nrently's driver service, then you must pay the traffic fine.",
   },
   {
     q: "For which event can I book your car in Karachi?",
-    a: "You can rent a car in Karachi for any event, picnic, wedding, shopping, casual and executive trips. Car rental services like Corolla and Civic offer you the best car for weddings. So, you can easily Rent a car in Karachi for Weddings from our website and get the car you want.",
+    a: "You can rent a car in Karachi for any event, picnic, wedding, shopping, casual and executive trips. Cars like the Corolla and Civic offer you the best options for weddings. So, you can easily rent a car in Karachi for weddings from our website and get the car you want.",
   },
   {
     q: "What areas do you cover in Karachi?",
@@ -917,28 +917,6 @@ export interface RentalPolicyItem {
   known: boolean;
 }
 
-export const SOCIAL_LINKS: { label: string; href: string | null }[] = [
-  {
-    label: "WhatsApp",
-    href: WHATSAPP_URL,
-  },
-  {
-    label: "Email",
-    href: `mailto:${EMAIL}`,
-  },
-  {
-    label: "Phone",
-    href: `tel:${PHONE_INTL}`,
-  },
-  // Official social profiles slot — fill with verified profile URLs when they
-  // exist. `null` means "not verified yet" and is intentionally NOT rendered,
-  // so the site never links to a non-existent profile (no invented off-page).
-  { label: "Facebook", href: null },
-  { label: "Instagram", href: null },
-  { label: "TikTok", href: null },
-  { label: "YouTube", href: null },
-];
-
 export const RENTAL_POLICY: RentalPolicyItem[] = [
   {
     label: "Driver",
@@ -1020,8 +998,8 @@ export const customerCenters = [
 ];
 
 export const CONTACT = {
-  heading: "Feel Free To Contact Us",
-  text: "Explore Karachi's top attractions with nrently.pk, car services your trusted travel partner for a smooth and comfortable ride!",
+  heading: "Contact Nrently — Car Rental Services",
+  text: "Explore Karachi's top attractions with nrently.pk — your trusted travel partner for a smooth and comfortable ride!",
   location: "Shahrah-E-Faisal, Karachi",
   phones: ["+92-306-6556934", "+92-316-1068353"],
   email: "nrently@gmail.com",

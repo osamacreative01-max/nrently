@@ -26,7 +26,7 @@ export default function CategoryGrid() {
               <div className="relative h-56 overflow-hidden bg-gradient-to-b from-[#161616] to-[#0e0e0e] sm:h-72">
                 <Image
                   src={cat.image}
-                  alt={cat.label}
+                  alt={`${cat.label} car rental — ${cat.example}`}
                   fill
                   sizes="(min-width: 1024px) 50vw, 100vw"
                   className="object-contain p-2 transition-transform duration-500 group-hover:scale-105"

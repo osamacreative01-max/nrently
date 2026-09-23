@@ -223,7 +223,7 @@ export default function Navbar() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.25 }}
-              className="fixed inset-0 z-40 bg-brand/60 backdrop-blur-sm lg:hidden"
+              className="fixed inset-0 z-[80] bg-brand/60 backdrop-blur-sm lg:hidden"
               onClick={() => setMobileOpen(false)}
             />
             <motion.aside
@@ -236,7 +236,7 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="fixed inset-y-0 right-0 z-50 flex w-[86%] max-w-sm flex-col bg-brand px-6 py-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] lg:hidden"
+              className="fixed inset-y-0 right-0 z-[90] flex w-[86%] max-w-sm flex-col bg-brand px-6 py-6 pb-[max(1.5rem,env(safe-area-inset-bottom))] lg:hidden"
               data-lenis-prevent
             >
               <div className="flex items-center justify-between">
@@ -251,7 +251,7 @@ export default function Navbar() {
                 </button>
               </div>
 
-              <div className="mt-8 flex flex-1 flex-col gap-1.5 overflow-y-auto overscroll-contain">
+              <div className="mt-8 flex min-h-0 flex-1 flex-col gap-1.5 overflow-y-auto overscroll-contain">
                 {MENU.map((item, i) => (
                   <motion.div
                     key={item.label}

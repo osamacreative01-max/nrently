@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
 import CityLanding from "@/components/sections/CityLanding";
 import { CITIES } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Car Rental in Lahore",
   description:
     "Rent a car in Lahore — budget to luxury, with driver or self-drive. Doorstep delivery in Gulberg, DHA, Model Town and Johar Town.",
-  alternates: {
-    canonical: "/lahore",
-  },
-};
+  path: "/lahore",
+});
 
 const city = CITIES[1];
 

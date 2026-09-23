@@ -36,7 +36,7 @@ export default function AboutPreview() {
           <div className="group relative mt-10 aspect-[16/9] overflow-hidden rounded-[2rem] border border-white/10 shadow-[0_45px_90px_-35px_rgba(0,0,0,0.8)] sm:aspect-[21/9] sm:mt-14">
             <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
             <Image
-              src="/images/Car Collage.png"
+              src="/images/car-collage.webp"
               alt="Nrently fleet — car collage"
               fill
               priority

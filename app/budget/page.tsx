@@ -3,16 +3,15 @@ import PageHero from "@/components/PageHero";
 import VehicleListing from "@/components/sections/VehicleListing";
 import ContactCta from "@/components/sections/ContactCta";
 import { VEHICLES, categoryFrom, formatPKR } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
 const fromPrice = formatPKR(categoryFrom("budget"));
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Budget Vehicles",
   description: `Affordable budget car rental in Karachi and Pakistan — Suzuki Cultus, Wagon R and Alto from ${fromPrice}/day.`,
-  alternates: {
-    canonical: "/budget",
-  },
-};
+  path: "/budget",
+});
 
 const vehicles = VEHICLES.filter((v) => v.category === "budget");
 
@@ -21,7 +20,7 @@ export default function BudgetPage() {
     <>
       <PageHero
         eyebrow="Budget Fleet"
-        title="Smart cars, smaller bills"
+        title="Budget Car Rental in Karachi"
         subtitle={`Fuel-efficient Suzuki Cultus, Wagon R and Alto that keep your budget on the road — from ${fromPrice}/day.`}
         image="/images/SUZUKI Cultus-Photoroom.png"
         imageAlt="Suzuki Cultus budget rental car"

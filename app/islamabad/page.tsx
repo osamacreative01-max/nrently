@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
 import CityLanding from "@/components/sections/CityLanding";
 import { CITIES } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Car Rental in Islamabad",
   description:
     "Rent a car in Islamabad — budget to luxury, with driver or self-drive. Delivery across F-6, F-7, Blue Area and DHA Phase 2.",
-  alternates: {
-    canonical: "/islamabad",
-  },
-};
+  path: "/islamabad",
+});
 
 const city = CITIES[2];
 
