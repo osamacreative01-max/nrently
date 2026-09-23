@@ -277,13 +277,27 @@ export async function detectCurrentLocation(): Promise<DetectedLocation> {
     throw new Error("Geolocation is not supported in this browser.");
   }
 
-  const position = await new Promise<GeolocationPosition>((resolve, reject) => {
-    navigator.geolocation.getCurrentPosition(resolve, reject, {
-      enableHighAccuracy: true,
-      timeout: 12000,
-      maximumAge: 60000,
+  if (!window.isSecureContext) {
+    throw new Error(
+      "Location requires a secure (HTTPS) connection. Please open the site with https://"
+    );
+  }
+
+  const getPosition = (enableHighAccuracy: boolean) =>
+    new Promise<GeolocationPosition>((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(resolve, reject, {
+        enableHighAccuracy,
+        timeout: enableHighAccuracy ? 10000 : 15000,
+        maximumAge: 60000,
+      });
     });
-  });
+
+  let position: GeolocationPosition;
+  try {
+    position = await getPosition(true);
+  } catch {
+    position = await getPosition(false);
+  }
 
   const { latitude, longitude } = position.coords;
   const coords = `${latitude.toFixed(6)},${longitude.toFixed(6)}`;
@@ -307,7 +321,7 @@ export async function detectCurrentLocation(): Promise<DetectedLocation> {
       const a = data.address ?? {};
       const short = [
         a.road || a.neighbourhood || a.suburb || a.hamlet || a.village,
-        a.city || a.town || a.county || a.state,
+        a.city || a.town || a.county || a.state || a.region,
       ]
         .filter(Boolean)
         .join(", ");

@@ -277,7 +277,7 @@ export const VEHICLES: Vehicle[] = [
     fuel: "Petrol",
     ac: true,
     tag: "Premium Sedan",
-    image: "/images/HONDA Civic-Photoroom.png",
+    image: "/images/Honda Civic X.png",
     description:
       "The top-tier Civic X — turbo-charged performance, sporty styling and a premium cabin for drivers who want more.",
     driverHours: 10,
@@ -916,6 +916,28 @@ export interface RentalPolicyItem {
   value: string;
   known: boolean;
 }
+
+export const SOCIAL_LINKS: { label: string; href: string | null }[] = [
+  {
+    label: "WhatsApp",
+    href: WHATSAPP_URL,
+  },
+  {
+    label: "Email",
+    href: `mailto:${EMAIL}`,
+  },
+  {
+    label: "Phone",
+    href: `tel:${PHONE_INTL}`,
+  },
+  // Official social profiles slot — fill with verified profile URLs when they
+  // exist. `null` means "not verified yet" and is intentionally NOT rendered,
+  // so the site never links to a non-existent profile (no invented off-page).
+  { label: "Facebook", href: null },
+  { label: "Instagram", href: null },
+  { label: "TikTok", href: null },
+  { label: "YouTube", href: null },
+];
 
 export const RENTAL_POLICY: RentalPolicyItem[] = [
   {

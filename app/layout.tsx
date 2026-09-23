@@ -6,7 +6,16 @@ import RouteTransition from "@/components/RouteTransition";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
-import { BRAND_NAME, BRAND_TAGLINE, SITE_URL } from "@/lib/site";
+import {
+  BRAND_NAME,
+  BRAND_TAGLINE,
+  CITIES,
+  EMAIL,
+  PHONE_INTL,
+  SITE_URL,
+  WHATSAPP_URL,
+  type CategoryId,
+} from "@/lib/site";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -90,6 +99,35 @@ export default function RootLayout({
         <Footer />
         <WhatsAppFloat />
         <RouteTransition />
+
+        {/* Sitewide structured data — real business data only (no invented facts) */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "CarRental",
+              name: BRAND_NAME,
+              url: SITE_URL,
+              slogan: BRAND_TAGLINE,
+              description:
+                "Car rental services across Pakistan — budget to luxury, with driver, delivered clean and on time.",
+              email: EMAIL,
+              telephone: PHONE_INTL,
+              priceRange: "PKR 4,200 – PKR 45,000 /day",
+              areaServed: CITIES.map((c) => c.name),
+              contactPoint: {
+                "@type": "ContactPoint",
+                contactType: "customer service",
+                telephone: PHONE_INTL,
+                email: EMAIL,
+                areaServed: "PK",
+                availableLanguage: "English",
+              },
+              sameAs: [WHATSAPP_URL, `mailto:${EMAIL}`, `tel:${PHONE_INTL}`],
+            }),
+          }}
+        />
       </body>
     </html>
   );
