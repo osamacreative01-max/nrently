@@ -157,7 +157,7 @@ export const VEHICLES: Vehicle[] = [
     id: "suzuki-wagon-r",
     name: "Suzuki Wagon R",
     category: "budget",
-    pricePerDay: 4800,
+    pricePerDay: 5000,
     seats: 4,
     luggage: 3,
     transmission: "Automatic",
