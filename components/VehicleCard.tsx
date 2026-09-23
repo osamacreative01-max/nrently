@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { MessageCircle, Users, Clock, Fuel, Settings, Search } from "lucide-react";
+import { MessageCircle, Users, Clock, Fuel, Settings, Search, Timer } from "lucide-react";
 import { WHATSAPP_URL, type Vehicle } from "@/lib/site";
 import {
   buildWhatsAppUrl,
@@ -89,7 +89,7 @@ export default function VehicleCard({
             {vehicle.driverHours} hrs
           </span>
           <span className="inline-flex items-center gap-1.5 rounded-full bg-white/[0.05] px-3 py-1.5 text-[11px] font-medium text-slate">
-            <Fuel className="h-3.5 w-3.5 text-accent" />
+            <Timer className="h-3.5 w-3.5 text-accent" />
             PKR {vehicle.overtimeRate}/hr OT
           </span>
         </div>
