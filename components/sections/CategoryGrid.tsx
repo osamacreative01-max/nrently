@@ -18,35 +18,40 @@ export default function CategoryGrid() {
       <Stagger className="mt-10 grid grid-cols-1 gap-5 sm:mt-16 sm:grid-cols-2">
         {CATEGORIES.map((cat) => (
           <StaggerItem key={cat.id}>
-            <Link
-              href={cat.href}
-              className="group relative flex min-h-[300px] flex-col overflow-hidden rounded-3xl border border-white/[0.06] bg-[#0e0e0e] transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 hover:shadow-2xl hover:shadow-accent/10 sm:min-h-[380px]"
-            >
-              {/* Image */}
-              <div className="relative h-56 overflow-hidden bg-gradient-to-b from-[#161616] to-[#0e0e0e] sm:h-72">
-                <Image
-                  src={cat.image}
-                  alt={`${cat.label} car rental — ${cat.example}`}
-                  fill
-                  sizes="(min-width: 1024px) 50vw, 100vw"
-                  className="object-contain p-2 transition-transform duration-500 group-hover:scale-105"
-                />
+            <article className="group relative flex min-h-[300px] flex-col overflow-hidden rounded-3xl border border-white/[0.06] bg-[#0e0e0e] transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 hover:shadow-2xl hover:shadow-accent/10 sm:min-h-[380px]">
+              {/* Link: image + heading (keeps anchor text short & unique) */}
+              <Link
+                href={cat.href}
+                className="relative block overflow-hidden bg-gradient-to-b from-[#161616] to-[#0e0e0e]"
+              >
+                <div className="relative h-56 sm:h-72">
+                  <Image
+                    src={cat.image}
+                    alt={`${cat.label} car rental — ${cat.example}`}
+                    fill
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    className="object-contain p-2 transition-transform duration-500 group-hover:scale-105"
+                  />
 
-                {/* Price badge */}
-                <span className="absolute left-4 top-4 rounded-full bg-black/50 px-3.5 py-1.5 text-[11px] font-bold text-white backdrop-blur-md border border-white/10">
-                  From PKR {cat.from.toLocaleString()}/day
-                </span>
-              </div>
+                  {/* Price badge */}
+                  <span className="absolute left-4 top-4 z-10 rounded-full bg-black/50 px-3.5 py-1.5 text-[11px] font-bold text-white backdrop-blur-md border border-white/10">
+                    From PKR {cat.from.toLocaleString()}/day
+                  </span>
+                </div>
 
-              {/* Content */}
-              <div className="flex flex-1 flex-col p-5 pt-4 sm:p-6 sm:pt-5">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
-                  {cat.label}
-                </p>
-                <h3 className="mt-2 font-display text-2xl font-bold text-white">
-                  {cat.example}
-                </h3>
-                <p className="mt-2 line-clamp-2 flex-1 text-sm leading-relaxed text-slate">
+                <div className="p-5 pb-0 pt-4 sm:p-6 sm:pb-0 sm:pt-5">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-accent">
+                    {cat.label}
+                  </p>
+                  <h3 className="mt-2 font-display text-2xl font-bold text-white">
+                    {cat.example}
+                  </h3>
+                </div>
+              </Link>
+
+              {/* Body outside the link */}
+              <div className="flex flex-1 flex-col p-5 pt-3 sm:p-6 sm:pt-3">
+                <p className="line-clamp-2 flex-1 text-sm leading-relaxed text-slate">
                   {cat.blurb}
                 </p>
 
@@ -63,12 +68,15 @@ export default function CategoryGrid() {
                 </div>
 
                 {/* CTA */}
-                <span className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] py-3 font-display text-sm font-semibold text-white transition-all duration-300 group-hover:border-accent group-hover:bg-accent group-hover:shadow-lg group-hover:shadow-accent/30">
-                  View & Book
+                <Link
+                  href={cat.href}
+                  className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] py-3 font-display text-sm font-semibold text-white transition-all duration-300 hover:border-accent hover:bg-accent hover:shadow-lg hover:shadow-accent/30"
+                >
+                  View & Book {cat.label} cars
                   <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </span>
+                </Link>
               </div>
-            </Link>
+            </article>
           </StaggerItem>
         ))}
       </Stagger>

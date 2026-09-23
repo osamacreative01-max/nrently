@@ -29,11 +29,7 @@ export default function VehicleCard({
   return (
     <article className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-[#101010] transition-all duration-500 hover:-translate-y-1.5 hover:border-accent/30 hover:shadow-2xl hover:shadow-accent/10">
       {/* Image stage */}
-      <Link
-        href={detailHref}
-        className="relative block h-48 shrink-0 overflow-hidden bg-gradient-to-b from-[#1a1a1a] to-[#101010] sm:h-56"
-        aria-label={`View ${vehicle.name}`}
-      >
+      <div className="relative block h-48 shrink-0 overflow-hidden bg-gradient-to-b from-[#1a1a1a] to-[#101010] sm:h-56">
         <Image
           src={vehicle.image}
           alt={vehicle.name}
@@ -58,7 +54,7 @@ export default function VehicleCard({
           PKR {vehicle.pricePerDay.toLocaleString()}
           <span className="font-medium text-white/70">/day</span>
         </span>
-      </Link>
+      </div>
 
       {/* Card content */}
       <div className="flex flex-1 flex-col p-4 sm:p-5">
@@ -108,7 +104,7 @@ export default function VehicleCard({
             href={detailHref}
             className="btn-gradient flex w-full items-center justify-center gap-2 rounded-xl px-4 py-3 font-display text-sm font-semibold shadow-lg shadow-accent/20 transition-all duration-300 hover:shadow-xl hover:shadow-accent/30"
           >
-            <Search className="h-4 w-4" /> Check Availability
+            <Search className="h-4 w-4" /> Check {vehicle.name} availability
           </Link>
           <a
             href={whatsappHref}
