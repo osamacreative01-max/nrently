@@ -494,14 +494,14 @@ export const VEHICLES: Vehicle[] = [
     description:
       "A rugged pickup-SUV hybrid with off-road muscle and modern comfort — perfect for adventure and utility.",
     driverHours: 10,
-    overtimeRate: 1000,
+    overtimeRate: 500,
   },
   {
     id: "kia-sportage",
     name: "KIA Sportage",
     category: "suv",
     pricePerDay: 11000,
-    seats: 4,
+    seats: 5,
     luggage: 4,
     transmission: "Automatic",
     fuel: "Petrol",
@@ -510,7 +510,7 @@ export const VEHICLES: Vehicle[] = [
     description:
       "A stylish mid-size SUV with premium interiors, smooth ride and advanced tech features for modern families.",
     driverHours: 10,
-    overtimeRate: 1000,
+    overtimeRate: 500,
   },
   {
     id: "honda-brv",
@@ -526,7 +526,7 @@ export const VEHICLES: Vehicle[] = [
     description:
       "A versatile 7-seat crossover with Honda reliability — spacious cabin, smooth drive and excellent fuel economy.",
     driverHours: 10,
-    overtimeRate: 1000,
+    overtimeRate: 500,
   },
 ];
 
