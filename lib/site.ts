@@ -317,6 +317,23 @@ export const VEHICLES: Vehicle[] = [
     overtimeRate: 300,
   },
   {
+    id: "audi-a6",
+    name: "Audi A6",
+    category: "luxury",
+    pricePerDay: 40000,
+    seats: 5,
+    luggage: 4,
+    transmission: "Automatic",
+    fuel: "Petrol",
+    ac: true,
+    tag: "Executive Choice",
+    image: "/images/AUDI A6.png",
+    description:
+      "A refined executive sedan with quattro grip, a tech-forward cabin and effortless highway presence.",
+    driverHours: 12,
+    overtimeRate: 300,
+  },
+  {
     id: "mercedes-cla200",
     name: "Mercedes CLA200",
     category: "luxury",
