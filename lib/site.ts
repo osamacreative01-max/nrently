@@ -141,7 +141,7 @@ export const VEHICLES: Vehicle[] = [
     name: "Suzuki Cultus",
     category: "budget",
     pricePerDay: 5000,
-    seats: 5,
+    seats: 4,
     luggage: 2,
     transmission: "Manual",
     fuel: "Petrol",
@@ -151,14 +151,14 @@ export const VEHICLES: Vehicle[] = [
     description:
       "A nimble, fuel-efficient hatchback that glides through city traffic. Perfect for daily commutes and short trips.",
     driverHours: 10,
-    overtimeRate: 200,
+    overtimeRate: 500,
   },
   {
     id: "suzuki-wagon-r",
     name: "Suzuki Wagon R",
     category: "budget",
     pricePerDay: 4800,
-    seats: 5,
+    seats: 4,
     luggage: 3,
     transmission: "Manual",
     fuel: "Petrol",
@@ -167,7 +167,7 @@ export const VEHICLES: Vehicle[] = [
     description:
       "Tall, roomy and easy to park. The Wagon R packs surprising space into a compact, affordable body.",
     driverHours: 10,
-    overtimeRate: 200,
+    overtimeRate: 500,
   },
   {
     id: "suzuki-alto",
@@ -183,7 +183,7 @@ export const VEHICLES: Vehicle[] = [
     description:
       "A dependable little runabout with tiny running costs and easy city parking — the classic first choice.",
     driverHours: 10,
-    overtimeRate: 200,
+    overtimeRate: 500,
   },
   {
     id: "toyota-corolla-grande",
