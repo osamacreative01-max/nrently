@@ -3,10 +3,7 @@ export function categoryLabel(id: CategoryId): string {
 }
 
 export function categoryFrom(id: CategoryId): number {
-  const prices = VEHICLES.filter((v) => v.category === id).map(
-    (v) => v.pricePerDay
-  );
-  return prices.length ? Math.min(...prices) : 0;
+  return CATEGORIES.find((c) => c.id === id)?.from ?? 0;
 }
 
 export function formatPKR(value: number): string {
