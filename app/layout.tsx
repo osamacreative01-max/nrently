@@ -105,7 +105,7 @@ export default function RootLayout({
                 "Car rental services across Pakistan — budget to luxury, with driver, delivered clean and on time.",
               email: EMAIL,
               telephone: PHONE_INTL,
-              priceRange: "PKR 4,200 – PKR 22,000 /day",
+              priceRange: "PKR 4,800 – PKR 40,000 /day",
               image: `${SITE_URL}/images/MERCEDES%20S%20Class%20-%20S400.png`,
               logo: `${SITE_URL}/logo.png`,
               address: {
