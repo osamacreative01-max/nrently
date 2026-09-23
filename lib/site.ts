@@ -200,7 +200,7 @@ export const VEHICLES: Vehicle[] = [
     description:
       "Pakistan's favourite saloon in its top Grande trim. Smooth ride, generous boot and dependable comfort.",
     driverHours: 10,
-    overtimeRate: 250,
+    overtimeRate: 500,
   },
   {
     id: "toyota-corolla-altise",
@@ -216,7 +216,7 @@ export const VEHICLES: Vehicle[] = [
     description:
       "A refined Altise trim with premium interior touches — built for long, comfortable road trips.",
     driverHours: 10,
-    overtimeRate: 250,
+    overtimeRate: 500,
   },
   {
     id: "toyota-yaris",
@@ -232,7 +232,7 @@ export const VEHICLES: Vehicle[] = [
     description:
       "A modern, well-appointed sedan with crisp handling and a comfortable cabin for every kind of trip.",
     driverHours: 10,
-    overtimeRate: 250,
+    overtimeRate: 500,
   },
   {
     id: "toyota-gli",
@@ -248,7 +248,7 @@ export const VEHICLES: Vehicle[] = [
     description:
       "Business-class comfort with immaculate cabin finish. A favourite for corporate and family city travel.",
     driverHours: 10,
-    overtimeRate: 250,
+    overtimeRate: 500,
   },
   {
     id: "honda-civic",
@@ -264,7 +264,7 @@ export const VEHICLES: Vehicle[] = [
     description:
       "A sporty-yet-refined sedan with premium interiors and punchy performance — ideal for long road trips.",
     driverHours: 10,
-    overtimeRate: 250,
+    overtimeRate: 500,
   },
   {
     id: "honda-civic-x",
@@ -281,7 +281,7 @@ export const VEHICLES: Vehicle[] = [
     description:
       "The top-tier Civic X — turbo-charged performance, sporty styling and a premium cabin for drivers who want more.",
     driverHours: 10,
-    overtimeRate: 250,
+    overtimeRate: 500,
   },
   {
     id: "audi-a4",
@@ -297,7 +297,7 @@ export const VEHICLES: Vehicle[] = [
     description:
       "Athletic German engineering with a beautifully crafted cabin — the executive's everyday grand entrance.",
     driverHours: 12,
-    overtimeRate: 300,
+    overtimeRate: 1000,
   },
   {
     id: "audi-a5",
@@ -314,7 +314,7 @@ export const VEHICLES: Vehicle[] = [
     description:
       "Striking coupe-like proportions with quattro grip — style and sure-footed confidence in one package.",
     driverHours: 12,
-    overtimeRate: 300,
+    overtimeRate: 1000,
   },
   {
     id: "audi-a6",
@@ -331,7 +331,7 @@ export const VEHICLES: Vehicle[] = [
     description:
       "A refined executive sedan with quattro grip, a tech-forward cabin and effortless highway presence.",
     driverHours: 12,
-    overtimeRate: 300,
+    overtimeRate: 1000,
   },
   {
     id: "mercedes-cla200",
@@ -347,7 +347,7 @@ export const VEHICLES: Vehicle[] = [
     description:
       "Sleek, coupe-styled elegance with the three-pointed star. A head-turner for weddings and VIP pickups.",
     driverHours: 12,
-    overtimeRate: 300,
+    overtimeRate: 1000,
   },
   {
     id: "mercedes-s400",
@@ -363,7 +363,7 @@ export const VEHICLES: Vehicle[] = [
     description:
       "The flagship S-Class. First-class appointments, whisper-quiet refinement and timeless authority.",
     driverHours: 12,
-    overtimeRate: 300,
+    overtimeRate: 1000,
   },
   {
     id: "toyota-land-cruiser",
@@ -380,7 +380,7 @@ export const VEHICLES: Vehicle[] = [
     description:
       "The ultimate overlander. Legendary durability, triple-zone climate control and space for the whole crew.",
     driverHours: 10,
-    overtimeRate: 250,
+    overtimeRate: 1000,
   },
   {
     id: "toyota-prado",
@@ -396,7 +396,7 @@ export const VEHICLES: Vehicle[] = [
     description:
       "A refined yet unstoppable 4x4 with luxurious appointments — equally at home on city avenues and mountain passes.",
     driverHours: 10,
-    overtimeRate: 250,
+    overtimeRate: 1000,
   },
   {
     id: "toyota-fortuner",
@@ -412,7 +412,7 @@ export const VEHICLES: Vehicle[] = [
     description:
       "A muscular 7-seat SUV that swallows highways and climbs northern hills with total confidence.",
     driverHours: 10,
-    overtimeRate: 250,
+    overtimeRate: 1000,
   },
   {
     id: "toyota-hiace-15",
@@ -429,7 +429,7 @@ export const VEHICLES: Vehicle[] = [
     description:
       "A spacious 15-seat passenger van for outings, pickups and group travel — comfortable and dependable.",
     driverHours: 12,
-    overtimeRate: 300,
+    overtimeRate: 1000,
   },
   {
     id: "saloon-4c-28seater",
@@ -445,7 +445,7 @@ export const VEHICLES: Vehicle[] = [
     description:
       "A full-size 28-seat coast for weddings, corporate retreats and large family gatherings.",
     driverHours: 12,
-    overtimeRate: 300,
+    overtimeRate: 1000,
   },
   {
     id: "changan-karvaan",
@@ -461,7 +461,7 @@ export const VEHICLES: Vehicle[] = [
     description:
       "A comfortable 7-seat passenger van — smooth ride, spacious cabin and ideal for family outings and group travel.",
     driverHours: 10,
-    overtimeRate: 250,
+    overtimeRate: 1000,
   },
   {
     id: "toyota-land-cruiser-v8",
@@ -478,7 +478,7 @@ export const VEHICLES: Vehicle[] = [
     description:
       "The legendary V8 Land Cruiser — unmatched power, prestige and presence for VIP travel and long highway runs.",
     driverHours: 12,
-    overtimeRate: 300,
+    overtimeRate: 1000,
   },
   {
     id: "toyota-revo",
@@ -494,7 +494,7 @@ export const VEHICLES: Vehicle[] = [
     description:
       "A rugged pickup-SUV hybrid with off-road muscle and modern comfort — perfect for adventure and utility.",
     driverHours: 10,
-    overtimeRate: 250,
+    overtimeRate: 1000,
   },
   {
     id: "kia-sportage",
@@ -510,7 +510,7 @@ export const VEHICLES: Vehicle[] = [
     description:
       "A stylish mid-size SUV with premium interiors, smooth ride and advanced tech features for modern families.",
     driverHours: 10,
-    overtimeRate: 250,
+    overtimeRate: 1000,
   },
   {
     id: "honda-brv",
@@ -526,7 +526,7 @@ export const VEHICLES: Vehicle[] = [
     description:
       "A versatile 7-seat crossover with Honda reliability — spacious cabin, smooth drive and excellent fuel economy.",
     driverHours: 10,
-    overtimeRate: 250,
+    overtimeRate: 1000,
   },
 ];
 
