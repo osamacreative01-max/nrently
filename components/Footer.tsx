@@ -55,7 +55,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={social.label}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:text-accent"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-300 transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:text-accent"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -111,20 +111,20 @@ export default function Footer() {
                   <Link
                     key={city.id}
                     href={city.href}
-                    className="rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm text-slate-300 transition-colors hover:border-accent hover:text-accent"
+                    className="inline-flex min-h-[44px] items-center rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm text-slate-300 transition-colors hover:border-accent hover:text-accent"
                   >
                     {city.name}
                   </Link>
                 ) : (
                   <span
                     key={name}
-                    className="rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm text-slate-300"
+                    className="inline-flex min-h-[44px] items-center rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm text-slate-300"
                   >
                     {name}
                   </span>
                 );
               })}
-              <span className="rounded-full border border-white/10 px-4 py-1.5 text-sm text-slate-500">
+              <span className="inline-flex min-h-[44px] items-center rounded-full border border-white/10 px-4 py-1.5 text-sm text-slate-500">
                 All Pakistan
               </span>
             </div>

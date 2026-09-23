@@ -144,19 +144,23 @@ export default function Hero() {
           </div>
 
           {/* Dot indicators */}
-          <div className="mt-6 flex items-center justify-center gap-2">
+          <div className="mt-6 flex items-center justify-center gap-1 sm:gap-2">
             {CAROUSEL_IMAGES.map((_, i) => (
               <button
                 key={i}
                 type="button"
                 onClick={() => setCurrent(i)}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  i === current
-                    ? "w-6 bg-accent"
-                    : "w-2 bg-white/30 hover:bg-white/50"
-                }`}
                 aria-label={`Go to image ${i + 1}`}
-              />
+                className="grid h-11 w-11 place-items-center rounded-full"
+              >
+                <span
+                  className={`block h-2 rounded-full transition-all duration-300 ${
+                    i === current
+                      ? "w-6 bg-accent"
+                      : "w-2 bg-white/30 hover:bg-white/50"
+                  }`}
+                />
+              </button>
             ))}
           </div>
         </motion.div>

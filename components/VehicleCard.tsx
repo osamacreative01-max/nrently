@@ -48,7 +48,7 @@ export default function VehicleCard({
           </span>
         )}
         {categoryLabel && (
-          <span className="absolute right-4 top-4 z-10 rounded-full border border-white/10 bg-black/50 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-white backdrop-blur-md">
+          <span className="absolute right-4 top-4 z-10 hidden rounded-full border border-white/10 bg-black/50 px-3 py-1 text-[10px] font-semibold uppercase tracking-wide text-white backdrop-blur-md sm:inline-flex">
             {categoryLabel}
           </span>
         )}

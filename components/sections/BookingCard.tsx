@@ -78,7 +78,7 @@ function DetectLocationButton({
       disabled={loading}
       aria-label={label}
       title={label}
-      className="absolute right-2.5 top-1/2 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-lg border border-white/10 bg-white/[0.06] text-slate-400 transition-all duration-200 hover:border-accent/50 hover:bg-accent/15 hover:text-accent disabled:cursor-not-allowed disabled:opacity-60"
+      className="absolute right-2.5 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-lg border border-white/10 bg-white/[0.06] text-slate-400 transition-all duration-200 hover:border-accent/50 hover:bg-accent/15 hover:text-accent disabled:cursor-not-allowed disabled:opacity-60"
     >
       {loading ? (
         <Loader2 className="h-4 w-4 animate-spin" />
@@ -391,7 +391,7 @@ export default function BookingCard() {
                 onClick={() =>
                   update("sameDropoffLocation", !form.sameDropoffLocation)
                 }
-                className="group inline-flex w-fit cursor-pointer items-center gap-3 rounded-xl px-1 py-1"
+                className="group inline-flex w-fit min-h-[44px] cursor-pointer items-center gap-3 rounded-xl px-1 py-1"
               >
                 <span
                   className={`relative h-6 w-[42px] shrink-0 rounded-full transition-colors duration-200 ${

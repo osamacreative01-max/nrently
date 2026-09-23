@@ -88,7 +88,7 @@ export default function VehicleFilter({ search = null }: VehicleFilterProps) {
             key={f.id}
             type="button"
             onClick={() => setCategory(f.id)}
-            className={`rounded-full px-5 py-2.5 font-display text-sm font-semibold transition-all duration-300 ${
+            className={`inline-flex min-h-[44px] items-center rounded-full px-5 py-2.5 font-display text-sm font-semibold transition-all duration-300 ${
               category === f.id ? chipActive : chipIdle
             }`}
           >
@@ -105,7 +105,7 @@ export default function VehicleFilter({ search = null }: VehicleFilterProps) {
               key={f.id}
               type="button"
               onClick={() => setTransmission(f.id)}
-              className={`rounded-full px-3 py-2 text-[11px] font-semibold transition-all duration-300 sm:px-4 sm:text-xs ${
+              className={`inline-flex min-h-[44px] items-center rounded-full px-3 py-2 text-[11px] font-semibold transition-all duration-300 sm:px-4 sm:text-xs ${
                 transmission === f.id ? chipActive : chipIdle
               }`}
             >
@@ -114,7 +114,7 @@ export default function VehicleFilter({ search = null }: VehicleFilterProps) {
           ))}
         </div>
 
-        <label className="flex items-center gap-2 rounded-full border border-white/10 bg-[#121212] px-3 py-2 text-[11px] font-semibold text-slate sm:px-4 sm:text-xs">
+        <label className="flex min-h-[44px] items-center gap-2 rounded-full border border-white/10 bg-[#121212] px-3 py-2 text-[11px] font-semibold text-slate sm:px-4 sm:text-xs">
           <Users className="h-3.5 w-3.5 text-accent" />
           Seats
           <select
@@ -144,7 +144,7 @@ export default function VehicleFilter({ search = null }: VehicleFilterProps) {
           <button
             type="button"
             onClick={clearFilters}
-            className="inline-flex items-center gap-1.5 rounded-full border border-white/10 px-4 py-1.5 text-xs font-semibold text-slate transition-colors hover:border-accent/40 hover:text-white"
+            className="inline-flex min-h-[44px] items-center gap-1.5 rounded-full border border-white/10 px-4 py-1.5 text-xs font-semibold text-slate transition-colors hover:border-accent/40 hover:text-white"
           >
             <RotateCcw className="h-3 w-3 text-accent" />
             Clear filters
