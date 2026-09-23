@@ -429,7 +429,7 @@ export const VEHICLES: Vehicle[] = [
     description:
       "A spacious 15-seat passenger van for outings, pickups and group travel — comfortable and dependable.",
     driverHours: 12,
-    overtimeRate: 1000,
+    overtimeRate: 500,
   },
   {
     id: "saloon-4c-28seater",
@@ -445,7 +445,7 @@ export const VEHICLES: Vehicle[] = [
     description:
       "A full-size 28-seat coast for weddings, corporate retreats and large family gatherings.",
     driverHours: 12,
-    overtimeRate: 1000,
+    overtimeRate: 500,
   },
   {
     id: "changan-karvaan",
@@ -461,7 +461,7 @@ export const VEHICLES: Vehicle[] = [
     description:
       "A comfortable 7-seat passenger van — smooth ride, spacious cabin and ideal for family outings and group travel.",
     driverHours: 10,
-    overtimeRate: 1000,
+    overtimeRate: 500,
   },
   {
     id: "toyota-land-cruiser-v8",
