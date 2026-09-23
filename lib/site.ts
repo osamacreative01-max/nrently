@@ -952,8 +952,9 @@ export const RENTAL_POLICY: RentalPolicyItem[] = [
   },
   {
     label: "Fuel",
-    value: "Depends on the chosen plan — confirm at the time of booking.",
-    known: false,
+    value:
+      "Car is delivered without fuel — fuel cost is not included, you pay for what you use.",
+    known: true,
   },
   {
     label: "Security Deposit",
