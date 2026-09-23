@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { Fragment, useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { MessageCircle, Phone } from "lucide-react";
 import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
@@ -70,22 +70,25 @@ export default function Hero() {
 
           <h1 className="font-display text-3xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-4xl lg:text-5xl xl:text-6xl">
             {HERO.heading.split(" ").map((word, i) => (
-              <span key={word + i} className="inline-block whitespace-nowrap pr-3 last:pr-0">
-                <span className="inline-block overflow-hidden pb-1 align-bottom">
-                  <motion.span
-                    className="inline-block"
-                    initial={prefersReduced ? false : { y: "110%", opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{
-                      duration: 0.8,
-                      delay: 0.2 + i * 0.08,
-                      ease: [0.16, 1, 0.3, 1],
-                    }}
-                  >
-                    {word}
-                  </motion.span>
+              <Fragment key={word + i}>
+                {i > 0 ? " " : null}
+                <span className="inline-block whitespace-nowrap pr-3 last:pr-0">
+                  <span className="inline-block overflow-hidden pb-1 align-bottom">
+                    <motion.span
+                      className="inline-block"
+                      initial={prefersReduced ? false : { y: "110%", opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{
+                        duration: 0.8,
+                        delay: 0.2 + i * 0.08,
+                        ease: [0.16, 1, 0.3, 1],
+                      }}
+                    >
+                      {word}
+                    </motion.span>
+                  </span>
                 </span>
-              </span>
+              </Fragment>
             ))}
           </h1>
 
