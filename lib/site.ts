@@ -3,7 +3,10 @@ export function categoryLabel(id: CategoryId): string {
 }
 
 export function categoryFrom(id: CategoryId): number {
-  return CATEGORIES.find((c) => c.id === id)?.from ?? 0;
+  const prices = VEHICLES.filter((v) => v.category === id).map(
+    (v) => v.pricePerDay
+  );
+  return prices.length ? Math.min(...prices) : 0;
 }
 
 export function formatPKR(value: number): string {
@@ -72,7 +75,7 @@ export const CATEGORIES: Category[] = [
     href: "/budget",
     example: "Daihatsu Mira or Similar",
     blurb: "Clean, reliable and easy on the budget — perfect for daily city runs.",
-    from: 4800,
+    from: 5000,
     image: "/images/SUZUKI Cultus-Photoroom.png",
     features: ["Economical fuel", "City driving", "Great mileage"],
   },
@@ -549,7 +552,7 @@ export const CITIES: CityInfo[] = [
     blurb:
       "The city that never sleeps. From Clifton beaches to the airport runways, get around easefully.",
     image: "/images/TOYOTA Corolla Altis-Photoroom.png",
-    from: 4800,
+    from: 5000,
     areas: [
       "Gulshan-e-Iqbal",
       "Gulistan-e-Johar",

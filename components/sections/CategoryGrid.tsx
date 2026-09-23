@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { Stagger, StaggerItem } from "@/components/ui/Stagger";
-import { CATEGORIES, WHATSAPP_URL } from "@/lib/site";
+import { CATEGORIES, WHATSAPP_URL, categoryFrom } from "@/lib/site";
 
 export default function CategoryGrid() {
   return (
@@ -35,7 +35,7 @@ export default function CategoryGrid() {
 
                   {/* Price badge */}
                   <span className="absolute left-4 top-4 z-10 rounded-full bg-black/50 px-3.5 py-1.5 text-[11px] font-bold text-white backdrop-blur-md border border-white/10">
-                    From PKR {cat.from.toLocaleString()}/day
+                    From PKR {categoryFrom(cat.id).toLocaleString()}/day
                   </span>
                 </div>
 

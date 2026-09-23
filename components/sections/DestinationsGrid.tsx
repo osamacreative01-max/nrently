@@ -37,7 +37,7 @@ export default function DestinationsGrid() {
                 <div className="absolute inset-x-0 bottom-0 p-4 sm:p-6">
                   <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-[0.15em] text-accent sm:text-xs sm:tracking-[0.2em]">
                     <MapPin className="h-3.5 w-3.5 shrink-0" />
-                    From PKR {city.from.toLocaleString()}/day
+                    Rent a car in {city.name}
                   </p>
                   <h3 className="mt-1.5 font-display text-xl font-bold text-white sm:text-2xl">
                     {city.name}
