@@ -38,6 +38,8 @@ export default function CityLanding({ city, tagline, routes }: CityLandingProps)
   ].slice(0, 6);
   const mapEmbed =
     CONTACT.mapEmbeds[city.id as keyof typeof CONTACT.mapEmbeds] ?? null;
+  const shortAddress =
+    city.address.split(",").slice(0, 2).join(",").trim();
 
   return (
     <>
@@ -133,7 +135,7 @@ export default function CityLanding({ city, tagline, routes }: CityLandingProps)
                   Customer centre
                 </p>
                 <p className="mt-2 text-sm font-medium leading-relaxed text-white">
-                  {city.address}
+                  {shortAddress}
                 </p>
               </div>
             </Reveal>
@@ -177,7 +179,7 @@ export default function CityLanding({ city, tagline, routes }: CityLandingProps)
                 Customer centre in {city.name}
               </h2>
               <p className="mt-4 text-base leading-relaxed text-slate">
-                {city.address}
+                {city.address.split(",")[0]}
               </p>
               <p className="mt-3 text-sm leading-relaxed text-slate">
                 Can&apos;t come to us? Book on WhatsApp and we bring the keys to
