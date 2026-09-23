@@ -59,9 +59,9 @@ export default function Hero() {
       <div className="relative mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-6 px-4 pb-10 pt-20 sm:gap-12 sm:pb-28 sm:pt-32 lg:grid-cols-[1.15fr_1fr] lg:px-8">
         <div>
           <motion.p
-            initial={prefersReduced ? false : { opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            initial={prefersReduced ? false : { y: 12 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className="mb-4 flex items-center gap-2 font-display text-xs font-semibold uppercase tracking-[0.18em] text-accent sm:text-sm sm:tracking-[0.3em]"
           >
             <span className="h-px w-8 bg-accent" />
@@ -76,11 +76,11 @@ export default function Hero() {
                   <span className="inline-block overflow-hidden pb-1 align-bottom">
                     <motion.span
                       className="inline-block"
-                      initial={prefersReduced ? false : { y: "110%", opacity: 0 }}
-                      animate={{ y: 0, opacity: 1 }}
+                      initial={prefersReduced ? false : { y: "110%" }}
+                      animate={{ y: 0 }}
                       transition={{
-                        duration: 0.8,
-                        delay: 0.2 + i * 0.08,
+                        duration: 0.55,
+                        delay: 0.02 + i * 0.06,
                         ease: [0.16, 1, 0.3, 1],
                       }}
                     >
@@ -93,9 +93,9 @@ export default function Hero() {
           </h1>
 
           <motion.p
-            initial={prefersReduced ? false : { opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            initial={prefersReduced ? false : { y: 14 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.55, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
             className="mt-5 max-w-xl text-base leading-relaxed text-slate-200 sm:mt-6 sm:text-lg"
           >
             {heroParagraphParts ? (
@@ -112,9 +112,9 @@ export default function Hero() {
           </motion.p>
 
           <motion.div
-            initial={prefersReduced ? false : { opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            initial={prefersReduced ? false : { y: 18 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.6, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
             className="mt-6 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4"
           >
             <a
@@ -139,14 +139,14 @@ export default function Hero() {
 
         {/* Carousel */}
         <motion.div
-          initial={prefersReduced ? false : { opacity: 0, x: 40 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.9, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          initial={prefersReduced ? false : { x: 30 }}
+          animate={{ x: 0 }}
+          transition={{ duration: 0.7, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
           className="relative pr-14 sm:pr-0 lg:mt-0"
         >
           <div className="pointer-events-none absolute inset-0 -z-0 rounded-full bg-accent/20 blur-[60px] sm:blur-[100px]" />
           <div className="relative mt-4 aspect-[16/10] sm:mt-8 sm:aspect-[3/2] lg:aspect-[4/3]">
-            <AnimatePresence mode="wait">
+            <AnimatePresence initial={false} mode="wait">
               <motion.div
                 key={current}
                 initial={{ opacity: 0 }}

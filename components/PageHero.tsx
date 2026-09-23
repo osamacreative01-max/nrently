@@ -23,9 +23,9 @@ export default function PageHero({ title, subtitle, eyebrow, image, imageAlt }: 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className={`grid items-center gap-6 sm:gap-8 ${image ? "lg:grid-cols-[1fr_1fr]" : ""}`}>
           <motion.div
-            initial={prefersReduced ? false : { opacity: 0, y: 26 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            initial={prefersReduced ? false : { y: 20 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-2xl"
           >
             {eyebrow && (
@@ -46,9 +46,9 @@ export default function PageHero({ title, subtitle, eyebrow, image, imageAlt }: 
 
           {image && (
             <motion.div
-              initial={prefersReduced ? false : { opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              initial={prefersReduced ? false : { x: 30 }}
+              animate={{ x: 0 }}
+              transition={{ duration: 0.7, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
               className="relative mt-3 lg:mt-0"
             >
               <div className="pointer-events-none absolute inset-0 -z-0 rounded-full bg-accent/10 blur-[80px]" />
