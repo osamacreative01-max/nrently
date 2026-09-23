@@ -1,5 +1,6 @@
 import { MessageCircle, Phone } from "lucide-react";
 import Reveal from "@/components/ui/Reveal";
+import ShareButtons from "@/components/ui/ShareButtons";
 import { PHONE_DISPLAY, WHATSAPP_URL } from "@/lib/site";
 
 export default function ContactCta() {
@@ -39,6 +40,9 @@ export default function ContactCta() {
               <Phone className="h-5 w-5" />
               {PHONE_DISPLAY}
             </a>
+          </div>
+          <div className="mt-8 flex justify-center">
+            <ShareButtons title="Nrently — Car Rental Services in Karachi" />
           </div>
         </Reveal>
       </div>

@@ -6,6 +6,7 @@ import { ArrowLeft, CalendarDays, Clock, MessageCircle } from "lucide-react";
 import { BLOG_POSTS, SITE_URL, WHATSAPP_URL } from "@/lib/site";
 import BlogCard from "@/components/BlogCard";
 import ContactCta from "@/components/sections/ContactCta";
+import ShareButtons from "@/components/ui/ShareButtons";
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
@@ -131,15 +132,18 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <h1 className="mt-4 font-display text-3xl font-extrabold leading-tight text-white sm:text-4xl">
             {post.title}
           </h1>
-          <div className="mt-4 flex flex-wrap items-center gap-4 text-sm text-slate">
-            <span className="flex items-center gap-1.5">
-              <CalendarDays className="h-4 w-4 text-accent" />
-              {formattedDate}
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Clock className="h-4 w-4 text-accent" />
-              {post.readTime}
-            </span>
+          <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
+            <div className="flex flex-wrap items-center gap-4 text-sm text-slate">
+              <span className="flex items-center gap-1.5">
+                <CalendarDays className="h-4 w-4 text-accent" />
+                {formattedDate}
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Clock className="h-4 w-4 text-accent" />
+                {post.readTime}
+              </span>
+            </div>
+            <ShareButtons title={post.title} />
           </div>
         </header>
 
