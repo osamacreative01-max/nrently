@@ -277,7 +277,7 @@ export const VEHICLES: Vehicle[] = [
     fuel: "Petrol",
     ac: true,
     tag: "Premium Sedan",
-    image: "/images/Honda Civic X.png",
+    image: "/images/Honda Civic X.webp",
     description:
       "The top-tier Civic X — turbo-charged performance, sporty styling and a premium cabin for drivers who want more.",
     driverHours: 10,
@@ -440,7 +440,7 @@ export const VEHICLES: Vehicle[] = [
     transmission: "Manual",
     fuel: "Petrol",
     ac: true,
-    image: "/images/changan karvaan-Photoroom.png",
+    image: "/images/changan-karvaan.webp",
     description:
       "A comfortable 7-seat passenger van — smooth ride, spacious cabin and ideal for family outings and group travel.",
     driverHours: 10,

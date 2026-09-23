@@ -22,7 +22,7 @@ export default function VansPage() {
         eyebrow="Vans & Coasters"
         title="Vans & Coasters for Rent in Pakistan"
         subtitle={`Spacious passenger vans and full-size coasters for weddings, outings and corporate travel — from ${fromPrice}/day.`}
-        image="/images/changan karvaan-Photoroom.png"
+        image="/images/changan-karvaan.webp"
         imageAlt="Changan Karvaan van rental"
       />
       <VehicleListing
