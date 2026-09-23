@@ -12,7 +12,7 @@ const CAROUSEL_IMAGES = [
   { src: "/images/AUDI A5.png", alt: "Audi A5 luxury rental" },
   { src: "/images/TOYOTA Fortuner-Photoroom.png", alt: "Toyota Fortuner SUV rental" },
   { src: "/images/HONDA Civic-Photoroom.png", alt: "Honda Civic sedan rental" },
-  { src: "/images/SUZUKI Cultus-Photoroom.png", alt: "Suzuki Cultus budget rental" },
+  { src: "/images/TOYOTA Corolla Altis-Photoroom.png", alt: "Toyota Corolla sedan rental" },
 ];
 
 const INTERVAL = 3500;
