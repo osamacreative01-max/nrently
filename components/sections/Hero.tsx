@@ -17,6 +17,17 @@ const CAROUSEL_IMAGES = [
 
 const INTERVAL = 3500;
 
+const HERO_KEYWORD = "car rental in Karachi";
+const heroParagraphParts = (() => {
+  const i = HERO.paragraph.indexOf(HERO_KEYWORD);
+  if (i === -1) return null;
+  return [
+    HERO.paragraph.slice(0, i),
+    HERO_KEYWORD,
+    HERO.paragraph.slice(i + HERO_KEYWORD.length),
+  ];
+})();
+
 export default function Hero() {
   const prefersReduced = useReducedMotion();
   const [current, setCurrent] = useState(0);
@@ -84,7 +95,17 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="mt-5 max-w-xl text-base leading-relaxed text-slate-200 sm:mt-6 sm:text-lg"
           >
-            {HERO.paragraph}
+            {heroParagraphParts ? (
+              <>
+                {heroParagraphParts[0]}
+                <strong className="font-semibold text-white">
+                  {heroParagraphParts[1]}
+                </strong>
+                {heroParagraphParts[2]}
+              </>
+            ) : (
+              HERO.paragraph
+            )}
           </motion.p>
 
           <motion.div

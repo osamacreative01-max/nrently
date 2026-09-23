@@ -24,6 +24,7 @@ export default function WhatsAppFloat() {
     >
       <span className="absolute inset-0 -z-10 animate-ping rounded-full bg-mint/50 [animation-duration:2s]" />
       <MessageCircle className="h-6 w-6" />
+      <span className="sr-only">Book on WhatsApp</span>
     </motion.a>
   );
 }

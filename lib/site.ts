@@ -35,7 +35,7 @@ export const BRAND_TAGLINE = "Best Car Rental Services in Karachi";
 export const HERO = {
   heading: "Best Car Rental Services in Karachi",
   paragraph:
-    "Looking for a reliable and affordable rental car? We offer a wide range of vehicles to suit your needs, whether for business, travel, or daily use. Enjoy hassle-free booking, competitive rates, and excellent customer service. Rent your perfect car today and drive with confidence!",
+    "Looking for a reliable and affordable car rental in Karachi? We offer a wide range of vehicles to suit your needs, whether for business, travel, or daily use. Enjoy hassle-free booking, competitive rates, and excellent customer service. Rent your perfect car today and drive with confidence!",
   cta: "Book Your Ride",
   image: "/images/download-removebg-preview.png",
 };

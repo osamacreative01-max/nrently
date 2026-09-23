@@ -65,6 +65,7 @@ export default function VehicleFilter({ search = null }: VehicleFilterProps) {
 
   return (
     <section className="mx-auto max-w-7xl px-4 pb-20 pt-8 sm:px-6 lg:px-8">
+      <h2 className="sr-only">Available rental vehicles in Pakistan</h2>
       {/* Search bar */}
       <form
         onSubmit={(e) => e.preventDefault()}

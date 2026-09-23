@@ -115,6 +115,7 @@ export default function Navbar() {
       >
         <Link href="/" aria-label="Nrently home" className="shrink-0">
           <Logo />
+          <span className="sr-only">Nrently — home</span>
         </Link>
 
         <div className="hidden items-center gap-8 lg:flex">

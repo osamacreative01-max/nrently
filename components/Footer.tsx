@@ -65,6 +65,7 @@ export default function Footer() {
                   >
                     <path d={social.path} />
                   </svg>
+                  <span className="sr-only">{social.label}</span>
                 </a>
               ))}
             </div>
