@@ -17,6 +17,18 @@ export function generateStaticParams() {
   return VEHICLES.map((vehicle) => ({ id: vehicle.id }));
 }
 
+const toSeoDescription = (vehicle: (typeof VEHICLES)[number]) => {
+  const tail = ` Rent ${vehicle.name} for PKR ${vehicle.pricePerDay.toLocaleString()}/day (with driver) — trustworthy ${BRAND_NAME} service, delivered clean and on time.`;
+  const budget = 156 - tail.length;
+  const head =
+    budget <= 0
+      ? vehicle.name
+      : vehicle.description.length <= budget
+        ? vehicle.description
+        : vehicle.description.slice(0, budget).replace(/\s\S*$/, "").trim();
+  return (head + tail).slice(0, 160);
+};
+
 export async function generateMetadata({
   params,
 }: VehicleDetailPageProps): Promise<Metadata> {
@@ -28,7 +40,7 @@ export async function generateMetadata({
   }
 
   const price = `PKR ${vehicle.pricePerDay.toLocaleString()}/day`;
-  const description = `${vehicle.description} Rent the ${vehicle.name} for ${price} (with driver) — trustworthy ${BRAND_NAME} service, delivered clean and on time.`;
+  const description = toSeoDescription(vehicle);
   const imageUrl = `${SITE_URL}${encodeURI(vehicle.image)}`;
 
   return {
