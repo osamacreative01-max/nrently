@@ -25,7 +25,7 @@ const POPULAR_VEHICLES = [
   VEHICLES.find((v) => v.category === "luxury"),
   VEHICLES.find((v) => v.category === "suv"),
   VEHICLES.find((v) => v.category === "vans"),
-  VEHICLES[0],
+  VEHICLES.find((v) => v.id === "toyota-yaris"),
 ].filter((v): v is NonNullable<typeof v> => v !== undefined);
 
 export default function Home() {

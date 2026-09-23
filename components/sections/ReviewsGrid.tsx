@@ -31,10 +31,10 @@ export default function ReviewsGrid() {
                   />
                 ))}
               </p>
-              <p className="mt-2 font-display text-2xl font-extrabold text-white">
+              <h3 className="mt-2 font-display text-2xl font-extrabold text-white">
                 {rating.value}
                 {rating.suffix}
-              </p>
+              </h3>
               <p className="text-xs font-medium uppercase tracking-wide text-slate">
                 {rating.label}
               </p>
@@ -47,10 +47,10 @@ export default function ReviewsGrid() {
 
           {customers && (
             <div>
-              <p className="font-display text-2xl font-extrabold text-accent">
+              <h3 className="font-display text-2xl font-extrabold text-accent">
                 {customers.value}
                 {customers.suffix}
-              </p>
+              </h3>
               <p className="text-xs font-medium uppercase tracking-wide text-slate">
                 {customers.label}
               </p>

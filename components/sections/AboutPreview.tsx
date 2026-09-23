@@ -68,7 +68,10 @@ export default function AboutPreview() {
 
         {/* Highlights + CTA */}
         <Reveal delay={0.2}>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-4 sm:mt-10 sm:gap-x-10 lg:mt-12">
+          <h3 className="mt-8 text-center font-display text-sm font-bold uppercase tracking-[0.18em] text-slate-200 sm:text-base">
+            Why drivers choose Nrently
+          </h3>
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-4 sm:mt-5 sm:gap-x-10 lg:mt-6">
             {HIGHLIGHTS.map((item) => (
               <div
                 key={item}
