@@ -37,9 +37,9 @@ export default function LocationPage() {
             {CITIES.map((city) => (
               <StaggerItem key={city.id}>
                 <div className="h-full rounded-2xl border border-line bg-[#121212] p-5">
-                  <h3 className="font-display text-lg font-bold text-white">
+                  <p className="font-display text-lg font-bold text-white">
                     {city.name}
-                  </h3>
+                  </p>
                   <ul className="mt-3 space-y-1.5 text-sm text-slate">
                     {city.areas.map((area) => (
                       <li key={area} className="leading-relaxed">

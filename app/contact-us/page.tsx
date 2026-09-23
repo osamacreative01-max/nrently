@@ -43,7 +43,10 @@ const INFO_CARDS = [
   {
     icon: MapPin,
     title: "Head Office",
-    lines: [CONTACT.location, "Karachi, Pakistan"],
+    lines: [
+      CONTACT.location.split(",").slice(0, 2).join(",").trim(),
+      "Karachi, Pakistan",
+    ],
     href: "/location",
   },
   {
@@ -66,6 +69,7 @@ export default function ContactPage() {
       />
 
       <section className="mx-auto max-w-7xl px-4 pb-14 pt-10 sm:px-6 sm:pb-20 sm:pt-14 lg:px-8">
+        <h2 className="sr-only">Ways to reach Nrently</h2>
         <Stagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {INFO_CARDS.map((card) => {
             const Icon = card.icon;
@@ -120,7 +124,7 @@ export default function ContactPage() {
               align="left"
               eyebrow="Find Us"
               title="Our main customer centre"
-              subtitle={`${CONTACT.location} — or let us bring the car to you anywhere in the city.`}
+              subtitle={`${CONTACT.location.split(",").slice(0, 2).join(",").trim()} — or let us bring the car to you anywhere in the city.`}
             />
             <div className="mt-6 overflow-hidden rounded-2xl border border-line shadow-lg">
               <iframe

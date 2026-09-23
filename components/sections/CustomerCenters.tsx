@@ -36,7 +36,7 @@ export default function CustomerCenters() {
                 <ul className="mt-4 space-y-2.5 border-t border-line pt-4 text-sm text-ink sm:mt-5 sm:pt-5">
                 <li className="flex items-start gap-2.5">
                   <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
-                  <span className="min-w-0 break-words text-slate">{city?.address}</span>
+                  <span className="min-w-0 break-words text-slate">{city?.address.split(",").slice(0, 2).join(",").trim()}</span>
                 </li>
                   <li className="flex items-center gap-2.5">
                     <Phone className="h-4 w-4 shrink-0 text-accent" />
