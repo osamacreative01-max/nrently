@@ -299,7 +299,7 @@ export const VEHICLES: Vehicle[] = [
     image: "/images/AUDI A4-Photoroom.png",
     description:
       "Athletic German engineering with a beautifully crafted cabin — the executive's everyday grand entrance.",
-    driverHours: 12,
+    driverHours: 10,
     overtimeRate: 1000,
   },
   {
@@ -316,7 +316,7 @@ export const VEHICLES: Vehicle[] = [
     image: "/images/AUDI A5.png",
     description:
       "Striking coupe-like proportions with quattro grip — style and sure-footed confidence in one package.",
-    driverHours: 12,
+    driverHours: 10,
     overtimeRate: 1000,
   },
   {
@@ -333,7 +333,7 @@ export const VEHICLES: Vehicle[] = [
     image: "/images/AUDI A6.png",
     description:
       "A refined executive sedan with quattro grip, a tech-forward cabin and effortless highway presence.",
-    driverHours: 12,
+    driverHours: 10,
     overtimeRate: 1000,
   },
   {
@@ -349,7 +349,7 @@ export const VEHICLES: Vehicle[] = [
     image: "/images/MERCEDES CLA200.png",
     description:
       "Sleek, coupe-styled elegance with the three-pointed star. A head-turner for weddings and VIP pickups.",
-    driverHours: 12,
+    driverHours: 10,
     overtimeRate: 1000,
   },
   {
@@ -365,7 +365,7 @@ export const VEHICLES: Vehicle[] = [
     image: "/images/MERCEDES S Class - S400.png",
     description:
       "The flagship S-Class. First-class appointments, whisper-quiet refinement and timeless authority.",
-    driverHours: 12,
+    driverHours: 10,
     overtimeRate: 1000,
   },
   {
@@ -431,7 +431,7 @@ export const VEHICLES: Vehicle[] = [
     image: "/images/Hiace-card.png",
     description:
       "A spacious 15-seat passenger van for outings, pickups and group travel — comfortable and dependable.",
-    driverHours: 12,
+    driverHours: 10,
     overtimeRate: 500,
   },
   {
@@ -447,7 +447,7 @@ export const VEHICLES: Vehicle[] = [
     image: "/images/Saloon 4C.png",
     description:
       "A full-size 28-seat coast for weddings, corporate retreats and large family gatherings.",
-    driverHours: 12,
+    driverHours: 10,
     overtimeRate: 500,
   },
   {
@@ -480,7 +480,7 @@ export const VEHICLES: Vehicle[] = [
     image: "/images/TOYOTA Land Cruiser v8-Photoroom.png",
     description:
       "The legendary V8 Land Cruiser — unmatched power, prestige and presence for VIP travel and long highway runs.",
-    driverHours: 12,
+    driverHours: 10,
     overtimeRate: 1000,
   },
   {
