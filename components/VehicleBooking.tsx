@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import {
   AlertCircle,
   CalendarDays,
   CheckCircle2,
+  ChevronDown,
   Clock,
   Loader2,
   Mail,
@@ -16,11 +16,16 @@ import {
 } from "lucide-react";
 import { type Vehicle } from "@/lib/site";
 import {
+  LOCATION_SUGGESTIONS,
+  PICKUP_TIME_OPTIONS,
   buildWhatsAppMessage,
   buildWhatsAppUrl,
   formatRentalDate,
   formatRentalTime,
+  todayISO,
+  validateRentalSearch,
   type RentalSearch,
+  type RentalSearchFormValues,
 } from "@/lib/search";
 
 interface VehicleBookingProps {
@@ -29,10 +34,32 @@ interface VehicleBookingProps {
 }
 
 const fieldClasses =
-  "w-full min-w-0 rounded-xl border border-white/[0.08] bg-white/[0.04] px-4 py-3 text-sm text-white outline-none transition-all duration-200 placeholder:text-slate-500 focus:border-accent/40 focus:bg-white/[0.06] focus:ring-1 focus:ring-accent/20 min-h-[44px]";
+  "w-full min-w-0 rounded-xl border border-white/[0.08] bg-white/[0.04] px-4 py-3 text-sm text-white outline-none transition-all duration-200 placeholder:text-slate-500 focus:border-accent/40 focus:bg-white/[0.06] focus:ring-1 focus:ring-accent/20 min-h-[44px] [color-scheme:dark]";
+
+const selectClasses = `${fieldClasses} cursor-pointer appearance-none pr-10`;
 
 const labelClasses =
   "mb-1.5 flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-slate";
+
+const INITIAL_DRAFT: RentalSearchFormValues = {
+  pickupLocation: "",
+  sameDropoffLocation: true,
+  dropoffLocation: "",
+  pickupDate: "",
+  pickupTime: "12:00",
+  dropoffDate: "",
+  dropoffTime: "12:00",
+};
+
+function MiniError({ message }: { message?: string }) {
+  if (!message) return null;
+  return (
+    <p className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-accent">
+      <AlertCircle className="h-3.5 w-3.5 shrink-0" />
+      {message}
+    </p>
+  );
+}
 
 export default function VehicleBooking({ vehicle, search }: VehicleBookingProps) {
   const [name, setName] = useState("");
@@ -48,25 +75,92 @@ export default function VehicleBooking({ vehicle, search }: VehicleBookingProps)
   >("idle");
   const [emailError, setEmailError] = useState("");
 
-  const waHref = buildWhatsAppUrl({ vehicleName: vehicle.name, search, name, phone });
-  const clientMessage = buildWhatsAppMessage({
+  const [draft, setDraft] = useState<RentalSearchFormValues>(INITIAL_DRAFT);
+  const [inlineSearch, setInlineSearch] = useState<RentalSearch | null>(null);
+  const [inlineErrors, setInlineErrors] = useState<Record<string, string>>({});
+
+  const activeSearch = search ?? inlineSearch;
+
+  const waHref = buildWhatsAppUrl({
     vehicleName: vehicle.name,
-    search,
+    search: activeSearch,
     name,
     phone,
   });
+  const clientMessage = buildWhatsAppMessage({
+    vehicleName: vehicle.name,
+    search: activeSearch,
+    name,
+    phone,
+  });
+
+  const updateDraft = <K extends keyof RentalSearchFormValues>(
+    field: K,
+    value: RentalSearchFormValues[K]
+  ) => {
+    setDraft((prev) => {
+      const next = { ...prev, [field]: value } as RentalSearchFormValues;
+      if (
+        field === "pickupDate" &&
+        typeof value === "string" &&
+        value &&
+        next.dropoffDate &&
+        next.dropoffDate < value
+      ) {
+        next.dropoffDate = "";
+      }
+      return next;
+    });
+    setInlineErrors((prev) => {
+      const copy = { ...prev };
+      const key = field as string;
+      if (copy[key]) delete copy[key];
+      if (
+        field === "sameDropoffLocation" &&
+        value === true &&
+        copy.dropoffLocation
+      ) {
+        delete copy.dropoffLocation;
+      }
+      if (field === "pickupDate" && copy.dropoffDate) {
+        delete copy.dropoffDate;
+      }
+      return copy;
+    });
+  };
+
+  const applyInlineSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    const found = validateRentalSearch(draft);
+    setInlineErrors(found);
+    if (Object.keys(found).length > 0) return;
+
+    const pickupLocation = draft.pickupLocation.trim();
+    const next: RentalSearch = {
+      pickupLocation,
+      dropoffLocation: draft.sameDropoffLocation
+        ? pickupLocation
+        : draft.dropoffLocation.trim(),
+      sameDropoffLocation: draft.sameDropoffLocation,
+      pickupDate: draft.pickupDate,
+      pickupTime: draft.pickupTime,
+      dropoffDate: draft.dropoffDate,
+      dropoffTime: draft.dropoffTime,
+    };
+    setInlineSearch(next);
+  };
 
   const buildPayload = () => ({
     name: name.trim(),
     email: email.trim(),
     phone: phone.trim(),
     carType: vehicle.name,
-    pickupLocation: search?.pickupLocation ?? "",
-    dropoffLocation: search?.dropoffLocation ?? "",
-    pickupDate: search?.pickupDate ?? "",
-    pickupTime: search?.pickupTime ?? "",
-    dropoffDate: search?.dropoffDate ?? "",
-    dropoffTime: search?.dropoffTime ?? "",
+    pickupLocation: activeSearch?.pickupLocation ?? "",
+    dropoffLocation: activeSearch?.dropoffLocation ?? "",
+    pickupDate: activeSearch?.pickupDate ?? "",
+    pickupTime: activeSearch?.pickupTime ?? "",
+    dropoffDate: activeSearch?.dropoffDate ?? "",
+    dropoffTime: activeSearch?.dropoffTime ?? "",
     clientMessage,
   });
 
@@ -97,7 +191,7 @@ export default function VehicleBooking({ vehicle, search }: VehicleBookingProps)
 
     // Only fire the booking-email flow when a full rental search is present;
     // otherwise the WhatsApp message alone carries the booking request.
-    if (!search?.pickupLocation || !search?.pickupDate) return;
+    if (!activeSearch?.pickupLocation || !activeSearch?.pickupDate) return;
 
     // Preserve the existing booking-email flow alongside WhatsApp, so the same
     // message also reaches the customer and owner email without extra clicks.
@@ -129,44 +223,46 @@ export default function VehicleBooking({ vehicle, search }: VehicleBookingProps)
     }
   };
 
-  const rentalRows = search
+  const rentalRows = activeSearch
     ? [
         {
           icon: MapPin,
           label: "Pickup Location",
-          value: search.pickupLocation,
+          value: activeSearch.pickupLocation,
         },
         {
           icon: MapPin,
           label: "Drop-off Location",
-          value: search.dropoffLocation || search.pickupLocation,
+          value: activeSearch.dropoffLocation || activeSearch.pickupLocation,
         },
         {
           icon: CalendarDays,
           label: "Pickup Date",
-          value: formatRentalDate(search.pickupDate),
+          value: formatRentalDate(activeSearch.pickupDate),
         },
         {
           icon: Clock,
           label: "Pickup Time",
-          value: formatRentalTime(search.pickupTime),
+          value: formatRentalTime(activeSearch.pickupTime),
         },
         {
           icon: CalendarDays,
           label: "Drop-off Date",
-          value: formatRentalDate(search.dropoffDate),
+          value: formatRentalDate(activeSearch.dropoffDate),
         },
-        ...(search.dropoffTime
+        ...(activeSearch.dropoffTime
           ? [
               {
                 icon: Clock,
                 label: "Drop-off Time",
-                value: formatRentalTime(search.dropoffTime),
+                value: formatRentalTime(activeSearch.dropoffTime),
               },
             ]
           : []),
       ]
     : [];
+
+  const minDate = todayISO();
 
   return (
     <div className="mt-6 rounded-2xl border border-line bg-[#121212] p-4 sm:mt-8 sm:p-6">
@@ -174,7 +270,7 @@ export default function VehicleBooking({ vehicle, search }: VehicleBookingProps)
         Booking details
       </h2>
 
-      {search ? (
+      {activeSearch ? (
         <dl className="mt-3 grid grid-cols-1 gap-2.5 sm:mt-4 sm:grid-cols-2 sm:gap-3">
           {rentalRows.map((row) => (
             <div
@@ -190,16 +286,203 @@ export default function VehicleBooking({ vehicle, search }: VehicleBookingProps)
           ))}
         </dl>
       ) : (
-        <div className="mt-4 rounded-xl border border-white/[0.08] bg-white/[0.03] px-3 py-2.5 text-xs text-slate sm:mt-4 sm:px-4 sm:py-3 sm:text-sm">
-          No rental dates selected yet.{" "}
-          <Link
-            href="/#booking"
-            className="font-semibold text-accent transition-colors duration-200 hover:text-white"
+        <form
+          onSubmit={applyInlineSearch}
+          className="mt-4 grid grid-cols-1 gap-3 rounded-xl border border-white/10 bg-white/[0.04] p-3 sm:mt-5 sm:grid-cols-2 sm:gap-4 sm:p-5"
+        >
+          <p className="text-xs leading-relaxed text-slate sm:col-span-2 sm:text-sm">
+            Enter when and where you want{" "}
+            <span className="font-semibold text-white">{vehicle.name}</span> so
+            we can confirm availability — no need to leave this page or start
+            over.
+          </p>
+
+          <datalist id="booking-location-suggestions">
+            {LOCATION_SUGGESTIONS.map((location) => (
+              <option key={location} value={location} />
+            ))}
+          </datalist>
+
+          <div className="min-w-0 sm:col-span-2">
+            <label htmlFor="book-pickup-location" className={labelClasses}>
+              <MapPin className="h-3 w-3 text-accent/70" />
+              Pickup Location
+            </label>
+            <div className="group relative">
+              <input
+                id="book-pickup-location"
+                list="booking-location-suggestions"
+                type="text"
+                value={draft.pickupLocation}
+                onChange={(e) => updateDraft("pickupLocation", e.target.value)}
+                placeholder="Enter City, Airport or Address"
+                autoComplete="off"
+                className={`${fieldClasses} ${
+                  inlineErrors.pickupLocation ? "border-accent/60" : ""
+                }`}
+              />
+            </div>
+            <MiniError message={inlineErrors.pickupLocation} />
+          </div>
+
+          <div>
+            <label htmlFor="book-pickup-date" className={labelClasses}>
+              <CalendarDays className="h-3 w-3 text-accent/70" />
+              Pickup Date
+            </label>
+            <div className="group relative">
+              <input
+                id="book-pickup-date"
+                type="date"
+                value={draft.pickupDate}
+                min={minDate}
+                onChange={(e) => updateDraft("pickupDate", e.target.value)}
+                className={`${fieldClasses} ${
+                  inlineErrors.pickupDate ? "border-accent/60" : ""
+                }`}
+              />
+            </div>
+            <MiniError message={inlineErrors.pickupDate} />
+          </div>
+
+          <div>
+            <label htmlFor="book-pickup-time" className={labelClasses}>
+              <Clock className="h-3 w-3 text-accent/70" />
+              Pickup Time
+            </label>
+            <div className="group relative">
+              <select
+                id="book-pickup-time"
+                value={draft.pickupTime}
+                onChange={(e) => updateDraft("pickupTime", e.target.value)}
+                className={`${selectClasses} ${
+                  inlineErrors.pickupTime ? "border-accent/60" : ""
+                }`}
+              >
+                {PICKUP_TIME_OPTIONS.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
+            </div>
+            <MiniError message={inlineErrors.pickupTime} />
+          </div>
+
+          <div>
+            <label htmlFor="book-dropoff-date" className={labelClasses}>
+              <CalendarDays className="h-3 w-3 text-accent/70" />
+              Drop-off Date
+            </label>
+            <div className="group relative">
+              <input
+                id="book-dropoff-date"
+                type="date"
+                value={draft.dropoffDate}
+                min={draft.pickupDate || minDate}
+                onChange={(e) => updateDraft("dropoffDate", e.target.value)}
+                className={`${fieldClasses} ${
+                  inlineErrors.dropoffDate ? "border-accent/60" : ""
+                }`}
+              />
+            </div>
+            <MiniError message={inlineErrors.dropoffDate} />
+          </div>
+
+          <div>
+            <label htmlFor="book-dropoff-time" className={labelClasses}>
+              <Clock className="h-3 w-3 text-accent/70" />
+              Drop-off Time
+            </label>
+            <div className="group relative">
+              <select
+                id="book-dropoff-time"
+                value={draft.dropoffTime}
+                onChange={(e) => updateDraft("dropoffTime", e.target.value)}
+                className={`${selectClasses} ${
+                  inlineErrors.dropoffTime ? "border-accent/60" : ""
+                }`}
+              >
+                {PICKUP_TIME_OPTIONS.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
+            </div>
+            <MiniError message={inlineErrors.dropoffTime} />
+          </div>
+
+          {!draft.sameDropoffLocation && (
+            <div className="min-w-0 sm:col-span-2">
+              <label htmlFor="book-dropoff-location" className={labelClasses}>
+                <MapPin className="h-3 w-3 text-accent/70" />
+                Drop-off Location
+              </label>
+              <div className="group relative">
+                <input
+                  id="book-dropoff-location"
+                  list="booking-location-suggestions"
+                  type="text"
+                  value={draft.dropoffLocation}
+                  onChange={(e) => updateDraft("dropoffLocation", e.target.value)}
+                  placeholder="Enter City, Airport or Address"
+                  autoComplete="off"
+                  className={`${fieldClasses} ${
+                    inlineErrors.dropoffLocation ? "border-accent/60" : ""
+                  }`}
+                />
+              </div>
+              <MiniError message={inlineErrors.dropoffLocation} />
+            </div>
+          )}
+
+          <div className="sm:col-span-2">
+            <button
+              type="button"
+              role="switch"
+              aria-checked={draft.sameDropoffLocation}
+              onClick={() =>
+                updateDraft(
+                  "sameDropoffLocation",
+                  !draft.sameDropoffLocation
+                )
+              }
+              className="group inline-flex w-fit items-center gap-3 rounded-xl px-1 py-1"
+            >
+              <span
+                className={`relative h-6 w-[42px] shrink-0 rounded-full transition-colors duration-200 ${
+                  draft.sameDropoffLocation ? "bg-accent" : "bg-white/15"
+                }`}
+              >
+                <span
+                  className={`absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white shadow-md transition-transform duration-200 ${
+                    draft.sameDropoffLocation ? "translate-x-4" : ""
+                  }`}
+                />
+              </span>
+              <span
+                className={`text-sm font-medium transition-colors duration-200 ${
+                  draft.sameDropoffLocation
+                    ? "text-white"
+                    : "text-slate-400 group-hover:text-slate-200"
+                }`}
+              >
+                Drop-off at same location
+              </span>
+            </button>
+          </div>
+
+          <button
+            type="submit"
+            className="flex w-full items-center justify-center gap-2 rounded-xl bg-accent/10 px-6 py-3.5 font-display text-sm font-bold text-accent transition-all duration-300 hover:bg-accent hover:text-white sm:col-span-2"
           >
-            Start a rental search
-          </Link>{" "}
-          to add pickup &amp; drop-off details.
-        </div>
+            <CalendarDays className="h-4 w-4" />
+            Add rental details &amp; continue
+          </button>
+        </form>
       )}
 
       {/* Customer details */}
