@@ -73,7 +73,7 @@ export const CATEGORIES: Category[] = [
     example: "Daihatsu Mira or Similar",
     blurb: "Clean, reliable and easy on the budget — perfect for daily city runs.",
     from: 5000,
-    image: "/images/SUZUKI Cultus-Photoroom.png",
+    image: "/images/Mira-ES-1024x735-Photoroom.png",
     features: ["Economical fuel", "City driving", "Great mileage"],
   },
   {

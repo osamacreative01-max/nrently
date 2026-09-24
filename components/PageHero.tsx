@@ -9,9 +9,10 @@ interface PageHeroProps {
   eyebrow?: string;
   image?: string;
   imageAlt?: string;
+  imageClassName?: string;
 }
 
-export default function PageHero({ title, subtitle, eyebrow, image, imageAlt }: PageHeroProps) {
+export default function PageHero({ title, subtitle, eyebrow, image, imageAlt, imageClassName }: PageHeroProps) {
   const prefersReduced = useReducedMotion();
 
   return (
@@ -52,7 +53,11 @@ export default function PageHero({ title, subtitle, eyebrow, image, imageAlt }: 
               className="relative mt-3 lg:mt-0"
             >
               <div className="pointer-events-none absolute inset-0 -z-0 rounded-full bg-accent/10 blur-[80px]" />
-              <div className="relative aspect-[16/10]">
+              <div
+                className={`relative aspect-[16/10] ${
+                  imageClassName ? `origin-center ${imageClassName}` : ""
+                }`}
+              >
                 <Image
                   src={image}
                   alt={imageAlt || "Nrently car rental fleet"}

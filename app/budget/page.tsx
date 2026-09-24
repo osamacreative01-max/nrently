@@ -22,8 +22,9 @@ export default function BudgetPage() {
         eyebrow="Budget Fleet"
         title="Budget Car Rental in Karachi"
         subtitle={`Fuel-efficient Suzuki Cultus, Wagon R and Alto that keep your budget on the road — from ${fromPrice}/day.`}
-        image="/images/SUZUKI Cultus-Photoroom.png"
-        imageAlt="Suzuki Cultus budget rental car"
+        image="/images/Mira-ES-1024x735-Photoroom.png"
+        imageAlt="Daihatsu Mira budget rental car"
+        imageClassName="scale-125"
       />
       <VehicleListing
         eyebrow="Budget"
