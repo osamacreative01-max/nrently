@@ -51,6 +51,12 @@ body {
   }
 }
 
+/* Native select dropdown options (dark theme) */
+select option {
+  background-color: #121212;
+  color: #ffffff;
+}
+
 h1,
 h2,
 h3,

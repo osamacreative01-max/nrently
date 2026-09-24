@@ -186,6 +186,22 @@ export const VEHICLES: Vehicle[] = [
     overtimeRate: 500,
   },
   {
+    id: "daihatsu-mira",
+    name: "Daihatsu Mira",
+    category: "budget",
+    pricePerDay: 5000,
+    seats: 4,
+    luggage: 2,
+    transmission: "Automatic",
+    fuel: "Petrol",
+    ac: true,
+    image: "/images/Mira-ES-1024x735-Photoroom.png",
+    description:
+      "A tiny, fuel-sipping city car that slips through traffic and parks anywhere — budget-friendly and easy going.",
+    driverHours: 10,
+    overtimeRate: 500,
+  },
+  {
     id: "toyota-corolla-grande",
     name: "Toyota Corolla Grande",
     category: "standard",

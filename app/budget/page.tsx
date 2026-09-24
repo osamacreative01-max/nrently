@@ -9,7 +9,7 @@ const fromPrice = formatPKR(categoryFrom("budget"));
 
 export const metadata: Metadata = pageMetadata({
   title: "Budget Vehicles",
-  description: `Affordable budget car rental in Karachi and Pakistan — Suzuki Cultus, Wagon R and Alto from ${fromPrice}/day.`,
+  description: `Affordable budget car rental in Karachi and Pakistan — Suzuki Cultus, Wagon R, Alto and Daihatsu Mira from ${fromPrice}/day.`,
   path: "/budget",
 });
 
@@ -21,7 +21,7 @@ export default function BudgetPage() {
       <PageHero
         eyebrow="Budget Fleet"
         title="Budget Car Rental in Karachi"
-        subtitle={`Fuel-efficient Suzuki Cultus, Wagon R and Alto that keep your budget on the road — from ${fromPrice}/day.`}
+        subtitle={`Fuel-efficient Suzuki Cultus, Wagon R, Alto and Daihatsu Mira that keep your budget on the road — from ${fromPrice}/day.`}
         image="/images/Mira-ES-1024x735-Photoroom.png"
         imageAlt="Daihatsu Mira budget rental car"
         imageClassName="scale-125"
