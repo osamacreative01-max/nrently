@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { MessageCircle, Users, Clock, Fuel, Settings, Search, Timer } from "lucide-react";
+import { MessageCircle, Users, Clock, Settings, Search, Timer } from "lucide-react";
 import { WHATSAPP_URL, type Vehicle } from "@/lib/site";
 import {
   buildWhatsAppUrl,

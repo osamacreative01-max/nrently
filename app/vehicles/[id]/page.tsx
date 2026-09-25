@@ -39,7 +39,6 @@ export async function generateMetadata({
     return { title: "Vehicle Not Found" };
   }
 
-  const price = `PKR ${vehicle.pricePerDay.toLocaleString()}/day`;
   const description = toSeoDescription(vehicle);
   const imageUrl = `${SITE_URL}${encodeURI(vehicle.image)}`;
 
