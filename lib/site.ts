@@ -83,7 +83,7 @@ export const CATEGORIES: Category[] = [
     example: "Toyota Corolla or Similar",
     blurb: "Comfortable sedans and saloons for families and business trips.",
     from: 6500,
-    image: "/images/TOYOTA Corolla Altis-Photoroom.png",
+    image: "/images/Altis 2.png",
     features: ["Spacious cabin", "Dual airbags", "Long-distance ready"],
   },
   {
@@ -212,7 +212,7 @@ export const VEHICLES: Vehicle[] = [
     fuel: "Petrol",
     ac: true,
     tag: "Most Popular",
-    image: "/images/TOYOTA Corolla Altis-Photoroom.png",
+    image: "/images/grandi 2.png",
     description:
       "Pakistan's favourite saloon in its top Grande trim. Smooth ride, generous boot and dependable comfort.",
     driverHours: 10,
@@ -228,7 +228,7 @@ export const VEHICLES: Vehicle[] = [
     transmission: "Automatic",
     fuel: "Petrol",
     ac: true,
-    image: "/images/TOYOTA Corolla Altis-Photoroom.png",
+    image: "/images/Altis 2.png",
     description:
       "A refined Altise trim with premium interior touches — built for long, comfortable road trips.",
     driverHours: 10,
@@ -293,7 +293,7 @@ export const VEHICLES: Vehicle[] = [
     fuel: "Petrol",
     ac: true,
     tag: "Premium Sedan",
-    image: "/images/Honda Civic X.webp",
+    image: "/images/civic x 2.png",
     description:
       "The top-tier Civic X — turbo-charged performance, sporty styling and a premium cabin for drivers who want more.",
     driverHours: 10,
@@ -516,7 +516,7 @@ export const VEHICLES: Vehicle[] = [
     id: "kia-sportage",
     name: "KIA Sportage",
     category: "suv",
-    pricePerDay: 11000,
+    pricePerDay: 14000,
     seats: 5,
     luggage: 4,
     transmission: "Automatic",
@@ -564,7 +564,7 @@ export const CITIES: CityInfo[] = [
     href: "/karachi",
     blurb:
       "The city that never sleeps. From Clifton beaches to the airport runways, get around easefully.",
-    image: "/images/TOYOTA Corolla Altis-Photoroom.png",
+    image: "/images/Altis 2.png",
     from: 5000,
     areas: [
       "Gulshan-e-Iqbal",

@@ -22,7 +22,7 @@ export default function StandardPage() {
         eyebrow="Standard Fleet"
         title="Standard Cars for Rent in Pakistan"
         subtitle={`Family sedans and saloons built for long drives and busy days — from ${fromPrice}/day.`}
-        image="/images/TOYOTA Corolla Altis-Photoroom.png"
+        image="/images/Altis 2.png"
         imageAlt="Toyota Corolla standard rental car"
       />
       <VehicleListing
