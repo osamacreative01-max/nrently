@@ -42,6 +42,38 @@ body {
   max-width: 100%;
 }
 
+.home-page > section:not(:first-child) {
+  padding-block: 2.5rem;
+}
+
+.home-page > section:nth-child(5) {
+  padding-block: 0;
+}
+
+.home-page > section:nth-child(5) > div {
+  padding-block: 2.5rem;
+}
+
+@media (min-width: 640px) {
+  .home-page > section:not(:first-child) {
+    padding-block: 3rem;
+  }
+
+  .home-page > section:nth-child(5) > div {
+    padding-block: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .home-page > section:not(:first-child) {
+    padding-block: 3.5rem;
+  }
+
+  .home-page > section:nth-child(5) > div {
+    padding-block: 3.5rem;
+  }
+}
+
 /* Prevent iOS Safari auto-zoom when focusing form fields */
 @media (max-width: 640px) {
   input,

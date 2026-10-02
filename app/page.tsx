@@ -30,7 +30,7 @@ const POPULAR_VEHICLES = [
 
 export default function Home() {
   return (
-    <>
+    <div className="home-page">
       <Hero />
       <BookingCard />
       <ValuesGrid />
@@ -49,6 +49,6 @@ export default function Home() {
       <DestinationsGrid />
       <FaqSection />
       <ContactCta />
-    </>
+    </div>
   );
 }
