@@ -8,8 +8,8 @@ import { pageMetadata } from "@/lib/seo";
 const fromPrice = formatPKR(categoryFrom("luxury"));
 
 export const metadata: Metadata = pageMetadata({
-  title: "Luxury Vehicles",
-  description: `Luxury car rental in Pakistan — Mercedes-Benz CLA200 and S400, Audi A4 and A5 for weddings and VIP travel. Prices from ${fromPrice}/day.`,
+  title: "Luxury Car Rental in Karachi",
+  description: `Book a luxury car in Karachi — Mercedes-Benz, Audi A4 and A5 for weddings, airport transfers and VIP travel. From ${fromPrice}/day.`,
   path: "/luxury",
 });
 

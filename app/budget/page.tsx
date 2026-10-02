@@ -8,8 +8,8 @@ import { pageMetadata } from "@/lib/seo";
 const fromPrice = formatPKR(categoryFrom("budget"));
 
 export const metadata: Metadata = pageMetadata({
-  title: "Budget Vehicles",
-  description: `Affordable budget car rental in Karachi and Pakistan — Suzuki Cultus, Wagon R, Alto and Daihatsu Mira from ${fromPrice}/day.`,
+  title: "Budget Car Rental in Karachi",
+  description: `Rent a budget car in Karachi — Suzuki Cultus, Wagon R, Alto and Daihatsu Mira from ${fromPrice}/day. Book with Nrently for city travel.`,
   path: "/budget",
 });
 

@@ -12,12 +12,14 @@ import DestinationsGrid from "@/components/sections/DestinationsGrid";
 import FaqSection from "@/components/sections/FaqSection";
 import ContactCta from "@/components/sections/ContactCta";
 import { VEHICLES } from "@/lib/site";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  alternates: {
-    canonical: "/",
-  },
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Car Rental in Karachi | Nrently.pk",
+  description:
+    "Book a car rental in Karachi for airport transfers, weddings and city trips. Choose budget cars, sedans, SUVs or vans, with delivery across Pakistan.",
+  path: "/",
+});
 
 const POPULAR_VEHICLES = [
   VEHICLES.find((v) => v.category === "budget"),

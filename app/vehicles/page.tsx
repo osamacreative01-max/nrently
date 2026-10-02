@@ -9,9 +9,9 @@ import { pageMetadata } from "@/lib/seo";
 type PageSearchParams = Record<string, string | string[] | undefined>;
 
 export const metadata: Metadata = pageMetadata({
-  title: "Vehicles",
+  title: "Car Rental Fleet in Pakistan",
   description:
-    "Browse the complete Nrently fleet — budget, standard, luxury, SUV and vans & coasters with transparent daily rates.",
+    "Browse car rentals in Karachi and Pakistan: budget cars, sedans, luxury vehicles, SUVs, vans and coasters with daily rates.",
   path: "/vehicles",
 });
 

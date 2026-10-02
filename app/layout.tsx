@@ -40,8 +40,8 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: BRAND_TAGLINE,
-    template: `%s`,
+    default: "Car Rental in Karachi",
+    template: "%s | Nrently.pk",
   },
   description:
     "Best car rental services in Karachi — budget to luxury, with or without chauffeur. Book your ride on WhatsApp in minutes.",

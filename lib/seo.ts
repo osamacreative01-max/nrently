@@ -21,12 +21,16 @@ export function pageMetadata({
   path,
   image = DEFAULT_OG_IMAGE,
 }: PageMetadataOptions): Metadata {
+  const socialTitle = title.endsWith(`| ${BRAND_NAME}.pk`)
+    ? title
+    : `${title} | ${BRAND_NAME}.pk`;
+
   return {
     title,
     description,
     alternates: { canonical: path },
     openGraph: {
-      title,
+      title: socialTitle,
       description,
       url: path === "/" ? SITE_URL : `${SITE_URL}${path}`,
       siteName: `${BRAND_NAME}.pk`,
@@ -36,7 +40,7 @@ export function pageMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title,
+      title: socialTitle,
       description,
       images: [image.url],
     },

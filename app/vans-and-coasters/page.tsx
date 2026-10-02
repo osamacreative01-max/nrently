@@ -8,8 +8,8 @@ import { pageMetadata } from "@/lib/seo";
 const fromPrice = formatPKR(categoryFrom("vans"));
 
 export const metadata: Metadata = pageMetadata({
-  title: "Vans & Coasters",
-  description: `Vans and coasters for group travel in Pakistan — Toyota Hiace 15-seater and Saloon 4C 28-seater hire from ${fromPrice}/day.`,
+  title: "Van & Coaster Rental in Karachi",
+  description: `Book a Toyota Hiace or Saloon 4C in Karachi for group travel, weddings and events. 15- and 28-seat vans from ${fromPrice}/day.`,
   path: "/vans-and-coasters",
 });
 

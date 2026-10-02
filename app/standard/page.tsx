@@ -8,8 +8,8 @@ import { pageMetadata } from "@/lib/seo";
 const fromPrice = formatPKR(categoryFrom("standard"));
 
 export const metadata: Metadata = pageMetadata({
-  title: "Standard Vehicles",
-  description: `Comfortable standard car rental in Pakistan — Toyota Corolla, Honda Civic and GLi from ${fromPrice}/day.`,
+  title: "Sedan Rental in Karachi",
+  description: `Rent a sedan in Karachi — Toyota Corolla, Honda Civic and GLi from ${fromPrice}/day. Comfortable cars for family trips and business travel.`,
   path: "/standard",
 });
 

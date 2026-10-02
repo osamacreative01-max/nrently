@@ -8,8 +8,8 @@ import { pageMetadata } from "@/lib/seo";
 const fromPrice = formatPKR(categoryFrom("suv"));
 
 export const metadata: Metadata = pageMetadata({
-  title: "SUV Vehicles",
-  description: `SUV and 4x4 hire in Pakistan — Toyota Land Cruiser, Prado and Fortuner from ${fromPrice}/day.`,
+  title: "SUV & 4x4 Rental in Karachi",
+  description: `Rent a Toyota Land Cruiser, Prado or Fortuner in Karachi. SUV and 4x4 options for family trips and long journeys from ${fromPrice}/day.`,
   path: "/suv",
 });
 
