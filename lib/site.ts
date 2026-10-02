@@ -13,7 +13,7 @@ export function formatPKR(value: number): string {
 export const SITE_URL = "https://www.nrently.pk";
 export const PHONE_DISPLAY = "0306-6556934";
 export const PHONE_INTL = "+923066556934";
-export const SECOND_PHONE_DISPLAY = "+92 316 1068353";
+export const SECOND_PHONE_DISPLAY = "+92-316-1068353";
 export const SECOND_PHONE_INTL = "+923161068353";
 
 const WHATSAPP_DEFAULT_MESSAGE = [
@@ -1023,11 +1023,11 @@ export const VALUES = [
 ];
 
 export const customerCenters = [
-  { city: "Karachi", phones: ["+92-306-6556934", "+923-161-068353"], email: "nrently@gmail.com" },
+  { city: "Karachi", phones: ["+92-306-6556934", "+92-316-1068353"], email: "nrently@gmail.com" },
   { city: "Lahore", phones: ["+92-306-6556934", "+92-316-1068353"], email: "nrently@gmail.com" },
   { city: "Islamabad", phones: ["+92-306-6556934", "+92-316-1068353"], email: "nrently@gmail.com" },
   { city: "Multan", phones: ["+92-306-6556934", "+92-316-1068353"], email: "nrently@gmail.com" },
-  { city: "Sukkur", phones: ["+92-306-6556934", "+9231-610-68353"], email: "nrently@gmail.com" },
+  { city: "Sukkur", phones: ["+92-306-6556934", "+92-316-1068353"], email: "nrently@gmail.com" },
   { city: "Hyderabad", phones: ["+92-306-6556934", "+92-316-1068353"], email: "nrently@gmail.com" },
 ];
 
