@@ -14,9 +14,12 @@ export default function DestinationsGrid() {
         subtitle="Customer centres in Karachi, Lahore and Islamabad — with full fleet delivery across Multan and Sukkur."
       />
 
-      <Stagger className="mt-8 grid gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
-        {CITIES.slice(0, 5).map((city) => (
-          <StaggerItem key={city.id}>
+      <Stagger className="mt-8 grid gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-5 lg:grid-cols-6">
+        {CITIES.slice(0, 5).map((city, index) => (
+          <StaggerItem
+            key={city.id}
+            className={`lg:col-span-2${index === 3 ? " lg:col-start-2" : ""}${index === 4 ? " lg:col-start-4" : ""}`}
+          >
             <article className="group relative block overflow-hidden rounded-2xl bg-[#0e0e0e] shadow-sm transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-brand/20">
               <Link
                 href={city.href}
@@ -54,7 +57,7 @@ export default function DestinationsGrid() {
           </StaggerItem>
         ))}
 
-        <StaggerItem className="sm:col-span-2 lg:col-span-3">
+        <StaggerItem className="sm:col-span-2 lg:col-span-6">
           <Link
             href="/location"
             className="group flex items-center justify-between gap-4 rounded-2xl border border-dashed border-white/20 bg-[#121212] p-5 transition-all duration-300 hover:border-accent/50 hover:bg-[#121212] sm:p-8"
