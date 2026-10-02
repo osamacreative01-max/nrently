@@ -6,6 +6,7 @@ import RouteTransition from "@/components/RouteTransition";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
+import { SOCIAL_LINKS } from "@/components/SocialIcons";
 import { BRAND_NAME, BRAND_TAGLINE, CITIES, EMAIL, PHONE_INTL, SITE_URL } from "@/lib/site";
 
 const inter = Inter({
@@ -124,7 +125,7 @@ export default function RootLayout({
                 areaServed: "PK",
                 availableLanguage: "English",
               },
-              sameAs: ["https://www.facebook.com/share/1L5rE5ZQyJ/"],
+              sameAs: SOCIAL_LINKS.map((link) => link.href),
             }),
           }}
         />

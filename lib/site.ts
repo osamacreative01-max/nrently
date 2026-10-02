@@ -1052,6 +1052,9 @@ export const FOOTER = {
     "Nrently car Services is your go-to choice for premium car rentals. Whether it's a party, event, or picnic, book your ride online in Karachi and travel in style.",
   social: {
     facebook: "https://www.facebook.com/share/1L5rE5ZQyJ/",
+    instagram: "https://www.instagram.com/nrently2026/",
+    youtube: "https://www.youtube.com/@nrently",
+    linkedin: "https://www.linkedin.com/in/nrently-undefined-621a3243b/",
   },
   quickLinks: ["Home", "About", "Vehicles", "Location", "Contact us", "Blog"],
   areasServed: ["Karachi", "Lahore", "Islamabad", "Sukkur", "Multan"],
