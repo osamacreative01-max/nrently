@@ -197,8 +197,16 @@ export default function Footer() {
           <p>
             © {new Date().getFullYear()} Nrently.pk — All rights reserved.
           </p>
-          <p className="flex items-center gap-1">
-            Crafted with <span className="text-accent">♦</span> for smooth rides
+          <p>
+            Design by{" "}
+            <a
+              href="https://www.webexperts.com.pk/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors hover:text-accent"
+            >
+              Webexpert
+            </a>
           </p>
         </div>
       </div>
